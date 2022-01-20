@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     cityId = db.Column(db.Integer, db.ForeignKey(City.id), nullable=False)
+    authority = db.Column(db.Integer) 
 
     city_relation = db.relationship("City", back_populates="user_relation")
     puzzles_relation = db.relationship("Puzzle", back_populates="owner_relation", cascade="all, delete")

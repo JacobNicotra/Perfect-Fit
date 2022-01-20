@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+}
+
+.puzzle-card-wrapper {
+  display: inline;
+  /* float: left; */
+  display: inline-block;
+  text-align: center;
+}
+
+.puzzle-card {
+  border: solid 3px black;
+}
+
+.PuzzlesContainer {
+  background-color: tan;
+}

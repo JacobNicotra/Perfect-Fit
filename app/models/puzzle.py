@@ -10,7 +10,6 @@ class Puzzle(db.Model):
     title = db.Column(db.String(100), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     cityId = db.Column(db.Integer, db.ForeignKey(City.id))
-    authority = db.Column(db.Integer)
     piece_count = db.Column(db.Integer)
     image = db.Column(db.Text)
     description = db.Column(db.Text)

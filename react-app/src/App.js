@@ -9,12 +9,16 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 
+import Landing from './components/Landing';
+import Puzzle from './components/PuzzlePage';
+import PuzzleDetails from './components/PuzzleDetailsPage';
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -26,8 +30,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
+        <Route path='/' exact={true}>
+          <NavBar />
+          <Landing />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -35,7 +42,7 @@ function App() {
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
@@ -43,6 +50,18 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
+        <Route path='/puzzles' exact>
+          <div className='PuzzlesContainer'>
+            <NavBar />
+            <Puzzle />
+          </div>
+        </Route>
+        <Route path='/puzzles/:puzzleId' exact>
+          <div className='PuzzleDetailsContainer'>
+            <NavBar />
+            <PuzzleDetails />
+          </div>
+        </Route>
       </Switch>
     </BrowserRouter>
   );
