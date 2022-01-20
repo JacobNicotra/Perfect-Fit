@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, User, Puzzle
+from app.models import db, User, Puzzle, Image
 from sqlalchemy.exc import IntegrityError
 from flask_login import current_user
 
 puzzle_routes = Blueprint('servers', __name__)
 
 # http://localhost:5000/channels/?title=firsttitle&description=someDescriptiveStuff&ownerId=1
+
 
 @puzzle_routes.route('/')
 def get_all_puzzles():
@@ -16,10 +17,10 @@ def get_all_puzzles():
     puzzles = Puzzle.query.all()
     if puzzles:
         puzzle_list = [{'id': puzzle.id, 'title': puzzle.title, 'userId': puzzle.userId,
-                        'cityId': puzzle.cityId if puzzle.cityId else None, 
-                        'piece_count': puzzle.piece_count if puzzle.piece_count else None, 
-                        'image': puzzle.image if puzzle.image else None, 
-                        'description': puzzle.description if puzzle.description else None, 
+                        'cityId': puzzle.cityId if puzzle.cityId else None,
+                        'piece_count': puzzle.piece_count if puzzle.piece_count else None,
+                        'image': puzzle.image if puzzle.image else None,
+                        'description': puzzle.description if puzzle.description else None,
                         } for puzzle in puzzles]
         return jsonify(puzzle_list)
     else:
@@ -32,10 +33,10 @@ def get_all_puzzles_for_city(city_id):
     puzzles = Puzzle.query.filter(Puzzle.cityId == city_id).all()
     if puzzles:
         puzzle_list = [{'id': puzzle.id, 'title': puzzle.title, 'userId': puzzle.userId,
-                        'cityId': puzzle.cityId if puzzle.cityId else None, 
-                        'piece_count': puzzle.piece_count if puzzle.piece_count else None, 
-                        'image': puzzle.image if puzzle.image else None, 
-                        'description': puzzle.description if puzzle.description else None, 
+                        'cityId': puzzle.cityId if puzzle.cityId else None,
+                        'piece_count': puzzle.piece_count if puzzle.piece_count else None,
+                        'image': puzzle.image if puzzle.image else None,
+                        'description': puzzle.description if puzzle.description else None,
                         } for puzzle in puzzles]
         return jsonify(puzzle_list)
     else:
@@ -66,7 +67,7 @@ def new_puzzle():
         )
         db.session.add(new_puzzle_db)
         db.session.commit()
-        
+
         new_puzzle_db_dict = {
             'id': new_puzzle_db.id,
             'title': new_puzzle_db.title,
@@ -74,7 +75,7 @@ def new_puzzle():
             'cityId': new_puzzle_db.cityId if new_puzzle_db.cityId else None,
             'piece_count': new_puzzle_db.piece_count if new_puzzle_db.piece_count else None,
             'image': new_puzzle_db.image if new_puzzle_db.image else None,
-            'description': new_puzzle_db.description if new_puzzle_db.description else None, 
+            'description': new_puzzle_db.description if new_puzzle_db.description else None,
         }
         return new_puzzle_db_dict
     except IntegrityError as e:
@@ -91,10 +92,14 @@ def new_puzzle():
 # }
 
 
-
 @puzzle_routes.route('/<int:puzzle_id>/')
 def get_puzzle(puzzle_id):
     puzzle = Puzzle.query.filter(Puzzle.id == puzzle_id).first()
+    images = Image.query.filter(Image.puzzleId == puzzle_id).all()
+    images_list = None
+    if len(images) > 0:
+        images_list = [{'id': image.id,'puzzleId': image.puzzleId} for image in images]
+
     if puzzle:
         puzzle_db_dict = {
             'id': puzzle.id,
@@ -103,7 +108,8 @@ def get_puzzle(puzzle_id):
             'cityId': puzzle.cityId if puzzle.cityId else None,
             'piece_count': puzzle.piece_count if puzzle.piece_count else None,
             'image': puzzle.image if puzzle.image else None,
-            'description': puzzle.description if puzzle.description else None, 
+            'description': puzzle.description if puzzle.description else None,
+            'images': images_list
         }
         return puzzle_db_dict
     else:
