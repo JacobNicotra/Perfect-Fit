@@ -1,18 +1,15 @@
-from app.models import db, User
+from app.models import db, Swap
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password', cityId=1)
-    tom = User(
-        username='tom', email='tom@aa.io', password='password', cityId=2)
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password', cityId=3)
+def seed_swaps():
+    swap1 = Swap(
+        userId=1, recipientId=2, getPuzzleId=2, givePuzzleId=1, message="i'd like to trade for the death start please")
+    swap2 = Swap(
+        userId=3, recipientId=2, getPuzzleId=2, givePuzzleId=3, message="i want star wars puzzles")
 
-    db.session.add(demo)
-    db.session.add(tom)
-    db.session.add(bobbie)
+    db.session.add(swap1)
+    db.session.add(swap2)
 
     db.session.commit()
 
@@ -22,6 +19,6 @@ def seed_users():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_users():
+def undo_swaps():
     db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
     db.session.commit()
