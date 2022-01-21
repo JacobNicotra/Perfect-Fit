@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { NavLink, Redirect, useParams } from 'react-router-dom';
 import { getPuzzleOne } from '../../store/puzzle';
+import ProfileModal from '../ProfileModal';
+import Profile from '../Profile';
 
 // import AddServerModal from '../AddServerModal';
 import './PuzzleDetailsPage.css'
@@ -37,7 +39,10 @@ const PuzzleDetails = () => {
     if (puzzle) {
       return (
         <div>
-          {puzzle.title}
+          <div className='puzzle-details-title'>{puzzle.title}</div>
+          <div className='puzzle-details-description'>{puzzle.description}</div>
+          <Profile/>
+          <ProfileModal/>
           </div>
     //         <>
     //             <div className='ServerContainer'>

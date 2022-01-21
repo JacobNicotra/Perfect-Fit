@@ -7,9 +7,9 @@ const Landing = () => {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const history = useHistory()
-    if (user) {
-        return <Redirect to='/puzzles' />;
-    }
+    // if (user) {
+    //     return <Redirect to='/puzzles' />;
+    // }
     const onClick = () => {
         dispatch(login('demo@aa.io', 'password'));
         return history.push(`/puzzles`);
