@@ -46,4 +46,18 @@ a:visited {
  #perfect-fit {
    font-size: 40px;
    color: white;
+   margin-right: 50px;
+ }
+
+ .add-puzzle-button {
+   color: white;
+   font-size: 47px;
+   margin-left: 30px;
+ }
+
+ #nav-left {
+   display: flex;
+   align-items: center;
+   align-content: center;
+   justify-content: center
  }

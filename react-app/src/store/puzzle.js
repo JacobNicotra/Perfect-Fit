@@ -49,16 +49,16 @@ export const getPuzzleOne = (puzzleId) => async dispatch => {
     }
 }
 
-// export const createServer = (newServer) => async dispatch => {
-//     const response = await fetch(`/api/channels/`, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(newServer)
-//     })
-//     const server = await response.json()
-//     if (response.ok) dispatch(addOneServer(server))
-//     return server
-// }
+export const createPuzzle = (newPuzzle) => async dispatch => {
+    const response = await fetch(`/api/puzzles/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newPuzzle)
+    })
+    const puzzle = await response.json()
+    if (response.ok) dispatch(addOnePuzzle(puzzle))
+    return puzzle
+}
 
 // export const deleteServer = (serverToDelete) => async dispatch => {
 //     const response = await fetch(`/api/channels/${serverToDelete.serverId}/`, {

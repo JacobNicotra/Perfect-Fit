@@ -24,7 +24,11 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        return current_user.to_dict()
+        user_dict = current_user.to_dict()
+        user = User.query.filter(User.id == user_dict['id']).first()
+        user_dict['cityId'] = user.cityId
+        user_dict['authority'] = user.authority
+        return user_dict
     return {'errors': ['Unauthorized']}
 
 
