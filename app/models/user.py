@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    cityId = db.Column(db.Integer, db.ForeignKey(City.id), nullable=False)
+    cityId = db.Column(db.Integer, db.ForeignKey(City.id))
     authority = db.Column(db.Integer) 
 
     city_relation = db.relationship("City", back_populates="user_relation")
