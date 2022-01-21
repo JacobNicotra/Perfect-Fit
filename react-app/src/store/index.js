@@ -1,9 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
+import puzzleReducer from './puzzle';
+
 
 const rootReducer = combineReducers({
   session,
+  puzzles: puzzleReducer
 });
 
 
