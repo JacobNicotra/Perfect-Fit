@@ -37,7 +37,7 @@ const Puzzle = () => {
   if (puzzles) {
     return (
       <div>
-        <ul>
+        <ul id="puzzle-cards">
           {puzzles.map(puzzle => {
             let color
             if (puzzle.image !== 'none') {

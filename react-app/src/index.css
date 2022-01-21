@@ -1,5 +1,6 @@
 /* TODO Add site wide styles */
 
+
 * {
   text-decoration: none;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -8,4 +9,41 @@
 a:visited { 
   text-decoration: none; 
   color: rgb(0, 0, 0); 
+ }
+
+ #logo {
+   width: auto;
+   height: 90px;
+ }
+
+
+ #nav {
+   display: flex;
+   justify-content: space-between;
+   background-color: #26532b;
+   align-items: center;
+   height: 90px;
+
+ }
+
+ .profile-button {
+   background-color: white;
+   background-image: url("./profile.png");
+   background-size:     cover;                      /* <------ */
+   background-repeat:   no-repeat;
+   background-position: center center;     
+   height: 50px;
+   width: 50px;
+   border: none;
+   border-radius: 100px;
+   margin-right: 10px;
+ }
+
+ .profile-button:hover {
+   cursor: pointer;
+ }
+
+ #perfect-fit {
+   font-size: 40px;
+   color: white;
  }

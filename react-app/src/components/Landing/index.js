@@ -17,7 +17,7 @@ const Landing = () => {
     return (
         <div className='splash-container'>
             <div className='splash-description'>
-                <h1 className='splash_text'>This is the Perfect Fit! 👁‍🗨</h1>
+                <h1 className='splash_text'>This is the Perfect Fit! </h1>
                 <div className='description-text'>
                     <h2 className='splash_text'>The number one web application for puzzle community and puzzle swapping</h2>
                     <p className='splash_text'>take a look around</p>

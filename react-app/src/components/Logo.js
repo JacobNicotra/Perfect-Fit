@@ -5,15 +5,11 @@ import LogoutButton from './auth/LogoutButton';
 import ProfileModal from './ProfileModal'
 import LoginFormModal from './LoginFormModal'
 import logo from './../logobg.png'
-const NavBar = () => {
+const Logo = () => {
   return (
     <nav id="nav">
       <img id="logo" src={logo}></img>
 
-
-      <h1 id="perfect-fit">Perfect Fit</h1>
-
-      <ProfileModal />
        
         {/* <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
