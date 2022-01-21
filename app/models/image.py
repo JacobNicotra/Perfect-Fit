@@ -8,6 +8,7 @@ class Image(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     puzzleId = db.Column(db.Integer, db.ForeignKey(Puzzle.id), nullable=False)
+    image = db.Column(db.Text, nullable=False)
 
     puzzle_relation = db.relationship("Puzzle", back_populates="images_relation", cascade="all, delete")
  
