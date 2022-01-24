@@ -1,4 +1,60 @@
 .add-puzzle-button {
   background-color: #26532b; 
   border: none;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-bottom: 4px;
+ }
+
+.add-puzzle-button:hover {
+  color: #30da77;
+ }
+
+ .LabelAndInputContainer {
+   margin: 15px;
+ }
+
+ .add-puzzle-form {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   /* background-color: #26532b94; */
+ }
+
+ .new-puzzle-submit-button {
+   margin: 15px;
+   border:none;
+   border-radius: 30px;
+
+   padding: 9px;
+
+ }
+
+ .puzzle-form-input {
+   padding: 9px;
+   border: none;
+   /* background-color: #26532b62; */
+   border-radius: 30px;
+   display: flex;
+   justify-content: center;
+   text-align: center;
+ }
+
+
+ /* .add-puzzle-modal {
+   
+ } */
+
+ .puz-form-erros {
+   border: none;
+   border-radius: 9px;
+   background-color: rgb(192, 2, 2);
+   color: white;
+   padding: 10px;
+   font-size: 0.8em;
  }

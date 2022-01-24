@@ -15,6 +15,15 @@ a:visited {
    width: auto;
    height: 90px;
  }
+ .font-logo {
+   font-size: 60px;
+   color: white;
+   margin-left: 10px;
+ }
+
+ .font-logo:hover {
+   color: #30da77;
+ }
 
 
  #nav {

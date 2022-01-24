@@ -58,9 +58,7 @@ def new_puzzle():
             new_puzzle['image'] = data['image']
         if 'cityId' in data and data["cityId"] != '':
             new_puzzle['cityId'] = data['cityId']
-            print('---------------DATA', data)
         if 'pieceCount' in data and data["pieceCount"] != '':
-            print('------------ piece count', data["pieceCount"])
             new_puzzle['piece_count'] = int(data['pieceCount'])
         if 'description' in data and data["description"] != '':
             new_puzzle['description'] = data['description']
@@ -100,7 +98,7 @@ def get_puzzle(puzzle_id):
     images = Image.query.filter(Image.puzzleId == puzzle_id).all()
     images_list = None
     if len(images) > 0:
-        images_list = [{'id': image.id,'puzzleId': image.puzzleId} for image in images]
+        images_list = [{'id': image.id,'puzzleId': image.puzzleId, 'image': image.image} for image in images]
 
     if puzzle:
         puzzle_db_dict = {
@@ -144,8 +142,18 @@ def update_server(puzzle_id):
             puzzle.description = data['description']
 
         db.session.commit()
-        return jsonify('updated server')
-
+        if puzzle:
+                puzzle_db_dict = {
+                    'id': puzzle.id,
+                    'title': puzzle.title,
+                    'userId': puzzle.userId,
+                    'cityId': puzzle.cityId if puzzle.cityId else None,
+                    'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
+                    'image': puzzle.image if puzzle.image else None,
+                    'description': puzzle.description if puzzle.description else None,
+                    # 'images': images_list
+                }
+        return puzzle_db_dict
     else:
         return jsonify("server not found in database."), 404
 

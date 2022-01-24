@@ -70,14 +70,16 @@ export const createPuzzle = (newPuzzle) => async dispatch => {
 //     if (response.ok) dispatch(deleteOneServer(serverToDelete))
 // }
 
-// export const editServer = (serverToEdit) => async dispatch => {
-//     const response = await fetch(`/api/channels/${serverToEdit.id}/`, {
-//         method: "PUT",
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(serverToEdit)
-//     })
-//     if (response.ok) dispatch(editOneServer(serverToEdit))
-// }
+export const editPuzzle = (puzzleToEdit) => async dispatch => {
+    const response = await fetch(`/api/puzzles/${puzzleToEdit.id}/`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(puzzleToEdit)
+    })
+    const edittedPuzzle = await response.json()
+    if (response.ok) dispatch(editOnePuzzle(edittedPuzzle))
+    return edittedPuzzle
+}
 
 
 const initialState = {};
@@ -123,11 +125,11 @@ const puzzleReducer = (state = initialState, action) => {
         //     }
         //     return newState
         // }
-        // case EDIT_ONE: {
-        //     let newState = Object.assign({}, state);
-        //     newState[action.server.id] = action.server;
-        //     return newState
-        // }
+        case EDIT_ONE: {
+            let newState = Object.assign({}, state);
+            newState[action.puzzle.id] = action.puzzle;
+            return newState
+        }
 
     }
 }

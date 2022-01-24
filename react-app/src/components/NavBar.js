@@ -13,10 +13,13 @@ const NavBar = () => {
     <nav id="nav">
       <span id="nav-left">
 
-      <img id="logo" src={logo}></img>
+        {/* <img id="logo" src={logo}></img> */}
+        <NavLink to='/puzzles' exact={true} activeClassName='active'>
+        <i className="fas fa-puzzle-piece font-logo"></i>
+          </NavLink>
 
         {/* <div><i className='fas fa-plus add-puzzle-button'></i></div> */}
-        <AddPuzzleModal className="puzzle-modal"/>
+        <AddPuzzleModal edit={false} className="puzzle-modal"/>
       </span>
       <h1 id="perfect-fit">Perfect Fit</h1>
 

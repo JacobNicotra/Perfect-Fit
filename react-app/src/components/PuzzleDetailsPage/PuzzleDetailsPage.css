@@ -1,0 +1,85 @@
+#puz-det {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end
+
+}
+#puz-details-ul {
+text-align: center;
+max-height: 500px;
+}
+.puzzle-details-li {
+  display: inline-block;
+  text-align: center;
+  margin: 0 10px 10px 10px; 
+  overflow: hidden;
+  border-radius: 10px;
+
+}
+.puzzle-details-image {
+  object-fit:contain;
+  width: auto;
+  height: 240px;
+  overflow: hidden;
+
+
+}
+
+#puz-det-image {
+  object-fit:contain;
+  width: auto;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 10px;
+
+}
+
+#puz-det-image-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+#puz-det-images {
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#puzzle-details-ul {
+  margin: 0;
+}
+
+.puzzle-details-title {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 28px;
+  margin-top: 20px;
+}
+
+.puzzle-details-description{
+  display: flex;
+  justify-content: center;
+  font-size: 1.2em;
+  max-width: 80vw;
+  margin-top: 15px;
+  padding: 10px
+  
+}
+
+#puz-det-header {
+  display: flex;
+  
+}
+
+
+.cogSpin{
+  animation-name: Spin;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+.cogStatic{
+  animation-name: SpinBackwards;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
