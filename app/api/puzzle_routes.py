@@ -18,7 +18,7 @@ def get_all_puzzles():
     if puzzles:
         puzzle_list = [{'id': puzzle.id, 'title': puzzle.title, 'userId': puzzle.userId,
                         'cityId': puzzle.cityId if puzzle.cityId else None,
-                        'piece_count': puzzle.piece_count if puzzle.piece_count else None,
+                        'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
                         'image': puzzle.image if puzzle.image else None,
                         'description': puzzle.description if puzzle.description else None,
                         } for puzzle in puzzles]
@@ -34,7 +34,7 @@ def get_all_puzzles_for_city(city_id):
     if puzzles:
         puzzle_list = [{'id': puzzle.id, 'title': puzzle.title, 'userId': puzzle.userId,
                         'cityId': puzzle.cityId if puzzle.cityId else None,
-                        'piece_count': puzzle.piece_count if puzzle.piece_count else None,
+                        'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
                         'image': puzzle.image if puzzle.image else None,
                         'description': puzzle.description if puzzle.description else None,
                         } for puzzle in puzzles]
@@ -58,8 +58,8 @@ def new_puzzle():
             new_puzzle['image'] = data['image']
         if 'cityId' in data and data["cityId"] != '':
             new_puzzle['cityId'] = data['cityId']
-        if 'piece_count' in data and data["piece_count"] != '':
-            new_puzzle['piece_count'] = data['piece_count']
+        if 'pieceCount' in data and data["pieceCount"] != '':
+            new_puzzle['piece_count'] = int(data['pieceCount'])
         if 'description' in data and data["description"] != '':
             new_puzzle['description'] = data['description']
         new_puzzle_db = Puzzle(
@@ -98,7 +98,7 @@ def get_puzzle(puzzle_id):
     images = Image.query.filter(Image.puzzleId == puzzle_id).all()
     images_list = None
     if len(images) > 0:
-        images_list = [{'id': image.id,'puzzleId': image.puzzleId} for image in images]
+        images_list = [{'id': image.id,'puzzleId': image.puzzleId, 'image': image.image} for image in images]
 
     if puzzle:
         puzzle_db_dict = {
@@ -106,7 +106,7 @@ def get_puzzle(puzzle_id):
             'title': puzzle.title,
             'userId': puzzle.userId,
             'cityId': puzzle.cityId if puzzle.cityId else None,
-            'piece_count': puzzle.piece_count if puzzle.piece_count else None,
+            'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
             'image': puzzle.image if puzzle.image else None,
             'description': puzzle.description if puzzle.description else None,
             'images': images_list
@@ -135,15 +135,25 @@ def update_server(puzzle_id):
         if 'cityId' in data:
             puzzle.cityId = data['cityId']
         if 'piece_count' in data:
-            puzzle.piece_count = data['piece_count']
+            puzzle.piece_count = data['pieceCount']
         if 'image' in data:
             puzzle.image = data['image']
         if 'description' in data:
             puzzle.description = data['description']
 
         db.session.commit()
-        return jsonify('updated server')
-
+        if puzzle:
+                puzzle_db_dict = {
+                    'id': puzzle.id,
+                    'title': puzzle.title,
+                    'userId': puzzle.userId,
+                    'cityId': puzzle.cityId if puzzle.cityId else None,
+                    'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
+                    'image': puzzle.image if puzzle.image else None,
+                    'description': puzzle.description if puzzle.description else None,
+                    # 'images': images_list
+                }
+        return puzzle_db_dict
     else:
         return jsonify("server not found in database."), 404
 
