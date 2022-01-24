@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     authority = db.Column(db.Integer) 
 
     city_relation = db.relationship("City", back_populates="user_relation")
-    puzzles_relation = db.relationship("Puzzle", back_populates="owner_relation", cascade="all, delete")
+    puzzles_relation = db.relationship("Puzzle", back_populates="owner_relation", cascade="all, delete") #passive_deletes=True
 
     # swap_owner_relation = db.relationship("Swap", back_populates="owner_relation", cascade="all, delete")
     # swap_recipient_relation = db.relationship("Swap", back_populates="recipient_relation", cascade="all, delete")

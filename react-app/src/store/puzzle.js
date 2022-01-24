@@ -41,7 +41,7 @@ export const getPuzzles = () => async dispatch => {
 
 export const getPuzzleOne = (puzzleId) => async dispatch => {
 
-    const response = await fetch(`/api/puzzles/${puzzleId}`)
+    const response = await fetch(`/api/puzzles/${puzzleId}/`)
 
     if (response.ok) {
         const puzzle = await response.json()

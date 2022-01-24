@@ -29,6 +29,13 @@ def load_user(id):
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
 
+app.config.from_object(Config)
+app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(puzzle_routes, url_prefix='/api/puzzles')
+
+db.init_app(app)
+Migrate(app, db)
 
 # Application Security
 CORS(app)
@@ -41,6 +48,7 @@ CORS(app)
 # Well.........
 @app.before_request
 def https_redirect():
+    print('________BEFORE REQ HTTP CONVERSION')
     if os.environ.get('FLASK_ENV') == 'production':
         if request.headers.get('X-Forwarded-Proto') == 'http':
             url = request.url.replace('http://', 'https://', 1)
@@ -68,9 +76,3 @@ def react_root(path):
     return app.send_static_file('index.html')
 
     
-app.config.from_object(Config)
-app.register_blueprint(user_routes, url_prefix='/api/users')
-app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(puzzle_routes, url_prefix='/api/puzzles')
-db.init_app(app)
-Migrate(app, db)

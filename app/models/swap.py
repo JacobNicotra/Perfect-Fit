@@ -21,6 +21,5 @@ class Swap(db.Model):
     give_puzzle_relation = db.relationship("Puzzle", foreign_keys=[givePuzzleId])
     get_puzzle_relation = db.relationship("Puzzle", foreign_keys=[getPuzzleId])
 
-
     # channels_relation = db.relationship(
     #     "Channel", back_populates="server_relation", cascade="all, delete")

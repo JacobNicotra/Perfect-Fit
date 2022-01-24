@@ -22,7 +22,6 @@ const AddPuzzleForm = ({ edit, modalSetter }) => {
   useEffect(() => {
     dispatch(getPuzzles())
   }, [dispatch])
-  console.log('EDIT', !edit)
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -93,7 +92,6 @@ const AddPuzzleForm = ({ edit, modalSetter }) => {
     setImage(e.target.value);
   };
 
-  console.log('ERRORS', errors)
 
   return (
     <>

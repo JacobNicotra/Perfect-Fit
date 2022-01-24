@@ -14,7 +14,6 @@ import './PuzzleDetailsPage.css'
 
 
 const PuzzleDetails = () => {
-  console.log('see puz dets ()()()()()()()(()()()()()(')
   const dispatch = useDispatch();
   const params = useParams();
   const puzzleId = params.puzzleId
@@ -31,14 +30,12 @@ const PuzzleDetails = () => {
     return state.puzzles.puzzle
   })
 
-  console.log('PUZ DETES PUZZLEES', puzzle)
 
   let owner = false;
   if (user && puzzle?.userId === user.id) {
     owner = true;
   };
 
-  console.log('OWNER', owner)
 
 
   useEffect(async () => {
@@ -143,4 +140,3 @@ const PuzzleDetails = () => {
 }
 
 export default PuzzleDetails;
-http

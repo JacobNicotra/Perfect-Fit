@@ -19,7 +19,6 @@ const Puzzle = () => {
     return state.puzzles.puzzleArray
   })
 
-  console.log('_____puzzles', puzzles)
 
   useEffect(async () => {
     await dispatch(getPuzzles());

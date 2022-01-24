@@ -29,7 +29,6 @@ def get_all_puzzles():
 
 @puzzle_routes.route('/cities/<int:city_id>/')
 def get_all_puzzles_for_city(city_id):
-    print('_________________city_id', city_id)
     puzzles = Puzzle.query.filter(Puzzle.cityId == city_id).all()
     if puzzles:
         puzzle_list = [{'id': puzzle.id, 'title': puzzle.title, 'userId': puzzle.userId,
