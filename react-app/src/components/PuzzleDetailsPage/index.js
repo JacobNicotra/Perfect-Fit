@@ -139,7 +139,8 @@ const PuzzleDetails = () => {
       //         </>
     )
   }
-  return ('no puzzles')
+  return ('loading puzzle details')
 }
 
 export default PuzzleDetails;
+http
