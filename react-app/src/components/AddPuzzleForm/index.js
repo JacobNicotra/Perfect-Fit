@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom';
-import { createPuzzle, editPuzzle } from '../../store/puzzle';
+import { createPuzzle } from '../../store/puzzle';
 import { getPuzzles } from '../../store/puzzle';
 import { useEffect } from 'react';
 import "./PuzzleForm.css"
 
-const AddPuzzleForm = ({ edit, modalSetter }) => {
+const AddPuzzleForm = ({ modalSetter }) => {
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState('');
   const [pieceCount, setPieceCount] = useState('');
@@ -31,21 +31,18 @@ const AddPuzzleForm = ({ edit, modalSetter }) => {
     let newPuzzle = {
 
     }
-    if (!edit) {
 
-      newPuzzle = {
-        title,
-        userId,
-      }
-    } else {
-      newPuzzle = {}
+
+    newPuzzle = {
+      title,
+      userId,
     }
 
-    if (!title.replace(/\s/g, '').length && !edit) {
+    if (!title.replace(/\s/g, '').length) {
       return setErrors(['Please name your puzzle.'])
     }
 
-    if (title.replace(/\s/g, '').length && edit) {
+    if (title.replace(/\s/g, '').length ) {
       newPuzzle.title = title
     }
     if (pieceCount.length > 0) {
@@ -62,15 +59,10 @@ const AddPuzzleForm = ({ edit, modalSetter }) => {
     }
     let newPuzzleDb = null
     if (newPuzzle) {
-      if (!edit) {
+     
         newPuzzleDb = await dispatch(createPuzzle(newPuzzle));
         dispatch(getPuzzles())
 
-      } else {
-        newPuzzle.id = puzzleId
-        newPuzzleDb = await dispatch(editPuzzle(newPuzzle));
-        dispatch(getPuzzles())
-      }
     }
     modalSetter(true);
 
@@ -95,7 +87,7 @@ const AddPuzzleForm = ({ edit, modalSetter }) => {
 
   return (
     <>
-      <h2 className='modal-label'>{edit ? 'Edit Puzzle' : 'New Puzzle'}</h2>
+      <h2 className='modal-label'>{'New Puzzle'}</h2>
       <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
         {errors.length > 0 && <div className='puz-form-erros'>
           {errors.map((error, ind) => (
@@ -160,7 +152,7 @@ const AddPuzzleForm = ({ edit, modalSetter }) => {
 
           ></input>
         </div>
-        <button className='new-puzzle-submit-button' type='submit'>{edit ? 'Submit Change' : 'Create Puzzle'}</button>
+        <button className='new-puzzle-submit-button' type='submit'>{'Create Puzzle'}</button>
       </form>
     </>
   );

@@ -25,3 +25,4 @@ function AddPuzzleModal({ edit }) {
 }
 
 export default AddPuzzleModal;
+
