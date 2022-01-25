@@ -30,9 +30,14 @@
    margin: 15px;
    border:none;
    border-radius: 30px;
+   margin-top: 30px;
 
-   padding: 9px;
+   padding: 9px 13px 9px 13px;
 
+ }
+
+ .new-puzzle-submit-button:hover {
+   background-color: white;
  }
 
  .puzzle-form-input {

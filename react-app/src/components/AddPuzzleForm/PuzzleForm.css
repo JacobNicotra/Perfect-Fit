@@ -38,11 +38,25 @@
  .puzzle-form-input {
    padding: 9px;
    border: none;
-   /* background-color: #26532b62; */
+   background-color: #efefef;
    border-radius: 30px;
    display: flex;
    justify-content: center;
    text-align: center;
+
+ }
+
+ .edit-puzzle-delete-button {
+   margin-top: 65px;
+   background-color: rgb(151, 1, 1);
+   color: #efefef;
+   font-size: .8em;
+ }
+ .puzzle-form-input:hover {
+   background-color: white;
+ }
+ .new-puzzle-submit-button {
+   margin: 0 10px 0 10px
  }
 
 

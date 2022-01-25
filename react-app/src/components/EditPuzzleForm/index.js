@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom';
 import { editPuzzle } from '../../store/puzzle';
-import { getPuzzleOne } from '../../store/puzzle';
+import { getPuzzleOne, deletePuzzle } from '../../store/puzzle';
 import { useEffect } from 'react';
 import "./EditPuzzle.css"
 
@@ -18,7 +18,6 @@ const EditPuzzleForm = ({ modalSetter }) => {
 
   const params = useParams();
   const puzzleId = params.puzzleId
-  console.log('_______PUZZLEID', puzzleId)
 
   useEffect(() => {
     dispatch(getPuzzleOne(puzzleId))
@@ -33,7 +32,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
       'id': puzzleId
     }
 
-    if (title.replace(/\s/g, '').length ) {
+    if (title.replace(/\s/g, '').length) {
       newPuzzle.title = title
     }
     if (pieceCount.length > 0) {
@@ -50,9 +49,9 @@ const EditPuzzleForm = ({ modalSetter }) => {
     }
     let newPuzzleDb = null
     if (newPuzzle) {
-     
-        newPuzzleDb = await dispatch(editPuzzle(newPuzzle));
-        dispatch(getPuzzleOne(puzzleId))
+
+      newPuzzleDb = await dispatch(editPuzzle(newPuzzle));
+      dispatch(getPuzzleOne(puzzleId))
 
     }
     modalSetter(true);
@@ -62,92 +61,105 @@ const EditPuzzleForm = ({ modalSetter }) => {
 
   };
 
+  const handleDelete = async () => {
 
-  const updateTitle = (e) => {
-    setTitle(e.target.value);
-  };
-  const updatePieceCount = (e) => {
-    setPieceCount(e.target.value);
-  };
-  const updateDescription = (e) => {
-    setDescription(e.target.value);
-  };
-  const updateImage = (e) => {
-    setImage(e.target.value);
-  };
+    const deletedPuzzleId = await dispatch(deletePuzzle(puzzleId));
+    dispatch(getPuzzleOne(puzzleId))
+    
+    modalSetter(true);
+    return history.push(`/puzzles/`)
+    return
+
+}
 
 
-  return (
-    <>
-      <h2 className='modal-label'>{'Edit Puzzle'}</h2>
-      <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
-        {errors.length > 0 && <div className='puz-form-erros'>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
-        </div>
-        }
-        <div className='LabelAndInputContainer'>
-          {/* <label className="puzzle-form-label">Puzzle Name</label> */}
-          <input
-            type='text'
-            name='title'
-            onChange={updateTitle}
-            value={title}
-            // required
-            autoComplete="off"
-            className="puzzle-form-input"
-            placeholder="Name of Puzzle"
-
-          ></input>
-        </div>
-        <div className='LabelAndInputContainer'>
-          {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-          <input
-            type='number'
-            name='pieceCount'
-            onChange={updatePieceCount}
-            value={pieceCount}
-            // required
-            autoComplete="off"
-            className="puzzle-form-input"
-            placeholder="Number of Pieces"
+const updateTitle = (e) => {
+  setTitle(e.target.value);
+};
+const updatePieceCount = (e) => {
+  setPieceCount(e.target.value);
+};
+const updateDescription = (e) => {
+  setDescription(e.target.value);
+};
+const updateImage = (e) => {
+  setImage(e.target.value);
+};
 
 
-          ></input>
-        </div>
-        <div className='LabelAndInputContainer'>
-          {/* <label className="puzzle-form-label">Description</label> */}
-          <input
-            type='text'
-            name='title'
-            onChange={updateDescription}
-            value={description}
-            // required
-            autoComplete="off"
-            className="puzzle-form-input"
-            placeholder="Description"
+return (
+  <>
+    <h2 className='modal-label'>{'Edit Puzzle'}</h2>
+    <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
+      {errors.length > 0 && <div className='puz-form-erros'>
+        {errors.map((error, ind) => (
+          <div key={ind}>{error}</div>
+        ))}
+      </div>
+      }
+      <div className='LabelAndInputContainer'>
+        {/* <label className="puzzle-form-label">Puzzle Name</label> */}
+        <input
+          type='text'
+          name='title'
+          onChange={updateTitle}
+          value={title}
+          // required
+          autoComplete="off"
+          className="puzzle-form-input"
+          placeholder="Name of Puzzle"
+
+        ></input>
+      </div>
+      <div className='LabelAndInputContainer'>
+        {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+        <input
+          type='number'
+          name='pieceCount'
+          onChange={updatePieceCount}
+          value={pieceCount}
+          // required
+          autoComplete="off"
+          className="puzzle-form-input"
+          placeholder="Number of Pieces"
 
 
-          ></input>
-        </div>
-        <div className='LabelAndInputContainer'>
-          {/* <label className="puzzle-form-label">Image Url</label> */}
-          <input
-            type='text'
-            name='image'
-            onChange={updateImage}
-            value={image}
-            autoComplete="off"
-            className="puzzle-form-input"
-            placeholder="Image Url"
+        ></input>
+      </div>
+      <div className='LabelAndInputContainer'>
+        {/* <label className="puzzle-form-label">Description</label> */}
+        <input
+          type='text'
+          name='title'
+          onChange={updateDescription}
+          value={description}
+          // required
+          autoComplete="off"
+          className="puzzle-form-input"
+          placeholder="Description"
 
-          ></input>
-        </div>
-        <button className='new-puzzle-submit-button' type='submit'>{'Submit Changes'}</button>
-      </form>
-    </>
-  );
+
+        ></input>
+      </div>
+      <div className='LabelAndInputContainer'>
+        {/* <label className="puzzle-form-label">Image Url</label> */}
+        <input
+          type='text'
+          name='image'
+          onChange={updateImage}
+          value={image}
+          autoComplete="off"
+          className="puzzle-form-input"
+          placeholder="Image Url"
+
+        ></input>
+      </div>
+      <button className='new-puzzle-submit-button' type='submit'>{'Submit Changes'}</button>
+      <button className='edit-puzzle-delete-button puzzle-form-input' onClick={() => handleDelete()}>{'Remove This Puzzle'}</button>
+
+    </form>
+  </>
+);
 };
 
 export default EditPuzzleForm;
