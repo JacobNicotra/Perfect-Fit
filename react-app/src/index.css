@@ -17,19 +17,22 @@ a:visited {
  }
  .font-logo {
    font-size: 60px;
-   color: white;
+   color: black;
    margin-left: 10px;
  }
 
  .font-logo:hover {
-   color: #30da77;
+   color: rgb(77, 77, 77);
+ }
+ .font-logo:active {
+  transform: scale(.97, .97);
  }
 
 
  #nav {
    display: flex;
    justify-content: space-between;
-   background-color: #26532b;
+   background-color: #9bffc5;
    align-items: center;
    height: 90px;
 
@@ -50,19 +53,52 @@ a:visited {
 
  .profile-button:hover {
    cursor: pointer;
+   background-color: rgb(196, 196, 196);
+
+ }
+
+ .profile-button:active {
+
+  transform: scale(.97, .97);
  }
 
  #perfect-fit {
-   font-size: 40px;
-   color: white;
+   font-size: 50px;
+   font-weight: bold;
+   color: black;
    margin-right: 50px;
+   /* position: absolute;  */
+   transform: translate(-5%); 
  }
 
  .add-puzzle-button {
-   color: white;
-   font-size: 47px;
+   color: black;
+   font-size: 37px;
    margin-left: 30px;
  }
+
+ .add-puzzle-button {
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-bottom: 4px;
+  height: 50px;
+  width: 50px;
+  margin-top: 15px;
+  margin-left: 15px;
+ }
+
+.add-puzzle-button:hover {
+  color: rgb(77, 77, 77);
+}
+
+.add-puzzle-button:active {
+  transform: scale(.97, .97);
+ }
+
 
  #nav-left {
    display: flex;

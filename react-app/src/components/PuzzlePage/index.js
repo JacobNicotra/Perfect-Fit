@@ -61,43 +61,11 @@ const Puzzle = () => {
           })}
         </ul >
       </div >
-      //         <>
-      //             <div className='ServerContainer'>
-      //                 <NavLink to='/channels/'>
-      //                     <div title='Home' className='server-buttons home-button server-pop'></div>
-      //                 </NavLink>
-      //                 <ul className="Bar">
-      //                 <div key='seperator' className='seperator'></div>
-      //                     {servers.map(server => {
-      //                         let color
-      //                         if (server.image !== 'none') {
-      //                            color = 'transparent'
-      //                         } else {
-      //                             color = 'white'
-      //                         }
-      //                         return (
-      //                             <li className={`serverButtons server-pop server-${server.serverId}`} key={server.id} title={`${server.title}`}>
-      //                                 <NavLink title={`${server.title}`} to={`/channels/${server.serverId}`}><button className='server-buttons'
-      //                                     style={{backgroundImage: `url(${server.image})`,
-      //                                     backgroundSize: 'cover',
-      //                                     backgroundRepeat: "no-repeat",
-      //                                     backgroundClip: "text",
-      //                                     color: color
-      //                                 }}>{(server.title[0])}</button></NavLink>
-      //                             </li>
-      //                         )
-      //                     })}
-      //                     <div key='seperator-bottom' className='seperator'></div>
-      //                     <li className="server-pop" title="Add a server" key='add-server-modal'>
-      //                         <AddServerModal />
-      //                     </li>
-      //                     <div key='empty-space' className='emptySpace'></div>
-      //                 </ul>
-      //             </div>
-      //         </>
+      
     )
   }
-  return ('no puzzles')
+  return (<div class="loader"></div>
+  )
 }
 
 export default Puzzle;

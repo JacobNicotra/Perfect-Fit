@@ -99,7 +99,7 @@ const PuzzleDetails = () => {
       </div>
     )
   }
-  return ('loading puzzle details')
+  return (<div class="loader"></div>)
 }
 
 export default PuzzleDetails;

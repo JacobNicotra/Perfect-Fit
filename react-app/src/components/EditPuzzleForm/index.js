@@ -154,7 +154,7 @@ return (
 
         ></input>
       </div>
-      <button className='new-puzzle-submit-button' type='submit'>{'Submit Changes'}</button>
+      <button className='new-puzzle-submit-button' type='submit'>{'Submit'}</button>
       <button className='edit-puzzle-delete-button puzzle-form-input' onClick={() => handleDelete()}>{'Remove This Puzzle'}</button>
 
     </form>
