@@ -5,8 +5,9 @@ import { NavLink, Redirect, useParams } from 'react-router-dom';
 import { getPuzzleOne } from '../../store/puzzle';
 import ProfileModal from '../ProfileModal';
 import Profile from '../Profile';
-import AddPuzzleForm from '../AddPuzzleForm'
+// import AddPuzzleForm from '../AddPuzzleForm'
 import AddPuzzleModal from '../AddPuzzleForm/AddPuzzleModal';
+import EditPuzzleModal from '../EditPuzzleForm/EditPuzzleModal'
 import { Modal } from '../../context/Modal';
 
 // import AddServerModal from '../AddServerModal';
@@ -63,77 +64,39 @@ const PuzzleDetails = () => {
       <div id="puz-det">
         <span id="puz-det-header">
           <div className='puzzle-details-title'>{puzzle.title}</div>
-          <button onClick={() => setShowEditPuzzleModal(true)}
-            hidden={owner !== true}> {cogWheelClicked ? <i className='fas fa-cog cogSpin' id={`cog-icon-${puzzle.id}`}></i> : <i className='fas fa-cog cogStatic' id={`cog-icon-${puzzle.id}`}></i>}</button>
-          {/* {showEditPuzzleModal && (
-            <AddPuzzleModal edit={true} puzzleId={ puzzleId}/>
-          )} */}
-          {showEditPuzzleModal && (
-            <Modal onClose={() => setShowEditPuzzleModal(false)}>
-              <AddPuzzleForm edit={true} puzzleId={puzzleId} modalSetter={modalSetter}/>
-            </Modal>
-          )}
+          <div className="puz-edit-div"
+            hidden={owner !== true}> <EditPuzzleModal className="puzzle-modal" />
+          </div>
+
+
+
         </span>
-        {puzzle?.images && 
-        
+
         <span id="puz-det-images">
 
           <div id="puz-det-image-wrap"><img id="puz-det-image" src={puzzle?.image}></img></div>
-          <ul id="puzzle-details-ul">
-            {puzzle.images.map(image => {
-              return (
-                <li key={image.id} className='puzzle-details-li'>
-                  <div >
+          {puzzle?.images &&
+            <ul id="puzzle-details-ul">
+              {puzzle.images.map(image => {
+                return (
+                  <li key={image.id} className='puzzle-details-li'>
+                    <div >
 
-                    <img className="puzzle-details-image" src={image.image} alt=''></img>
+                      <img className="puzzle-details-image" src={image.image} alt=''></img>
 
 
 
-                  </div>
+                    </div>
 
-                </li >
-              )
-            })}
-          </ul >
+                  </li >
+                )
+              })}
+            </ul >
+          }
         </span>
-        
-        }
+
         <div className='puzzle-details-description'>{puzzle.description}</div>
       </div>
-      //         <>
-      //             <div className='ServerContainer'>
-      //                 <NavLink to='/channels/'>
-      //                     <div title='Home' className='server-buttons home-button server-pop'></div>
-      //                 </NavLink>
-      //                 <ul className="Bar">
-      //                 <div key='seperator' className='seperator'></div>
-      //                     {servers.map(server => {
-      //                         let color
-      //                         if (server.image !== 'none') {
-      //                            color = 'transparent'
-      //                         } else {
-      //                             color = 'white'
-      //                         }
-      //                         return (
-      //                             <li className={`serverButtons server-pop server-${server.serverId}`} key={server.id} title={`${server.title}`}>
-      //                                 <NavLink title={`${server.title}`} to={`/channels/${server.serverId}`}><button className='server-buttons'
-      //                                     style={{backgroundImage: `url(${server.image})`,
-      //                                     backgroundSize: 'cover',
-      //                                     backgroundRepeat: "no-repeat",
-      //                                     backgroundClip: "text",
-      //                                     color: color
-      //                                 }}>{(server.title[0])}</button></NavLink>
-      //                             </li>
-      //                         )
-      //                     })}
-      //                     <div key='seperator-bottom' className='seperator'></div>
-      //                     <li className="server-pop" title="Add a server" key='add-server-modal'>
-      //                         <AddServerModal />
-      //                     </li>
-      //                     <div key='empty-space' className='emptySpace'></div>
-      //                 </ul>
-      //             </div>
-      //         </>
     )
   }
   return ('loading puzzle details')

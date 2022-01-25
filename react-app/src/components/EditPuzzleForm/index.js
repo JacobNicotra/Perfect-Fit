@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { editPuzzle } from '../../store/puzzle';
 import { getPuzzleOne } from '../../store/puzzle';
 import { useEffect } from 'react';
-import "./PuzzleForm.css"
+import "./EditPuzzle.css"
 
 const EditPuzzleForm = ({ modalSetter }) => {
   const [errors, setErrors] = useState([]);
@@ -18,6 +18,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
 
   const params = useParams();
   const puzzleId = params.puzzleId
+  console.log('_______PUZZLEID', puzzleId)
 
   useEffect(() => {
     dispatch(getPuzzleOne(puzzleId))
@@ -29,18 +30,9 @@ const EditPuzzleForm = ({ modalSetter }) => {
     setErrors([])
 
     let newPuzzle = {
-
+      'id': puzzleId
     }
 
-
-    newPuzzle = {
-      title,
-      userId,
-    }
-
-    if (!title.replace(/\s/g, '').length) {
-      return setErrors(['Please name your puzzle.'])
-    }
     if (title.replace(/\s/g, '').length ) {
       newPuzzle.title = title
     }
@@ -59,13 +51,14 @@ const EditPuzzleForm = ({ modalSetter }) => {
     let newPuzzleDb = null
     if (newPuzzle) {
      
-        newPuzzleDb = await dispatch(createPuzzle(newPuzzle));
+        newPuzzleDb = await dispatch(editPuzzle(newPuzzle));
         dispatch(getPuzzleOne(puzzleId))
 
     }
     modalSetter(true);
 
-    return history.push(`/puzzles/${newPuzzleDb['id']}`)
+    // return history.push(`/puzzles/${newPuzzleDb['id']}`)
+    return
 
   };
 
@@ -86,7 +79,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
 
   return (
     <>
-      <h2 className='modal-label'>{'New Puzzle'}</h2>
+      <h2 className='modal-label'>{'Edit Puzzle'}</h2>
       <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
         {errors.length > 0 && <div className='puz-form-erros'>
           {errors.map((error, ind) => (
@@ -151,7 +144,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
 
           ></input>
         </div>
-        <button className='new-puzzle-submit-button' type='submit'>{'Create Puzzle'}</button>
+        <button className='new-puzzle-submit-button' type='submit'>{'Submit Changes'}</button>
       </form>
     </>
   );
