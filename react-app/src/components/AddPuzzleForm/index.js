@@ -42,9 +42,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
       return setErrors(['Please name your puzzle.'])
     }
 
-    if (title.replace(/\s/g, '').length ) {
-      newPuzzle.title = title
-    }
+
     if (pieceCount.length > 0) {
       newPuzzle.pieceCount = parseInt(pieceCount)
     }

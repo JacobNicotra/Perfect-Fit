@@ -19,9 +19,9 @@ const addOnePuzzle = puzzle => ({
     puzzle
 })
 
-const deleteOnePuzzle = puzzle => ({
+const deleteOnePuzzle = puzzleId => ({
     type: DELETE_ONE,
-    puzzle
+    puzzleId
 })
 
 const editOnePuzzle = puzzle => ({
@@ -60,15 +60,15 @@ export const createPuzzle = (newPuzzle) => async dispatch => {
     return puzzle
 }
 
-// export const deleteServer = (serverToDelete) => async dispatch => {
-//     const response = await fetch(`/api/channels/${serverToDelete.serverId}/`, {
-//         method: 'DELETE',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(serverToDelete)
-//     })
+export const deletePuzzle = (puzzleId) => async dispatch => {
+    const response = await fetch(`/api/puzzles/${puzzleId}/`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(puzzleId)
+    })
 
-//     if (response.ok) dispatch(deleteOneServer(serverToDelete))
-// }
+    if (response.ok) dispatch(deleteOnePuzzle(puzzleId))
+}
 
 export const editPuzzle = (puzzleToEdit) => async dispatch => {
     const response = await fetch(`/api/puzzles/${puzzleToEdit.id}/`, {
@@ -107,24 +107,24 @@ const puzzleReducer = (state = initialState, action) => {
             newState[action.puzzle.id] = action.puzzle;
             return newState;
         }
-        // case DELETE_ONE:{
-        //     const deleteServer = action.server;
-        //     const serversArray = state.serversArray;
-        //     const servers = state.servers;
-        //     delete servers[deleteServer.serverId]
-        //     let index;
-        //     for (let i = 0; i < serversArray.length; i++) {
-        //         const server = serversArray[i];
-        //         if (server.id === deleteServer.serverId) {
-        //             index = i
-        //         }
-        //     }
-        //     serversArray.splice(index, 1)
-        //     const newState = {
-        //         ...state, servers, serversArray
-        //     }
-        //     return newState
-        // }
+        case DELETE_ONE:{
+            const deletePuzzleId = action.puzzleId;
+            const puzzleArray = state.puzzleArray;
+            const puzzles = state.puzzles;
+            delete puzzles[deletePuzzleId]
+            let index;
+            for (let i = 0; i < puzzleArray.length; i++) {
+                const puzzle = puzzleArray[i];
+                if (puzzle.id === deletePuzzleId) {
+                    index = i
+                }
+            }
+            puzzleArray.splice(index, 1)
+            const newState = {
+                ...state, puzzles, puzzleArray
+            }
+            return newState
+        }
         case EDIT_ONE: {
             let newState = Object.assign({}, state);
             newState[action.puzzle.id] = action.puzzle;

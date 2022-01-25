@@ -30,33 +30,24 @@
    margin: 15px;
    border:none;
    border-radius: 30px;
+   margin-top: 30px;
 
-   padding: 9px;
+   padding: 9px 13px 9px 13px;
 
+ }
+
+ .new-puzzle-submit-button:hover {
+   background-color: white;
  }
 
  .puzzle-form-input {
    padding: 9px;
    border: none;
-   background-color: #efefef;
+   /* background-color: #26532b62; */
    border-radius: 30px;
    display: flex;
    justify-content: center;
    text-align: center;
-
- }
-
- .edit-puzzle-delete-button {
-   margin-top: 65px;
-   background-color: rgb(151, 1, 1);
-   color: #efefef;
-   font-size: .8em;
- }
- .puzzle-form-input:hover {
-   background-color: white;
- }
- .new-puzzle-submit-button {
-   margin: 0 10px 0 10px
  }
 
 
@@ -71,4 +62,10 @@
    color: white;
    padding: 10px;
    font-size: 0.8em;
+ }
+
+ .puz-edit-button {
+   color: black;
+   font-size: 1.2em;
+   margin: 10px;
  }
