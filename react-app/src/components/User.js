@@ -58,10 +58,10 @@ function User() {
             return (
               <li key={swap.id} className='swap-card-wrapper'>
                 <div className='swap-card'>
-                  <span className='swap-card-title'>{swap.getPuzzleId}</span>
-                  <span className='swap-card-title'>{swap.givePuzzleId}</span>
-                  <span className='swap-card-title'>{swap.recipientId}</span>
-                  <span className='swap-card-title'>{swap?.message}</span>
+                  {/* <span className='swap-card-title'>{swap.getPuzzleId}</span> */}
+                  <span className='swap-card-title'>{swap.givePuzzle.title}</span>
+                  {/* <span className='swap-card-title'>{swap.recipientId}</span> */}
+                  {/* <span className='swap-card-title'>{swap?.message}</span> */}
 
                 </div>
 
