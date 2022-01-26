@@ -50,8 +50,11 @@ export const getSwapOne = (swapId) => async dispatch => {
 }
 
 export const getUserSwaps = (userId) => async dispatch => {
+    console.log('---------user swaps', userId)
 
     const response = await fetch(`/api/swaps/users/${userId}/`)
+
+    
 
     if (response.ok) {
         const swaps = await response.json()
@@ -90,7 +93,7 @@ export const deleteSwap = (swapId) => async dispatch => {
     if (response.ok) dispatch(deleteOneswap(swapId))
 }
 
-export const editswap = (swapToEdit) => async dispatch => {
+export const editSwap = (swapToEdit) => async dispatch => {
     const response = await fetch(`/api/swaps/${swapToEdit.id}/`, {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },

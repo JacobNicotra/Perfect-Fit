@@ -1,18 +1,19 @@
 
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, Redirect, useParams } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import LoginFormModal from '../LoginFormModal';
 import User from '../User';
+import getUserSwaps from '../../store/swap'
 
 import './Profile.css'
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const params = useParams();
+
   const sessionUser = useSelector(state => state.session.user);
-
-  const user = useSelector(state => state.session.user);
-
 
 
   return (
@@ -28,7 +29,7 @@ const Profile = () => {
         <div className='puzzle-decor5'><i className="fas fa-puzzle-piece"></i></div>
         <div className='puzzle-decor6'><i className="fas fa-puzzle-piece"></i></div>
         </span>
-          <NavLink to={'/users/' + user.id} >
+          <NavLink to={'/users/' + sessionUser.id} >
         <div className='user-disp-name'>{sessionUser && sessionUser.username}  </div>
           </NavLink>
         {sessionUser ?

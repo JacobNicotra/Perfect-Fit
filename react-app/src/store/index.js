@@ -2,11 +2,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
 import puzzleReducer from './puzzle';
+import swapReducer from './swap';
 
 
 const rootReducer = combineReducers({
   session,
-  puzzles: puzzleReducer
+  puzzles: puzzleReducer,
+  swaps: swapReducer
 });
 
 
