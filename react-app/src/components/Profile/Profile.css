@@ -1,0 +1,146 @@
+.user-disp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.user-disp-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: black;
+  padding: 12px;
+  border-radius: 13px;
+  color: rgb(236, 236, 236);
+}
+
+.user-disp-name:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(39, 39, 39);
+  cursor: pointer;
+}
+
+.user-disp-name:active {
+  transform: scale(.94);
+}
+
+
+.logout-button-li {
+  margin-top: 40px;
+  list-style-type:none  
+}
+
+.logout-button {
+  border:none;
+  background-color: rgb(194, 2, 2);
+  font-size: .8em;
+  padding: 8px;
+  border-radius: 12px;
+  color: white;
+
+}
+
+.logout-button:hover {
+cursor:pointer;
+}
+
+
+.logout-button:active {
+transform: scale(.94); 
+ }
+
+
+.user-disp-ul {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-button, .signup-button {
+  border:none;
+  background-color: rgb(235, 235, 235);
+  font-size: .95em;
+  padding: 8px;
+  border-radius: 12px;
+  color: black;
+
+}
+
+.login-button:hover, .signup-button:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  
+
+}
+
+.login-button:active, .signup-button:active {
+transform: scale(.94);  
+
+}
+
+
+.login-button-li, .signup-button-li {
+  list-style-type:none;
+} 
+
+.login-button-li {
+  margin-right: 8px;
+}
+
+.user-disp-ul-logged-out {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+
+.puzzle-decor-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+}
+.puzzle-decor-holder {
+  font-size: 1.6em;
+  margin-bottom: 30px;
+
+}
+
+.puzzle-decor1 {
+  transform: rotate(0deg);
+  margin-right:10px;
+}
+.puzzle-decor2 {
+  transform: rotate(45deg);
+  margin-right:10px;
+
+}
+.puzzle-decor3 {
+  transform: rotate(90deg);
+  margin-right:10px;
+  margin-top: 9px;
+
+}
+.puzzle-decor4 {
+  transform: rotate(135deg);
+  margin-right:10px;
+  margin-top: 10px;
+
+}
+.puzzle-decor5 {
+  transform: rotate(225deg);
+  margin-right:10px;
+
+}
+.puzzle-decor6 {
+  transform: rotate(315deg);
+  margin-bottom: 9px;
+}

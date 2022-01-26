@@ -30,14 +30,17 @@ body {
   justify-content: flex-start;
   flex-direction: column;
   overflow: hidden;
-  /* background-color: #ffffff3f; */
   border-radius: 18px;
+}
 
+.puzzle-card-background {
+  background-color: #7ac99b;
 
 }
+
 .puzzle-card-title {
   color: white;
-  background-color: #26532B;
+  background-color: black;
   padding: 10px 3px 10px 3px
 
 }
@@ -57,7 +60,7 @@ body {
 
 .puzzle-card-logo {
   height: 140px; 
-  margin-top: 25px;
+  margin-top: 13px;
 
 }
 /* 

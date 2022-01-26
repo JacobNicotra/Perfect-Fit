@@ -7,6 +7,7 @@ import { getPuzzles } from '../../store/puzzle';
 // import AddServerModal from '../AddServerModal';
 import './PuzzlePage.css'
 import logo from '../../logobg.png'
+import logoBW from '../../logo-bw-bg.png'
 
 
 const Puzzle = () => {
@@ -46,11 +47,11 @@ const Puzzle = () => {
             }
             return (
               <li key={puzzle.id} className='puzzle-card-wrapper'>
-                <div className='puzzle-card'>
+                <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
                   <span className='puzzle-card-title'>{puzzle.title}</span>
                   <span className='puzzle-card-rating'></span>
                   <NavLink to={`/puzzles/${puzzle.id}`}>
-                    <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : logo} alt='Puzzle Thumbnail'></img>
+                    <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
                   </NavLink>
 
 

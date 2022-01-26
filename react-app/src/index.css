@@ -39,7 +39,7 @@ a:visited {
  }
 
  .profile-button {
-   background-color: white;
+   background-color: #9bffc5;
    background-image: url("./profile.png");
    background-size:     cover;                      /* <------ */
    background-repeat:   no-repeat;
@@ -53,7 +53,8 @@ a:visited {
 
  .profile-button:hover {
    cursor: pointer;
-   background-color: rgb(196, 196, 196);
+   background-color: #7ac99b;
+
 
  }
 
