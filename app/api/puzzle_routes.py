@@ -93,22 +93,28 @@ def new_puzzle():
 
 @puzzle_routes.route('/<int:puzzle_id>/')
 def get_puzzle(puzzle_id):
-    puzzle = Puzzle.query.filter(Puzzle.id == puzzle_id).first()
+    # puzzle = Puzzle.query.join(User, Puzzle.userId == User.id).filter(Puzzle.id == puzzle_id).first()
+    puzzle_user_tup = db.session.query(Puzzle, User).join(User, Puzzle.userId == User.id).filter(Puzzle.id == puzzle_id).first()
+    print('--------------__________----------puzzle route', puzzle_user_tup)
     images = Image.query.filter(Image.puzzleId == puzzle_id).all()
     images_list = None
     if len(images) > 0:
         images_list = [{'id': image.id,'puzzleId': image.puzzleId, 'image': image.image} for image in images]
 
-    if puzzle:
+    if puzzle_user_tup:
         puzzle_db_dict = {
-            'id': puzzle.id,
-            'title': puzzle.title,
-            'userId': puzzle.userId,
-            'cityId': puzzle.cityId if puzzle.cityId else None,
-            'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
-            'image': puzzle.image if puzzle.image else None,
-            'description': puzzle.description if puzzle.description else None,
-            'images': images_list
+            'id': puzzle_user_tup[0].id,
+            'title': puzzle_user_tup[0].title,
+            'userId': puzzle_user_tup[0].userId,
+            'cityId': puzzle_user_tup[0].cityId if puzzle_user_tup[0].cityId else None,
+            'pieceCount': puzzle_user_tup[0].piece_count if puzzle_user_tup[0].piece_count else None,
+            'image': puzzle_user_tup[0].image if puzzle_user_tup[0].image else None,
+            'description': puzzle_user_tup[0].description if puzzle_user_tup[0].description else None,
+            'images': images_list,
+            'user': {
+                "id": puzzle_user_tup[1].id,
+                "username": puzzle_user_tup[1].username,
+            }
         }
         return puzzle_db_dict
     else:

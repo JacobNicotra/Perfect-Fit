@@ -1,0 +1,19 @@
+.swap-btn {
+  border: none;
+  font-size: 1.6em;
+  padding-top: 30px;
+  color: #88dfac;
+  background: none;
+  padding-left: 30px;
+  font-weight: bold;
+}
+
+
+.swap-btn:hover {
+  cursor: pointer;
+  color: #9affc4;
+}
+
+.swap-btn:active {
+  transform: scale(0.94);
+}

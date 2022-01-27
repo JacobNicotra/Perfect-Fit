@@ -63,7 +63,7 @@ function Swaps() {
 
                 return (
                   <li className='puz-pair-li'>
-                    <div>{ swap.recipientId }</div>
+                    <div>{swap.recipientId}</div>
                     <div className='puz-pair-ul-wrapper'>
 
                       <ul className='puz-pair-ul'>
@@ -76,6 +76,7 @@ function Swaps() {
                             </NavLink>
                           </div>
                         </li >
+                        <li><i className="fas fa-exchange-alt swap-symbol"></i></li>
                         <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
                           <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
                             <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.givePuzzle.title}</span>
@@ -121,6 +122,8 @@ function Swaps() {
                             </NavLink>
                           </div>
                         </li >
+                        <i className="fas fa-exchange-alt swap-symbol"></i>
+
                         <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
                           <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
                             <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.givePuzzle.title}</span>

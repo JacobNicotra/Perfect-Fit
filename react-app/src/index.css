@@ -149,6 +149,9 @@ a:visited {
  }
 
  .puz-pair-ul {
+   display: flex;
+   align-items: center;
+   align-content: center;
    width: fit-content;
    padding: 0;
    margin: 0;

@@ -9,6 +9,7 @@ import Profile from '../Profile';
 import AddPuzzleModal from '../AddPuzzleForm/AddPuzzleModal';
 import EditPuzzleModal from '../EditPuzzleForm/EditPuzzleModal'
 import { Modal } from '../../context/Modal';
+import SwapFormModal from '../SwapForm/SwapFormModal';
 
 // import AddServerModal from '../AddServerModal';
 import './PuzzleDetailsPage.css'
@@ -24,9 +25,6 @@ const PuzzleDetails = () => {
   const [showEditPuzzleModal, setShowEditPuzzleModal] = useState(false);
 
 
-
-
-
   let puzzle = useSelector(state => {
     return state.puzzles.puzzle
   })
@@ -36,8 +34,6 @@ const PuzzleDetails = () => {
   if (user && puzzle?.userId === user.id) {
     owner = true;
   };
-
-
 
   useEffect(async () => {
     await dispatch(getPuzzleOne(puzzleId));
@@ -63,9 +59,15 @@ const PuzzleDetails = () => {
     return (
       <div id="puz-det">
         <span id="puz-det-header">
-          <div className='puzzle-details-title'>{puzzle.title}</div>
+          <div className='puz-det-title-owner'>
+            <div className='puzzle-details-title'>{puzzle.title}</div>
+            <div>{ user.id === puzzle.user.id ? 'This puzzle is owned by you' : 'This puzzle is owned by' + puzzle.user.username}</div>
+          </div>
           <div className="puz-edit-div"
             hidden={owner !== true}> <EditPuzzleModal className="puzzle-modal" />
+          </div>
+          <div className="puz-edit-div"
+            hidden={owner == true}> <SwapFormModal className="puzzle-modal" />
           </div>
 
 
