@@ -36,7 +36,7 @@ def get_all_user_swaps(user_id):
     userSwapGivePuzzles = db.session.query(Swap, Puzzle).join(
         Puzzle.swap_give_relation).filter(Swap.userId == user_id).all()
 
-    userSwapGetPuzzles = db.session.query(Puzzle).join(
+    userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
         Puzzle.swap_get_relation).filter(Swap.userId == user_id).all()
 
 
@@ -57,13 +57,13 @@ def get_all_user_swaps(user_id):
                           'description': give_puzzle.description if give_puzzle.description else None
                       },
                       'getPuzzle': {
-                          'id': userSwapGetPuzzles[i].id,
-                          'title': userSwapGetPuzzles[i].title,
-                          'userId': userSwapGetPuzzles[i].userId,
-                          'cityId': userSwapGetPuzzles[i].cityId if userSwapGetPuzzles[i].cityId else None,
-                          'pieceCount': userSwapGetPuzzles[i].piece_count if userSwapGetPuzzles[i].piece_count else None,
-                          'image': userSwapGetPuzzles[i].image if userSwapGetPuzzles[i].image else None,
-                          'description': userSwapGetPuzzles[i].description if userSwapGetPuzzles[i].description else None
+                          'id': userSwapGetPuzzles[i][1].id,
+                          'title': userSwapGetPuzzles[i][1].title,
+                          'userId': userSwapGetPuzzles[i][1].userId,
+                          'cityId': userSwapGetPuzzles[i][1].cityId if userSwapGetPuzzles[i][1].cityId else None,
+                          'pieceCount': userSwapGetPuzzles[i][1].piece_count if userSwapGetPuzzles[i][1].piece_count else None,
+                          'image': userSwapGetPuzzles[i][1].image if userSwapGetPuzzles[i][1].image else None,
+                          'description': userSwapGetPuzzles[i][1].description if userSwapGetPuzzles[i][1].description else None
                       }
 
 
@@ -81,8 +81,7 @@ def get_all_recipient_swaps(recipientId):
         Puzzle.swap_give_relation).filter(Swap.recipientId == recipientId).all()
     userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
         Puzzle.swap_get_relation).filter(Swap.recipientId == recipientId).all()
-    print('_1_______userSwapGivePuzzles______', userSwapGivePuzzles)
-    print('__2____userSwapGetPuzzles________', userSwapGetPuzzles)
+
     if userSwapGivePuzzles:
         swap_list = [{'id': swap.id,
                       'userId': swap.userId,

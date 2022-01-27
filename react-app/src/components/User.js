@@ -17,6 +17,8 @@ function User() {
     return state.swaps.userSwapArray
   })
 
+  console.log('USERSWAPS_____________', userSwaps)
+
   let resipientSwaps = useSelector(state => {
     return state.swaps.recipientSwapArray
   })
@@ -47,7 +49,7 @@ function User() {
 
   if (user) {
     return (
-      <>
+      <div className='user-wrapper'>
         <ul>
           <li>
             <strong>User Id</strong> {userId}
@@ -61,60 +63,98 @@ function User() {
         </ul>
 
         {userSwaps &&
-          <ul>
-            {userSwaps.map(swap => {
+          <div>
+            <span>Swap Requests from Me</span>
 
-              return (
-                <li key={swap.id} className='swap-card-wrapper'>
-                  <div className='swap-card'>
-                    {/* <span className='swap-card-title'>{swap.getPuzzleId}</span> */}
-                    <span className='swap-card-title'>{swap.givePuzzle.title}</span>
-                    {/* <span className='swap-card-title'>{swap.recipientId}</span> */}
-                    {/* <span className='swap-card-title'>{swap?.message}</span> */}
+            <ul className='recipient-swaps-ul'>
 
-                  </div>
+              {userSwaps.map(swap => {
 
-                </li >
-              )
-            })}
-          </ul>
+                return (
+                  <li className='puz-pair-li'>
+                    <div className='puz-pair-ul-wrapper'>
+
+                      <ul className='puz-pair-ul'>
+                        <li key={swap.getPuzzle.id} className='puzzle-card-wrapper'>
+                          <div className={swap.getPuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                            <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-down download"></i>{swap.getPuzzle.title}</span>
+                            <span className='puzzle-card-rating'></span>
+                            <NavLink to={`/puzzles/${swap.getPuzzle.id}`}>
+                              <img className={swap.getPuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.getPuzzle.image ? swap.getPuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                            </NavLink>
+                          </div>
+                        </li >
+                        <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
+                          <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                            <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.givePuzzle.title}</span>
+                            <span className='puzzle-card-rating'></span>
+                            <NavLink to={`/puzzles/${swap.givePuzzle.id}`}>
+                              <img className={swap.givePuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.givePuzzle.image ? swap.givePuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                            </NavLink>
+                          </div>
+                        </li >
+                      </ul>
+                      <div>{swap.message}</div>
+
+                    </div>
+
+                  </li>
+
+                )
+              })}
+            </ul>
+
+          </div>
 
         }
         {resipientSwaps &&
-          <ul className='recipient-swaps-ul'>
-            {resipientSwaps.map(swap => {
+          <div>
 
-              return (
-                <li className='puz-pair-li'>
-                <ul className='puz-pair-ul'>
-                  <li key={swap.getPuzzle.id} className='puzzle-card-wrapper'>
-                    <div className={swap.getPuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
-                      <span className='puzzle-card-title'>{swap.getPuzzle.title}</span>
-                      <span className='puzzle-card-rating'></span>
-                      <NavLink to={`/puzzles/${swap.getPuzzle.id}`}>
-                        <img className={swap.getPuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.getPuzzle.image ? swap.getPuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
-                      </NavLink>
+
+            <span>Swap Requests from Others</span>
+
+            <ul className='recipient-swaps-ul'>
+              recipient
+              {resipientSwaps.map(swap => {
+
+                return (
+                  <li className='puz-pair-li'>
+                    <div className='puz-pair-ul-wrapper'>
+
+                      <ul className='puz-pair-ul'>
+                        <li key={swap.getPuzzle.id} className='puzzle-card-wrapper'>
+                          <div className={swap.getPuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                            <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-down download"></i>{swap.getPuzzle.title}</span>
+                            <span className='puzzle-card-rating'></span>
+                            <NavLink to={`/puzzles/${swap.getPuzzle.id}`}>
+                              <img className={swap.getPuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.getPuzzle.image ? swap.getPuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                            </NavLink>
+                          </div>
+                        </li >
+                        <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
+                          <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                            <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.givePuzzle.title}</span>
+                            <span className='puzzle-card-rating'></span>
+                            <NavLink to={`/puzzles/${swap.givePuzzle.id}`}>
+                              <img className={swap.givePuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.givePuzzle.image ? swap.givePuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                            </NavLink>
+                          </div>
+                        </li >
+                      </ul>
+                      <div>{swap.message}</div>
+
                     </div>
-                  </li >
-                  <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
-                    <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
-                      <span className='puzzle-card-title'>{swap.givePuzzle.title}</span>
-                      <span className='puzzle-card-rating'></span>
-                      <NavLink to={`/puzzles/${swap.givePuzzle.id}`}>
-                        <img className={swap.givePuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.givePuzzle.image ? swap.givePuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
-                      </NavLink>
-                    </div>
-                  </li >
-                </ul>
-                </li>
 
+                  </li>
 
-              )
-            })}
-          </ul>
+                )
+              })}
+            </ul>
+
+          </div>
 
         }
-      </>
+      </ div>
 
     );
   } else {

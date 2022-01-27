@@ -41,8 +41,13 @@ body {
 .puzzle-card-title {
   color: white;
   background-color: black;
-  padding: 10px 3px 10px 3px
+  padding: 10px 5px 10px 5px
 
+}
+
+
+.title-swap {
+  padding-right: 21px;
 }
 
 .PuzzlesContainer {

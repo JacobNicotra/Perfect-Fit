@@ -1,107 +1,154 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
+import React, { useState, useEffect } from 'react';
 import { NavLink, Redirect, useParams } from 'react-router-dom';
-import { getPuzzles } from '../../store/puzzle';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserSwaps, getRecipientSwaps } from '../store/swap';
 
-// import AddServerModal from '../AddServerModal';
-import './Swapp.css'
-import logo from '../../logobg.png'
+import logoBW from '../../logo-bw-bg.png'
 
-
-const Swap = () => {
+function User() {
   const dispatch = useDispatch();
   const params = useParams();
-  // // const serverId = params.serverId
-  // const user = useSelector(state => state.session.user);
-
-  // let userSwaps = useSelector(state => {
-  //   return state.swaps.user.swapArray
-  // })
-
-  // let recipientSwaps = useSelector(state => {
-  //   return state.swaps.recipient.swapArray
-  // })
 
 
-  // useEffect(async () => {
-  //   await dispatch(getPuzzles());
-  //   // const newPersist = document.querySelector(`.server-${serverId}`);
-  //   // const anotherPersist = document.querySelector('.current-chosen-server');
-  //   // if (anotherPersist) anotherPersist.classList.remove('current-chosen-server');
-  //   // if (newPersist) newPersist.classList.add('current-chosen-server');
-  //   return
-  // }, [dispatch])
+  const [user, setUser] = useState({});
+  const { userId } = useParams();
 
-  // // if (!user) {
-  // //     return <Redirect to='/' />;
-  // // }
+  let userSwaps = useSelector(state => {
+    return state.swaps.userSwapArray
+  })
 
-  // if (puzzles) {
-  //   return (
-  //     <div>
-  //       <ul id="puzzle-cards">
-  //         {puzzles.map(puzzle => {
-  //           let color
-  //           if (puzzle.image !== 'none') {
-  //             color = 'transparent'
-  //           } else {
-  //             color = 'white'
-  //           }
-  //           return (
-  //             <li key={puzzle.id} className='puzzle-card-wrapper'>
-  //               <div className='puzzle-card'>
-  //                 <span className='puzzle-card-title'>{puzzle.title}</span>
-  //                 <span className='puzzle-card-rating'></span>
-  //                 <NavLink to={`/puzzles/${puzzle.id}`}>
-  //                   <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : logo} alt='Puzzle Thumbnail'></img>
-  //                 </NavLink>
+  console.log('USERSWAPS_____________', userSwaps)
+
+  let resipientSwaps = useSelector(state => {
+    return state.swaps.recipientSwapArray
+  })
 
 
-  //               </div>
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    (async () => {
+      const response = await fetch(`/api/users/${userId}`);
+      const user = await response.json();
+      setUser(user);
+    })();
+  }, [userId]);
 
-  //             </li >
-  //           )
-  //         })}
-  //       </ul >
-  //     </div >
-  //     //         <>
-  //     //             <div className='ServerContainer'>
-  //     //                 <NavLink to='/channels/'>
-  //     //                     <div title='Home' className='server-buttons home-button server-pop'></div>
-  //     //                 </NavLink>
-  //     //                 <ul className="Bar">
-  //     //                 <div key='seperator' className='seperator'></div>
-  //     //                     {servers.map(server => {
-  //     //                         let color
-  //     //                         if (server.image !== 'none') {
-  //     //                            color = 'transparent'
-  //     //                         } else {
-  //     //                             color = 'white'
-  //     //                         }
-  //     //                         return (
-  //     //                             <li className={`serverButtons server-pop server-${server.serverId}`} key={server.id} title={`${server.title}`}>
-  //     //                                 <NavLink title={`${server.title}`} to={`/channels/${server.serverId}`}><button className='server-buttons'
-  //     //                                     style={{backgroundImage: `url(${server.image})`,
-  //     //                                     backgroundSize: 'cover',
-  //     //                                     backgroundRepeat: "no-repeat",
-  //     //                                     backgroundClip: "text",
-  //     //                                     color: color
-  //     //                                 }}>{(server.title[0])}</button></NavLink>
-  //     //                             </li>
-  //     //                         )
-  //     //                     })}
-  //     //                     <div key='seperator-bottom' className='seperator'></div>
-  //     //                     <li className="server-pop" title="Add a server" key='add-server-modal'>
-  //     //                         <AddServerModal />
-  //     //                     </li>
-  //     //                     <div key='empty-space' className='emptySpace'></div>
-  //     //                 </ul>
-  //     //             </div>
-  //     //         </>
-  //   )
-  // }
-  return ('no puzzles')
+  useEffect(async () => {
+    console.log('USERID', userId)
+    await dispatch(getUserSwaps(userId));
+    await dispatch(getRecipientSwaps(userId));
+    return
+  }, [dispatch])
+
+  if (!user) {
+    return null;
+  }
+
+
+  if (user) {
+    return (
+      <div className='user-wrapper'>
+
+        {userSwaps &&
+          <div>
+            <span>Swap Requests from Me</span>
+
+            <ul className='recipient-swaps-ul'>
+
+              {userSwaps.map(swap => {
+
+                return (
+                  <li className='puz-pair-li'>
+                    <div className='puz-pair-ul-wrapper'>
+
+                      <ul className='puz-pair-ul'>
+                        <li key={swap.getPuzzle.id} className='puzzle-card-wrapper'>
+                          <div className={swap.getPuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                            <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-down download"></i>{swap.getPuzzle.title}</span>
+                            <span className='puzzle-card-rating'></span>
+                            <NavLink to={`/puzzles/${swap.getPuzzle.id}`}>
+                              <img className={swap.getPuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.getPuzzle.image ? swap.getPuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                            </NavLink>
+                          </div>
+                        </li >
+                        <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
+                          <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                            <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.givePuzzle.title}</span>
+                            <span className='puzzle-card-rating'></span>
+                            <NavLink to={`/puzzles/${swap.givePuzzle.id}`}>
+                              <img className={swap.givePuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.givePuzzle.image ? swap.givePuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                            </NavLink>
+                          </div>
+                        </li >
+                      </ul>
+                      <div>{swap.message}</div>
+
+                    </div>
+
+                  </li>
+
+                )
+              })}
+            </ul>
+
+          </div>
+
+        }
+        {resipientSwaps &&
+          <div>
+
+
+            <span>Swap Requests from Others</span>
+
+            <ul className='recipient-swaps-ul'>
+              recipient
+              {resipientSwaps.map(swap => {
+
+                return (
+                  <li className='puz-pair-li'>
+                    <div className='puz-pair-ul-wrapper'>
+
+                      <ul className='puz-pair-ul'>
+                        <li key={swap.getPuzzle.id} className='puzzle-card-wrapper'>
+                          <div className={swap.getPuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                            <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-down download"></i>{swap.getPuzzle.title}</span>
+                            <span className='puzzle-card-rating'></span>
+                            <NavLink to={`/puzzles/${swap.getPuzzle.id}`}>
+                              <img className={swap.getPuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.getPuzzle.image ? swap.getPuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                            </NavLink>
+                          </div>
+                        </li >
+                        <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
+                          <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                            <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.givePuzzle.title}</span>
+                            <span className='puzzle-card-rating'></span>
+                            <NavLink to={`/puzzles/${swap.givePuzzle.id}`}>
+                              <img className={swap.givePuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.givePuzzle.image ? swap.givePuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                            </NavLink>
+                          </div>
+                        </li >
+                      </ul>
+                      <div>{swap.message}</div>
+
+                    </div>
+
+                  </li>
+
+                )
+              })}
+            </ul>
+
+          </div>
+
+        }
+      </ div>
+
+    );
+  } else {
+    return (<div class="loader"></div>
+    )
+  }
 }
-
-export default Swap;
+export default User;

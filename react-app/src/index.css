@@ -110,11 +110,62 @@ a:visited {
 
 
  .recipient-swaps-ul {
-  white-space:nowrap;
+  position: relative;
 
+  white-space:nowrap;
+  overflow-x: scroll;
+  display: flex;
+  background-color: #7ac99b;
+  padding: 20px 0 20px 0;
+  max-width: 900px;
+  min-width: 600px;
+  border-radius: 16px;
  }
+ 
 
  .puz-pair-li {
   display:inline;
+  background-color: #f8f8f8b6;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+  margin-right: 35px;
+  margin-left: 35px;
+  border-radius: 15px;
+  padding: 20px;
+ }
+ 
+ .puz-pair-ul-wrapper {
+  display:inline;
+  background-color: #7ac99b;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+ }
 
+ .puz-pair-ul {
+   width: fit-content;
+   padding: 0;
+   margin: 0;
+ }
+
+ .user-wrapper {
+   display: flex;
+   flex-direction: column;
+   align-content: center;
+   align-items: center;
+   justify-content: center;
+
+ }
+
+ .download,.upload {
+  margin-right: 10px;
+ }
+
+ .download {
+   color: rgb(44, 255, 44);
+ }
+
+ .upload {
+   color: rgb(255, 53, 53);
  }
