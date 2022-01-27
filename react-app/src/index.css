@@ -107,3 +107,14 @@ a:visited {
    align-content: center;
    justify-content: center
  }
+
+
+ .recipient-swaps-ul {
+  white-space:nowrap;
+
+ }
+
+ .puz-pair-li {
+  display:inline;
+
+ }

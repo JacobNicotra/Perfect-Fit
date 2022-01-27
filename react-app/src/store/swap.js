@@ -1,11 +1,17 @@
-const LOAD = 'swaps/LOAD';
+const LOAD_USER = 'swaps/LOAD_USER';
+const LOAD_RECIPIENT = 'swaps/LOAD_RECIPIENT';
 const LOAD_ONE = 'swaps/LOAD_ONE';
 const ADD_ONE = 'swaps/ADD_ONE';
 const DELETE_ONE = 'swaps/DELETE_ONE'
 const EDIT_ONE = 'swaps/EDIT_ONE'
 
-const load = swapArray => ({
-    type: LOAD,
+const loadUser = swapArray => ({
+    type: LOAD_USER,
+    swapArray
+})
+
+const loadRecipient = swapArray => ({
+    type: LOAD_RECIPIENT,
     swapArray
 })
 
@@ -29,15 +35,15 @@ const editOneswap = swap => ({
     swap
 })
 
-export const getSwaps = () => async dispatch => {
+// export const getSwaps = () => async dispatch => {
 
-    const response = await fetch(`/api/swaps/`)
+//     const response = await fetch(`/api/swaps/`)
 
-    if (response.ok) {
-        const swapArray = await response.json()
-        dispatch(load(swapArray))
-    }
-}
+//     if (response.ok) {
+//         const swapArray = await response.json()
+//         dispatch(load(swapArray))
+//     }
+// }
 
 export const getSwapOne = (swapId) => async dispatch => {
 
@@ -54,21 +60,25 @@ export const getUserSwaps = (userId) => async dispatch => {
 
     const response = await fetch(`/api/swaps/users/${userId}/`)
 
-    
+
 
     if (response.ok) {
         const swaps = await response.json()
-        dispatch(load(swaps))
+        if (swaps === "None") return "None"
+        dispatch(loadUser(swaps))
     }
 }
 
 export const getRecipientSwaps = (userId) => async dispatch => {
 
-    const response = await fetch(`/api/swaps/recipient/${userId}/`)
+    console.log('_____RECIPITENT SWAPS', userId)
+
+    const response = await fetch(`/api/swaps/recipients/${userId}/`)
 
     if (response.ok) {
         const swaps = await response.json()
-        dispatch(load(swaps))
+        if (swaps === "None") return "None"
+        dispatch(loadRecipient(swaps))
     }
 }
 
@@ -111,14 +121,24 @@ const swapReducer = (state = initialState, action) => {
     switch(action.type) {
         default:
             return state
-        case LOAD:{
-            const swaps = {}
-            const swapArray = action.swapArray
+        case LOAD_USER:{
+            const userSwaps = {}
+            const userSwapArray = action.swapArray
             action.swapArray.forEach(swap => {
-                swaps[swap.id] = swap
+                userSwaps[swap.id] = swap
             });
             return {
-                ...state, swaps, swapArray
+                ...state, userSwaps, userSwapArray
+            }}
+        case LOAD_RECIPIENT: {
+            console.log('_____LOAD_RECIPIENT')
+            const recipientSwaps = {}
+            const recipientSwapArray = action.swapArray
+            action.swapArray.forEach(swap => {
+                recipientSwaps[swap.id] = swap
+            });
+            return {
+                ...state, recipientSwaps, recipientSwapArray
             }}
         case LOAD_ONE:{
             const swap = action.swap

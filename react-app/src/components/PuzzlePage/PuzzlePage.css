@@ -50,9 +50,9 @@ body {
 }
 
 .puzzle-card-image {
-  object-fit:contain;
+  object-fit:cover;
   width: 200px;
-  height: auto;
+  height: 200px;
   overflow: hidden;
   border-radius: 0 0 18px 18px;
 
