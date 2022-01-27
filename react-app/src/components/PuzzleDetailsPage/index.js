@@ -59,7 +59,7 @@ const PuzzleDetails = () => {
 
 
 
-  if (puzzle) {
+  if (puzzle && puzzle.id === parseInt(puzzleId)) {
     return (
       <div id="puz-det">
         <span id="puz-det-header">

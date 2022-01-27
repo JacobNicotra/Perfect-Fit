@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Redirect, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserSwaps, getRecipientSwaps } from '../store/swap';
+import { getUserSwaps, getRecipientSwaps } from '../../store/swap';
+
+import './Swap.css'
 
 import logoBW from '../../logo-bw-bg.png'
 
-function User() {
+function Swaps() {
   const dispatch = useDispatch();
   const params = useParams();
+  const user = useSelector(state => state.session.user);
+  const userId = user.id
 
-
-  const [user, setUser] = useState({});
-  const { userId } = useParams();
+  // const [user, setUser] = useState({});
+  // const { userId } = useParams();
 
   let userSwaps = useSelector(state => {
     return state.swaps.userSwapArray
@@ -31,7 +34,7 @@ function User() {
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
-      setUser(user);
+      // setUser(user);
     })();
   }, [userId]);
 
@@ -52,8 +55,7 @@ function User() {
       <div className='user-wrapper'>
 
         {userSwaps &&
-          <div>
-            <span>Swap Requests from Me</span>
+          <div className='my-swaps-wrapper'>
 
             <ul className='recipient-swaps-ul'>
 
@@ -61,6 +63,7 @@ function User() {
 
                 return (
                   <li className='puz-pair-li'>
+                    <div>{ swap.recipientId }</div>
                     <div className='puz-pair-ul-wrapper'>
 
                       <ul className='puz-pair-ul'>
@@ -97,13 +100,11 @@ function User() {
 
         }
         {resipientSwaps &&
-          <div>
+          <div className='others-swaps-wrapper'>
 
 
-            <span>Swap Requests from Others</span>
 
             <ul className='recipient-swaps-ul'>
-              recipient
               {resipientSwaps.map(swap => {
 
                 return (
@@ -151,4 +152,4 @@ function User() {
     )
   }
 }
-export default User;
+export default Swaps;

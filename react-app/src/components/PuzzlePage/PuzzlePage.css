@@ -18,7 +18,13 @@ body {
   text-align: center;
   margin: 10px; 
   /* background-color: #464947; */
-  border-radius: 66px;
+  /* border-radius: 66px; */
+  box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.2);
+
+}
+
+.puzzle-card-wrapper:hover {
+  box-shadow: 0px 1px 10px 7px #7ac99b88;
 
 }
 
@@ -30,7 +36,7 @@ body {
   justify-content: flex-start;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 18px;
+  /* border-radius: 18px; */
 }
 
 .puzzle-card-background {

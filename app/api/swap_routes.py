@@ -33,8 +33,13 @@ def get_all_user_swaps(user_id):
 
     # userSwaps = Swap.query.filter(Swap.userId == user_id).all()
 
-    userSwapGivePuzzles = db.session.query(Swap, Puzzle).join(
+    print('_______________________________________________________?????BEFORE Q')
+
+    userSwapGivePuzzles = db.session.query(Swap, Puzzle, User).join(
         Puzzle.swap_give_relation).filter(Swap.userId == user_id).all()
+
+
+    print('_______________------------____-------____userSwapGivePuzzles___', userSwapGivePuzzles)
 
     userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
         Puzzle.swap_get_relation).filter(Swap.userId == user_id).all()

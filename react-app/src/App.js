@@ -12,6 +12,7 @@ import { authenticate } from './store/session';
 import Landing from './components/Landing';
 import Puzzle from './components/PuzzlePage';
 import PuzzleDetails from './components/PuzzleDetailsPage';
+import Swaps from './components/Swap.js';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,6 +44,10 @@ function App() {
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
+        </ProtectedRoute>
+        <ProtectedRoute path='/swaps' exact={true} >
+          <NavBar />
+          <Swaps />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <NavBar />

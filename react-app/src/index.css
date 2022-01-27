@@ -19,6 +19,7 @@ a:visited {
    font-size: 60px;
    color: black;
    margin-left: 10px;
+   /* border:rgb(0, 0, 0) solid 2px */
  }
 
  .font-logo:hover {
@@ -69,7 +70,7 @@ a:visited {
    color: black;
    margin-right: 50px;
    /* position: absolute;  */
-   transform: translate(-5%); 
+   transform: translate(13%); 
  }
 
  .add-puzzle-button {
@@ -115,11 +116,15 @@ a:visited {
   white-space:nowrap;
   overflow-x: scroll;
   display: flex;
+  /* justify-content: center; */
   background-color: #7ac99b;
   padding: 20px 0 20px 0;
   max-width: 900px;
-  min-width: 600px;
-  border-radius: 16px;
+  min-width: 550px;
+  /* border-radius: 16px; */
+  margin: 0;
+
+  box-shadow: 0px 1px 9px 5px rgba(0, 0, 0, 0.2);
  }
  
 
@@ -169,3 +174,46 @@ a:visited {
  .upload {
    color: rgb(255, 53, 53);
  }
+
+ .nav-username-pro-btn {
+   display: flex;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+
+ }
+
+
+
+
+.nav-username {
+  padding-right: 13px;
+  font-weight: bold;
+
+}
+
+.nav-swap-btn {
+  border: none;
+  background-color: none;
+  background: none;
+}
+
+.swap-icon {
+  padding-right: 35px;
+  font-size: 1.8em;
+}
+
+
+.swap-icon {
+  padding-right: 35px;
+  font-size: 1.8em;
+}
+
+.swap-icon:hover {
+  color: rgb(77, 77, 77);
+}
+
+
+.nav-swap-btn:active {
+ transform: scale(.97, .97);
+}

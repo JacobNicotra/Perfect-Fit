@@ -1,0 +1,23 @@
+.my-swaps-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+.others-swaps-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin-top: 40px;
+
+}
+
+.swaps-ul-label {
+  background-color: #7ac99b;
+  padding: 5px 15px 0 15px;
+  border-radius: 50px 50px 0 0px;
+}
