@@ -36,10 +36,19 @@ def get_all_user_swaps(user_id):
     print('_______________________________________________________?????BEFORE Q')
 
     userSwapGivePuzzles = db.session.query(Swap, Puzzle, User).join(
-        Puzzle.swap_give_relation).filter(Swap.userId == user_id).all()
+        Puzzle.swap_give_relation).filter(Swap.userId == user_id, Swap.recipientId == User.id).all()
 
 
     print('_______________------------____-------____userSwapGivePuzzles___', userSwapGivePuzzles)
+    print('_______________0', userSwapGivePuzzles[0], userSwapGivePuzzles[0][2].id, userSwapGivePuzzles[0][2].username)
+    print('_______________1', userSwapGivePuzzles[1], userSwapGivePuzzles[1][2].id, userSwapGivePuzzles[1][2].username)
+    print('_______________2', userSwapGivePuzzles[2], userSwapGivePuzzles[2][2].id, userSwapGivePuzzles[2][2].username)
+    print('_______________3', userSwapGivePuzzles[3], userSwapGivePuzzles[3][2].id, userSwapGivePuzzles[3][2].username)
+    print('_______________4', userSwapGivePuzzles[4], userSwapGivePuzzles[4][2].id, userSwapGivePuzzles[4][2].username)
+    # print('_______________5', userSwapGivePuzzles[5], userSwapGivePuzzles[5][2].id, userSwapGivePuzzles[5][2].username)
+    # print('_______________6', userSwapGivePuzzles[6], userSwapGivePuzzles[6][2].id, userSwapGivePuzzles[6][2].username)
+    # print('_______________7', userSwapGivePuzzles[7], userSwapGivePuzzles[7][2].id, userSwapGivePuzzles[7][2].username)
+    # print('_______________8', userSwapGivePuzzles[8], userSwapGivePuzzles[8][2].id, userSwapGivePuzzles[8][2].username)
 
     userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
         Puzzle.swap_get_relation).filter(Swap.userId == user_id).all()
@@ -48,7 +57,6 @@ def get_all_user_swaps(user_id):
     if userSwapGivePuzzles:
         swap_list = [{'id': swap.id,
                       'userId': swap.userId,
-                      'recipientId': swap.recipientId if swap.recipientId else None,
                       'getPuzzleId': swap.getPuzzleId if swap.getPuzzleId else None,
                       'givePuzzleId': swap.givePuzzleId if swap.givePuzzleId else None,
                       'message': swap.message if swap.message else None,
@@ -61,6 +69,10 @@ def get_all_user_swaps(user_id):
                           'image': give_puzzle.image if give_puzzle.image else None,
                           'description': give_puzzle.description if give_puzzle.description else None
                       },
+                      'recipient': {
+                          'id': recipient.id, 
+                          'username': recipient.username, 
+                      },
                       'getPuzzle': {
                           'id': userSwapGetPuzzles[i][1].id,
                           'title': userSwapGetPuzzles[i][1].title,
@@ -72,7 +84,9 @@ def get_all_user_swaps(user_id):
                       }
 
 
-                      } for i, (swap, give_puzzle) in enumerate(userSwapGivePuzzles)]
+                      } for i, (swap, give_puzzle, recipient) in enumerate(userSwapGivePuzzles)]
+
+        print('_____!_!_!_!_! swaplist', swap_list)
 
         return jsonify(swap_list)
     else:

@@ -63,7 +63,7 @@ function Swaps() {
 
                 return (
                   <li className='puz-pair-li'>
-                    <div>{swap.recipientId}</div>
+                    <div>{swap.recipient.username}</div>
                     <div className='puz-pair-ul-wrapper'>
 
                       <ul className='puz-pair-ul'>
