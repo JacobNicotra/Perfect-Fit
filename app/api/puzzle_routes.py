@@ -41,6 +41,20 @@ def get_all_puzzles_for_city(city_id):
     else:
         return jsonify("Puzzles not found in database."), 404
 
+@puzzle_routes.route('/users/<int:userId>/')
+def get_all_puzzles_for_user(userId):
+    puzzles = Puzzle.query.filter(Puzzle.userId == userId).all()
+    if puzzles:
+        puzzle_list = [{'id': puzzle.id, 'title': puzzle.title, 'userId': puzzle.userId,
+                        'cityId': puzzle.cityId if puzzle.cityId else None,
+                        'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
+                        'image': puzzle.image if puzzle.image else None,
+                        'description': puzzle.description if puzzle.description else None,
+                        } for puzzle in puzzles]
+        return jsonify(puzzle_list)
+    else:
+        return jsonify("Puzzles not found in database."), 404
+
 
 @puzzle_routes.route('/', methods=['POST'])
 def new_puzzle():
