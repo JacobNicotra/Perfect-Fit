@@ -36,22 +36,25 @@ def get_all_user_swaps(user_id):
     print('_______________________________________________________?????BEFORE Q')
 
     userSwapGivePuzzles = db.session.query(Swap, Puzzle, User).join(
-        Puzzle.swap_give_relation).filter(Swap.userId == user_id, Swap.recipientId == User.id).all()
+        Puzzle.swap_give_relation).filter(Swap.userId == user_id, Swap.recipientId == User.id).order_by(Swap.id.desc()).all()
 
+    print('1111_______________________________________userSwapGivePuzzles', userSwapGivePuzzles)
 
-    print('_______________------------____-------____userSwapGivePuzzles___', userSwapGivePuzzles)
-    print('_______________0', userSwapGivePuzzles[0], userSwapGivePuzzles[0][2].id, userSwapGivePuzzles[0][2].username)
-    print('_______________1', userSwapGivePuzzles[1], userSwapGivePuzzles[1][2].id, userSwapGivePuzzles[1][2].username)
-    print('_______________2', userSwapGivePuzzles[2], userSwapGivePuzzles[2][2].id, userSwapGivePuzzles[2][2].username)
-    print('_______________3', userSwapGivePuzzles[3], userSwapGivePuzzles[3][2].id, userSwapGivePuzzles[3][2].username)
-    print('_______________4', userSwapGivePuzzles[4], userSwapGivePuzzles[4][2].id, userSwapGivePuzzles[4][2].username)
+    # print('_______________------------____-------____userSwapGivePuzzles___', userSwapGivePuzzles)
+    # print('_______________0', userSwapGivePuzzles[0], userSwapGivePuzzles[0][2].id, userSwapGivePuzzles[0][2].username)
+    # print('_______________1', userSwapGivePuzzles[1], userSwapGivePuzzles[1][2].id, userSwapGivePuzzles[1][2].username)
+    # print('_______________2', userSwapGivePuzzles[2], userSwapGivePuzzles[2][2].id, userSwapGivePuzzles[2][2].username)
+    # print('_______________3', userSwapGivePuzzles[3], userSwapGivePuzzles[3][2].id, userSwapGivePuzzles[3][2].username)
+    # print('_______________4', userSwapGivePuzzles[4], userSwapGivePuzzles[4][2].id, userSwapGivePuzzles[4][2].username)
     # print('_______________5', userSwapGivePuzzles[5], userSwapGivePuzzles[5][2].id, userSwapGivePuzzles[5][2].username)
     # print('_______________6', userSwapGivePuzzles[6], userSwapGivePuzzles[6][2].id, userSwapGivePuzzles[6][2].username)
     # print('_______________7', userSwapGivePuzzles[7], userSwapGivePuzzles[7][2].id, userSwapGivePuzzles[7][2].username)
     # print('_______________8', userSwapGivePuzzles[8], userSwapGivePuzzles[8][2].id, userSwapGivePuzzles[8][2].username)
 
     userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
-        Puzzle.swap_get_relation).filter(Swap.userId == user_id).all()
+        Puzzle.swap_get_relation).filter(Swap.userId == user_id).order_by(Swap.id.desc()).all()
+
+    print('2222_______________________________________userSwapGetPuzzles', userSwapGetPuzzles)
 
 
     if userSwapGivePuzzles:
@@ -86,7 +89,7 @@ def get_all_user_swaps(user_id):
 
                       } for i, (swap, give_puzzle, recipient) in enumerate(userSwapGivePuzzles)]
 
-        print('_____!_!_!_!_! swaplist', swap_list)
+        print('33333_______________________________________swaplist', swap_list)
 
         return jsonify(swap_list)
     else:

@@ -56,7 +56,6 @@ export const getSwapOne = (swapId) => async dispatch => {
 }
 
 export const getUserSwaps = (userId) => async dispatch => {
-    console.log('---------user swaps', userId)
 
     const response = await fetch(`/api/swaps/users/${userId}/`)
 
@@ -64,6 +63,8 @@ export const getUserSwaps = (userId) => async dispatch => {
 
     if (response.ok) {
         const swaps = await response.json()
+            console.log('---------user swaps res from backend', swaps)
+
         if (swaps === "None") return "None"
         dispatch(loadUser(swaps))
     }
@@ -71,7 +72,6 @@ export const getUserSwaps = (userId) => async dispatch => {
 
 export const getRecipientSwaps = (userId) => async dispatch => {
 
-    console.log('_____RECIPITENT SWAPS', userId)
 
     const response = await fetch(`/api/swaps/recipients/${userId}/`)
 
@@ -89,6 +89,7 @@ export const createSwap = (newSwap) => async dispatch => {
         body: JSON.stringify(newSwap)
     })
     const swap = await response.json()
+    console.log('- - - - - - store response from backend', swap)
     if (response.ok) dispatch(addOneswap(swap))
     return swap
 }

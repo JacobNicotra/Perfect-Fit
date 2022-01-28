@@ -41,7 +41,7 @@ const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
         userId: user.id,
         recipientId: puzzleOwnerId,
         givePuzzleId,
-        getPuzzleId
+        getPuzzleId: puzzleId
       }
       console.log('_______NEW SWAP', newSwap)
 
@@ -73,9 +73,9 @@ const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
   const onPuzzleSelect = async(e) => {
     e.preventDefault();
 
-    console.log('_______cur______', e.currentTarget.id)
+    console.log(' ** *** ** *** give puzzle id', e.currentTarget.id, 'get puzzle id', puzzleId, 'recipient', puzzleOwnerId)
     setGivePuzzleId(e.currentTarget.id)
-    setGetPuzzleId(puzzleId)
+    // setGetPuzzleId(puzzleId)
   }
 
 
