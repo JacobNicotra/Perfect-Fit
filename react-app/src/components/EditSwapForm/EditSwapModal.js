@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import SwapForm from './index';
+import EditSwapForm from './index';
 
-function AddPuzzleModal() {
+function EditSwapModal({ recipient }) {
   const [showModal, setShowModal] = useState(false);
   
 
@@ -13,15 +13,17 @@ function AddPuzzleModal() {
   return (
     <>
       {/* <button className='add-puzzle-button puzzle-buttons' onClick={() => setShowModal(true)}><i className="far fa-plus-square"></i></button> */}
-      <button className='swap-btn' onClick={() => setShowModal(true)}><i className="fas fa-sync-alt"></i></button>
+      <button className='swap-btn' onClick={() => setShowModal(true)}> <i className="fas fa-edit edit-puz"></i></button>
       {showModal && (
         <Modal className="add-puzzle-modal" onClose={() => setShowModal(false)}>
 
-          <SwapForm modalSetter={modalSetter} />
+          <EditSwapForm 
+          recipient={recipient} 
+          modalSetter={modalSetter} />
         </Modal>
       )}
     </>
   );
 }
 
-export default AddPuzzleModal;
+export default EditSwapModal;

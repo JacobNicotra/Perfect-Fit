@@ -75,5 +75,16 @@
   background: none;
   margin: 0;
   padding: 0;
+  margin: 10px
+}
+
+/* .selected-puzzle {
+  box-shadow: 0 0 10px 5px red
+} */
+.puz-card-wrap-form {
+  margin: 0
+}
+.puz-select-button:focus {
+  box-shadow: 0 0 10px 5px red
 
 }

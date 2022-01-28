@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Redirect, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserSwaps, getRecipientSwaps } from '../../store/swap';
+import EditSwapModal from '../EditSwapForm/EditSwapModal'
 
 import './Swap.css'
 
@@ -64,6 +65,7 @@ function Swaps() {
                 return (
                   <li className='puz-pair-li'>
                     <div>{swap.recipient.username}</div>
+                    <div><EditSwapModal recipient={swap.recipient}/></div>
                     <div className='puz-pair-ul-wrapper'>
 
                       <ul className='puz-pair-ul'>

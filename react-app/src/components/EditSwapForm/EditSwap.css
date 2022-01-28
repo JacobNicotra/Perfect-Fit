@@ -1,0 +1,7 @@
+.edit-swap-lists-wrapper {
+  display: flex;
+}
+
+.selected-give-puzzle {
+  box-shadow: 0 0 7px 4px red
+}

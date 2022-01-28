@@ -33,12 +33,10 @@ def get_all_user_swaps(user_id):
 
     # userSwaps = Swap.query.filter(Swap.userId == user_id).all()
 
-    print('_______________________________________________________?????BEFORE Q')
 
     userSwapGivePuzzles = db.session.query(Swap, Puzzle, User).join(
         Puzzle.swap_give_relation).filter(Swap.userId == user_id, Swap.recipientId == User.id).order_by(Swap.id.desc()).all()
 
-    print('1111_______________________________________userSwapGivePuzzles', userSwapGivePuzzles)
 
     # print('_______________------------____-------____userSwapGivePuzzles___', userSwapGivePuzzles)
     # print('_______________0', userSwapGivePuzzles[0], userSwapGivePuzzles[0][2].id, userSwapGivePuzzles[0][2].username)
@@ -54,7 +52,6 @@ def get_all_user_swaps(user_id):
     userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
         Puzzle.swap_get_relation).filter(Swap.userId == user_id).order_by(Swap.id.desc()).all()
 
-    print('2222_______________________________________userSwapGetPuzzles', userSwapGetPuzzles)
 
 
     if userSwapGivePuzzles:
@@ -89,7 +86,6 @@ def get_all_user_swaps(user_id):
 
                       } for i, (swap, give_puzzle, recipient) in enumerate(userSwapGivePuzzles)]
 
-        print('33333_______________________________________swaplist', swap_list)
 
         return jsonify(swap_list)
     else:
@@ -98,7 +94,6 @@ def get_all_user_swaps(user_id):
 
 @swap_routes.route('/recipients/<int:recipientId>/')
 def get_all_recipient_swaps(recipientId):
-    print('----- recipient route -------')
     userSwapGivePuzzles = db.session.query(Swap, Puzzle).join(
         Puzzle.swap_give_relation).filter(Swap.recipientId == recipientId).all()
     userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
