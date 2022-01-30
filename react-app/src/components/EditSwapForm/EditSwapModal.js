@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EditSwapForm from './index';
 
-function EditSwapModal({ recipient }) {
+function EditSwapModal({ recipient, swap, swapEditDetector, user }) {
   const [showModal, setShowModal] = useState(false);
   
 
@@ -19,7 +19,11 @@ function EditSwapModal({ recipient }) {
 
           <EditSwapForm 
           recipient={recipient} 
-          modalSetter={modalSetter} />
+          sender={user} 
+          swap={swap} 
+          modalSetter={modalSetter} 
+          swapEditDetector= {swapEditDetector}
+          />
         </Modal>
       )}
     </>

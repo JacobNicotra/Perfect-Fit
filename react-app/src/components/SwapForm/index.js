@@ -41,7 +41,8 @@ const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
         userId: user.id,
         recipientId: puzzleOwnerId,
         givePuzzleId,
-        getPuzzleId: puzzleId
+        getPuzzleId: puzzleId,
+        userAccept: true
       }
       console.log('_______NEW SWAP', newSwap)
 

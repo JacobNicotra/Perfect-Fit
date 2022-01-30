@@ -12,6 +12,8 @@ class Swap(db.Model):
     getPuzzleId = db.Column(db.Integer, db.ForeignKey(Puzzle.id), nullable=False)
     givePuzzleId = db.Column(db.Integer, db.ForeignKey(Puzzle.id), nullable=False)
     message = db.Column(db.Text)
+    userAccept = db.Column(db.Boolean, default=False)
+    recipientAccept = db.Column(db.Boolean, default=False)
 
     # owner_relation = db.relationship("User", back_populates="swap_relation")
     # recipient_relation = db.relationship("User", back_populates="swap_relation")

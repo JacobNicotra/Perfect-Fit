@@ -104,8 +104,8 @@ export const deleteSwap = (swapId) => async dispatch => {
     if (response.ok) dispatch(deleteOneswap(swapId))
 }
 
-export const editSwap = (swapToEdit) => async dispatch => {
-    const response = await fetch(`/api/swaps/${swapToEdit.id}/`, {
+export const editSwap = (swapToEdit, swapId) => async dispatch => {
+    const response = await fetch(`/api/swaps/${swapId}/`, {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(swapToEdit)
@@ -153,19 +153,20 @@ const swapReducer = (state = initialState, action) => {
         }
         case DELETE_ONE:{
             const deleteswapId = action.swapId;
-            const swapArray = state.swapArray;
-            const swaps = state.swaps;
-            delete swaps[deleteswapId]
+            const userSwapArray = state.userSwapArray;
+            const userSwaps = state.userSwaps;
+            
+            delete userSwaps[deleteswapId]
             let index;
-            for (let i = 0; i < swapArray.length; i++) {
-                const swap = swapArray[i];
+            for (let i = 0; i < userSwapArray.length; i++) {
+                const swap = userSwapArray[i];
                 if (swap.id === deleteswapId) {
                     index = i
                 }
             }
-            swapArray.splice(index, 1)
+            userSwapArray.splice(index, 1)
             const newState = {
-                ...state, swaps, swapArray
+                ...state, userSwaps, userSwapArray
             }
             return newState
         }

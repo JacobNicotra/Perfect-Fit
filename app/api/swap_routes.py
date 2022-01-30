@@ -94,10 +94,10 @@ def get_all_user_swaps(user_id):
 
 @swap_routes.route('/recipients/<int:recipientId>/')
 def get_all_recipient_swaps(recipientId):
-    userSwapGivePuzzles = db.session.query(Swap, Puzzle).join(
-        Puzzle.swap_give_relation).filter(Swap.recipientId == recipientId).all()
+    userSwapGivePuzzles = db.session.query(Swap, Puzzle, User).join(
+        Puzzle.swap_give_relation).filter(Swap.recipientId == recipientId, Swap.userId == User.id).order_by(Swap.id.desc()).all()
     userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
-        Puzzle.swap_get_relation).filter(Swap.recipientId == recipientId).all()
+        Puzzle.swap_get_relation).filter(Swap.recipientId == recipientId).order_by(Swap.id.desc()).all()
 
     if userSwapGivePuzzles:
         swap_list = [{'id': swap.id,
@@ -115,6 +115,10 @@ def get_all_recipient_swaps(recipientId):
                           'image': give_puzzle.image if give_puzzle.image else None,
                           'description': give_puzzle.description if give_puzzle.description else None
                       },
+                      'user': {
+                          'id': user.id, 
+                          'username': user.username, 
+                      },
                       'getPuzzle': {
                           'id': userSwapGetPuzzles[i][1].id,
                           'title': userSwapGetPuzzles[i][1].title,
@@ -126,7 +130,7 @@ def get_all_recipient_swaps(recipientId):
                       }
 
 
-                      } for i, (swap, give_puzzle) in enumerate(userSwapGivePuzzles)]
+                      } for i, (swap, give_puzzle, user) in enumerate(userSwapGivePuzzles)]
 
     # userSwaps = Swap.query.filter(Swap.recipientId == recipientId).all()
     # if userSwaps:
@@ -171,6 +175,7 @@ def new_swap():
             'givePuzzleId': data['givePuzzleId'],
             'recipientId': data['recipientId'],
             'message': data['message'],
+            'userAccept': True
         }
 
         if 'message' in data and data["message"] != '':
