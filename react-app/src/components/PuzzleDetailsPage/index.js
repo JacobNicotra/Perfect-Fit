@@ -67,7 +67,7 @@ const PuzzleDetails = () => {
             hidden={owner !== true}> <EditPuzzleModal className="puzzle-modal" />
           </div>
           <div className="puz-edit-div"
-            hidden={owner == true}> <SwapFormModal puzzleOwnerId={puzzle.userId} className="puzzle-modal" />
+            hidden={owner == true}> <SwapFormModal puzzleOwner={puzzle.user} className="puzzle-modal" />
           </div>
 
 

@@ -24,12 +24,12 @@ function Swaps() {
     return state.swaps.userSwapArray
   })
 
-  // console.log('USERSWAPS_____________', userSwaps)
   // let resipientSwaps = useSelector(state => {
   //   return state.swaps.recipientSwapArray
   // })
 
   const swapEditDetector = () => {
+
     if (swapEdit === false) setSwapEdit(true)
     else setSwapEdit(true)
     return
@@ -48,7 +48,6 @@ function Swaps() {
   }, [userId]);
 
   useEffect(async () => {
-    console.log('USERID', userId)
     await dispatch(getUserSwaps(userId));
     // await dispatch(getRecipientSwaps(userId));
     return
@@ -85,7 +84,7 @@ function Swaps() {
 
         <div>
           <h3>Pending Swaps</h3>
-          {userSwaps ?
+          {userSwaps?.length > 0 ?
             <div className='my-swaps-wrapper'>
 
               <ul className='recipient-swaps-ul'>
@@ -94,7 +93,7 @@ function Swaps() {
 
                   return (
                     <li className='puz-pair-li'>
-
+                      <div>{user.id === swap.userId ? swap.recipientUsername : swap.userUsername }</div>
                       <div><EditSwapModal otherUserId={user.id === swap.userId ? swap.recipientId : swap.userId} swap={swap} swapEditDetector={swapEditDetector} /></div>
                       <div>{user.id === swap.userId ?
                         <span>
@@ -152,57 +151,7 @@ function Swaps() {
         </div>
 
         <div>
-          {/* {resipientSwaps ?
-            <div className='others-swaps-wrapper'>
-
-              <ul className='recipient-swaps-ul'>
-                {resipientSwaps.map(swap => {
-
-                  return (
-                    <li className='puz-pair-li'>
-
-                      <div>{swap.user.username}</div>
-                      <div><EditSwapModal user={swap.user} swap={swap} swapEditDetector={swapEditDetector} /></div>
-                      <div className='puz-pair-ul-wrapper'>
-
-                        <ul className='puz-pair-ul'>
-                          <li key={swap.getPuzzle.id} className='puzzle-card-wrapper'>
-                            <div className={swap.getPuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
-                              <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-down download"></i>{swap.getPuzzle.title}</span>
-                              <span className='puzzle-card-rating'></span>
-                              <NavLink to={`/puzzles/${swap.getPuzzle.id}`}>
-                                <img className={swap.getPuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.getPuzzle.image ? swap.getPuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
-                              </NavLink>
-                            </div>
-                          </li >
-                          <i className="fas fa-exchange-alt swap-symbol"></i>
-
-                          <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
-                            <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
-                              <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.givePuzzle.title}</span>
-                              <span className='puzzle-card-rating'></span>
-                              <NavLink to={`/puzzles/${swap.givePuzzle.id}`}>
-                                <img className={swap.givePuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.givePuzzle.image ? swap.givePuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
-                              </NavLink>
-                            </div>
-                          </li >
-                        </ul>
-                        <div>{swap.message}</div>
-
-                      </div>
-
-                    </li>
-
-                  )
-                })}
-              </ul>
-
-            </div>
-
-            :
-            <div>If a user sends you a swap request, it will appear here...</div>
-
-          } */}
+        
         </ div>
       </div>
 

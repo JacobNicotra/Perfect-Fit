@@ -9,7 +9,7 @@ import logoBW from '../../logo-bw-bg.png'
 import { createSwap } from '../../store/swap'
 
 
-const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
+const SwapForm = ({ modalSetter, puzzleOwner }) => {
 
 
   const [errors, setErrors] = useState([]);
@@ -28,7 +28,7 @@ const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
   const params = useParams();
   const puzzleId = params.puzzleId
 
-  console.log('___________puzzleOWNERID', puzzleOwnerId, 'USERID', user.id)
+  console.log('___________puzzleOWNERID', puzzleOwner, 'USERID', user.id)
   useEffect(() => {
     dispatch(getPuzzlesUser(user.id))
     // dispatch(getPuzzlesRecipient(puzzleOwnerId))
@@ -41,7 +41,9 @@ const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
 
     let newSwap = {
       userId: user.id,
-      recipientId: puzzleOwnerId,
+      recipientId: puzzleOwner.id,
+      userUsername: user.username,
+      recipientUsername: puzzleOwner.username,
       givePuzzleId,
       getPuzzleId: puzzleId,
       userAccept: true

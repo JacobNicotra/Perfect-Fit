@@ -63,6 +63,8 @@ def get_all_user_swaps(user_id):
         swap_list = [{'id': swap.id,
                       'userId': swap.userId,
                       'recipientId': swap.recipientId,
+                      'userUsername': swap.userUsername,
+                      'recipientUsername': swap.recipientUsername,
                       'getPuzzleId': swap.getPuzzleId if swap.getPuzzleId else None,
                       'givePuzzleId': swap.givePuzzleId if swap.givePuzzleId else None,
                       'message': swap.message if swap.message else None,
@@ -174,6 +176,8 @@ def new_swap():
         new_swap = {
             'userId': data['userId'],
             'recipientId': data['recipientId'],
+            'recipientUsername': data['recipientUsername'],
+            'userUsername': data['userUsername'],
             'getPuzzleId': data['getPuzzleId'],
             'givePuzzleId': data['givePuzzleId'],
             'recipientId': data['recipientId'],
@@ -232,6 +236,10 @@ def update_swap(swap_id):
             swap.givePuzzleId = data['givePuzzleId']
         if 'message' in data:
             swap.message = data['message']
+        if 'userAccept' in data:
+            swap.userAccept = data['userAccept']
+        if 'recipientAccept' in data:
+            swap.recipientAccept = data['recipientAccept']
 
         db.session.commit()
         if swap:
@@ -241,6 +249,8 @@ def update_swap(swap_id):
                             'getPuzzleId': swap.getPuzzleId if swap.getPuzzleId else None,
                             'givePuzzleId': swap.givePuzzleId if swap.givePuzzleId else None,
                             'message': swap.message if swap.message else None,
+                            'userAccept': swap.userAccept if swap.userAccept else None,
+                            'recipientAccept': swap.recipientAccept if swap.recipientAccept else None,
                             }
         return swap_db_dict
     else:

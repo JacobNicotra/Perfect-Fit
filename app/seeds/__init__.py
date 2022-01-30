@@ -16,7 +16,7 @@ def seed():
     seed_cities()
     seed_users()
     seed_puzzles()
-    seed_swaps()
+    # seed_swaps()
     seed_Images()
     # Add other seed functions here
 
@@ -27,7 +27,7 @@ def undo():
     undo_cities()
     undo_users()
     undo_puzzles()
-    undo_swaps()
+    # undo_swaps()
     undo_cities()
     undo_images()
 

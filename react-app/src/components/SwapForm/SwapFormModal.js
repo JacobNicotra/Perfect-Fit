@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import SwapForm from './index';
 
-function SwapformModal({puzzleOwnerId}) {
+function SwapformModal({puzzleOwner}) {
   const [showModal, setShowModal] = useState(false);
   
 
@@ -17,7 +17,7 @@ function SwapformModal({puzzleOwnerId}) {
       {showModal && (
         <Modal className="add-puzzle-modal" onClose={() => setShowModal(false)}>
 
-          <SwapForm modalSetter={modalSetter} puzzleOwnerId={puzzleOwnerId} />
+          <SwapForm modalSetter={modalSetter} puzzleOwner={puzzleOwner} />
         </Modal>
       )}
     </>
