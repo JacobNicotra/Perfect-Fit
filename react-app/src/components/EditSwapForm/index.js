@@ -6,10 +6,10 @@ import { getPuzzlesUser, getPuzzlesRecipient } from '../../store/puzzle';
 import { useEffect } from 'react';
 import "./EditSwap.css"
 import logoBW from '../../logo-bw-bg.png'
-import {createSwap, editSwap, deleteSwap, getUserSwaps, getRecipientSwaps} from '../../store/swap'
+import {createSwap, editSwap, deleteSwap, getUserSwaps} from '../../store/swap'
 
 
-const SwapForm = ({ modalSetter, recipient, sender, swap, swapEditDetector }) => {
+const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
 
   let oldSelectedGetPuzzle = document.getElementById(`${swap.getPuzzleId}`);
   let oldSelectedGivePuzzle = document.getElementById(`${swap.givePuzzleId}`);
@@ -30,6 +30,8 @@ const SwapForm = ({ modalSetter, recipient, sender, swap, swapEditDetector }) =>
   const userPuzzles = useSelector(state => state.puzzles.userPuzzleArray);
   const recipientPuzzles = useSelector(state => state.puzzles.recipientPuzzleArray);
 
+  console.log('otherUserId', otherUserId)
+
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -39,15 +41,8 @@ const SwapForm = ({ modalSetter, recipient, sender, swap, swapEditDetector }) =>
 
   
   useEffect(() => {
-
-    if (!sender) {
       dispatch(getPuzzlesUser(user.id))
-      dispatch(getPuzzlesRecipient(recipient.id))
-
-    } else {
-      dispatch(getPuzzlesUser(user.id))
-      dispatch(getPuzzlesRecipient(sender.id))
-    }
+      dispatch(getPuzzlesRecipient(otherUserId))
 
   }, [dispatch])
 
@@ -171,7 +166,7 @@ const handleDelete = async () => {
   console.log('DELETE PRESSED')
     const deletedSwap = await dispatch(deleteSwap(swap.id));
     dispatch(getUserSwaps(user.id))
-    dispatch(getRecipientSwaps(user.id))
+    // dispatch(getRecipientSwaps(user.id))
     
     modalSetter(true);
     // return history.push(`/puzzles/`)
@@ -205,7 +200,7 @@ if (swap) {
 put stuff here
 
 <div>
-      <div>Change the Puzzle that you are requesting from {recipient ? recipient.username : sender.username}</div>
+      <div>Change the Puzzle that you are requesting</div>
       <ul className='user-puz-selection'>
         {recipientPuzzles &&
           recipientPuzzles.map(puzzle => {
@@ -290,7 +285,7 @@ put stuff here
   )
 
 }
-  return (<div class="loader"></div>)
+  return (<div className="loader"></div>)
 
 
   // return (

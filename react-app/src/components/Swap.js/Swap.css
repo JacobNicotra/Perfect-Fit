@@ -26,3 +26,11 @@
   font-size: 2.5em;
   
 }
+
+.green-check,.green-other-check {
+  color: #13b657ea;
+}
+
+.red-check,.red-other-check {
+  color: red;
+}

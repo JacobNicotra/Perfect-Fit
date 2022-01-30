@@ -70,17 +70,17 @@ export const getUserSwaps = (userId) => async dispatch => {
     }
 }
 
-export const getRecipientSwaps = (userId) => async dispatch => {
+// export const getRecipientSwaps = (userId) => async dispatch => {
 
 
-    const response = await fetch(`/api/swaps/recipients/${userId}/`)
+//     const response = await fetch(`/api/swaps/recipients/${userId}/`)
 
-    if (response.ok) {
-        const swaps = await response.json()
-        if (swaps === "None") return "None"
-        dispatch(loadRecipient(swaps))
-    }
-}
+//     if (response.ok) {
+//         const swaps = await response.json()
+//         if (swaps === "None") return "None"
+//         dispatch(loadRecipient(swaps))
+//     }
+// }
 
 export const createSwap = (newSwap) => async dispatch => {
     const response = await fetch(`/api/swaps/`, {
@@ -115,6 +115,16 @@ export const editSwap = (swapToEdit, swapId) => async dispatch => {
     return edittedSwap
 }
 
+export const commitSwap = (swap) => async dispatch => {
+    const response = await fetch(`/api/swaps/${swap.id}/commit/`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(swap)
+    })
+
+    if (response.ok) dispatch(deleteOneswap(swap.id))
+}
+
 
 const initialState = {};
 
@@ -131,16 +141,16 @@ const swapReducer = (state = initialState, action) => {
             return {
                 ...state, userSwaps, userSwapArray
             }}
-        case LOAD_RECIPIENT: {
-            console.log('_____LOAD_RECIPIENT')
-            const recipientSwaps = {}
-            const recipientSwapArray = action.swapArray
-            action.swapArray.forEach(swap => {
-                recipientSwaps[swap.id] = swap
-            });
-            return {
-                ...state, recipientSwaps, recipientSwapArray
-            }}
+        // case LOAD_RECIPIENT: {
+        //     console.log('_____LOAD_RECIPIENT')
+        //     const recipientSwaps = {}
+        //     const recipientSwapArray = action.swapArray
+        //     action.swapArray.forEach(swap => {
+        //         recipientSwaps[swap.id] = swap
+        //     });
+        //     return {
+        //         ...state, recipientSwaps, recipientSwapArray
+        //     }}
         case LOAD_ONE:{
             const swap = action.swap
             return {

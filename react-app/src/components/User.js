@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Redirect, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserSwaps, getRecipientSwaps } from '../store/swap';
+import { getUserSwaps } from '../store/swap';
 import Swaps from './Swap.js';
+import { getPuzzlesUser } from '../store/puzzle';
 
 import logoBW from '../logo-bw-bg.png'
 
@@ -18,14 +19,17 @@ function User() {
     return state.swaps.userSwapArray
   })
 
-  console.log('USERSWAPS_____________', userSwaps)
 
-  let resipientSwaps = useSelector(state => {
-    return state.swaps.recipientSwapArray
+  let userPuzzles = useSelector(state => {
+    return state.puzzles.userPuzzleArray
   })
 
+  console.log('userPuzzles', userPuzzles)
 
-  useEffect(() => {
+
+
+  useEffect( async() => {
+    await dispatch(getPuzzlesUser(userId));
     if (!userId) {
       return;
     }
@@ -34,12 +38,12 @@ function User() {
       const user = await response.json();
       setUser(user);
     })();
-  }, [userId]);
+  }, [dispatch, userId]);
 
   useEffect(async () => {
     console.log('USERID', userId)
     await dispatch(getUserSwaps(userId));
-    await dispatch(getRecipientSwaps(userId));
+    // await dispatch(getRecipientSwaps(userId));
     return
   }, [dispatch])
 
@@ -47,17 +51,38 @@ function User() {
     return null;
   }
 
-
-  if (user) {
+  if (userPuzzles) {
     return (
-      <div className='user-page'>
-        <Swaps />
+      <div>
+        <ul id="puzzle-cards">
+          {userPuzzles.map(puzzle => {
+            let color
+            if (puzzle.image !== 'none') {
+              color = 'transparent'
+            } else {
+              color = 'white'
+            }
+            return (
+              <li key={puzzle.id} className='puzzle-card-wrapper'>
+                <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                  <span className='puzzle-card-title'>{puzzle.title}</span>
+                  <span className='puzzle-card-rating'></span>
+                  <NavLink to={`/puzzles/${puzzle.id}`}>
+                    <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                  </NavLink>
 
-      </div>
 
-    );
+                </div>
+
+              </li >
+            )
+          })}
+        </ul >
+      </div >
+      
+    )
   } else {
-    return (<div class="loader"></div>
+    return (<div className="loader"></div>
     )
   }
 }

@@ -42,7 +42,7 @@ const PuzzleDetails = () => {
     // if (anotherPersist) anotherPersist.classList.remove('current-chosen-server');
     // if (newPersist) newPersist.classList.add('current-chosen-server');
     return
-  }, [dispatch])
+  }, [dispatch, puzzleId])
 
   // if (!user) {
   //     return <Redirect to='/' />;
@@ -101,7 +101,7 @@ const PuzzleDetails = () => {
       </div>
     )
   }
-  return (<div class="loader"></div>)
+  return (<div className="loader"></div>)
 }
 
 export default PuzzleDetails;

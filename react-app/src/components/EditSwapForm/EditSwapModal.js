@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EditSwapForm from './index';
 
-function EditSwapModal({ recipient, swap, swapEditDetector, user }) {
+function EditSwapModal({ otherUserId, swap, swapEditDetector }) {
   const [showModal, setShowModal] = useState(false);
-  
+
 
   const modalSetter = () => {
     setShowModal(false);
@@ -17,12 +17,11 @@ function EditSwapModal({ recipient, swap, swapEditDetector, user }) {
       {showModal && (
         <Modal className="add-puzzle-modal" onClose={() => setShowModal(false)}>
 
-          <EditSwapForm 
-          recipient={recipient} 
-          sender={user} 
-          swap={swap} 
-          modalSetter={modalSetter} 
-          swapEditDetector= {swapEditDetector}
+          <EditSwapForm
+            otherUserId={otherUserId}
+            swap={swap}
+            modalSetter={modalSetter}
+            swapEditDetector={swapEditDetector}
           />
         </Modal>
       )}
