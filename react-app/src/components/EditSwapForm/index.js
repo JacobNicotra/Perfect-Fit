@@ -101,7 +101,6 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
     console.log(' e.currentTarget', e.currentTarget, 'e.currentTarget.id', e.currentTarget.id)
 
     setGetPuzzleId(e.currentTarget.id)
-    // e.currentTarget.className = "puz-select-button selected-puzzle"
 
     if (getPuzzleSelected !== '') {
       getPuzzleSelected.className='puz-select-button'
@@ -109,7 +108,6 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
     setGetPuzzleSelected(e.currentTarget)
         e.currentTarget.className = "puz-select-button selected-give-puzzle"
 
-    // setGetPuzzleId(puzzleId)
   }
 
   const onPuzzleSelectGive = async(first, e) => {
@@ -131,7 +129,6 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
     console.log(' e.currentTarget', e.currentTarget, 'e.currentTarget.id', e.currentTarget.id)
 
     setGivePuzzleId(e.currentTarget.id)
-    // e.currentTarget.className = "puz-select-button selected-puzzle"
 
     if (givePuzzleSelected !== '') {
       givePuzzleSelected.className='puz-select-button'
@@ -139,7 +136,6 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
     setGivePuzzleSelected(e.currentTarget)
         e.currentTarget.className = "puz-select-button selected-give-puzzle"
 
-    // setGetPuzzleId(puzzleId)
   }
 
 

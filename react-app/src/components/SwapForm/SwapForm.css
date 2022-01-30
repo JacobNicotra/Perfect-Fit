@@ -78,13 +78,13 @@
   margin: 10px
 }
 
-/* .selected-puzzle {
+.selected-puzzle {
   box-shadow: 0 0 10px 5px red
-} */
+}
 .puz-card-wrap-form {
   margin: 0
 }
-.puz-select-button:focus {
+/* .puz-select-button:focus {
   box-shadow: 0 0 10px 5px red
 
-}
+} */

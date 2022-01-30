@@ -6,7 +6,7 @@ import { getPuzzlesUser, getPuzzlesRecipient } from '../../store/puzzle';
 import { useEffect } from 'react';
 import "./SwapForm.css"
 import logoBW from '../../logo-bw-bg.png'
-import {createSwap} from '../../store/swap'
+import { createSwap } from '../../store/swap'
 
 
 const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
@@ -16,6 +16,8 @@ const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
   const [message, setMessage] = useState('');
   const [givePuzzleId, setGivePuzzleId] = useState('');
   const [getPuzzleId, setGetPuzzleId] = useState('');
+
+  const [givePuzzleSelected, setGivePuzzleSelected] = useState('');
 
   const user = useSelector(state => state.session.user);
   const userPuzzles = useSelector(state => state.puzzles.userPuzzleArray);
@@ -33,53 +35,53 @@ const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
   }, [dispatch])
 
   const onSubmit = async (e) => {
-      e.preventDefault();
-      console.log('#############SUBMIT')
-      setErrors([])
+    e.preventDefault();
+    console.log('#############SUBMIT')
+    setErrors([])
 
-      let newSwap = {
-        userId: user.id,
-        recipientId: puzzleOwnerId,
-        givePuzzleId,
-        getPuzzleId: puzzleId,
-        userAccept: true
-      }
-      console.log('_______NEW SWAP', newSwap)
+    let newSwap = {
+      userId: user.id,
+      recipientId: puzzleOwnerId,
+      givePuzzleId,
+      getPuzzleId: puzzleId,
+      userAccept: true
+    }
+    console.log('_______NEW SWAP', newSwap)
 
     //   if (!title.replace(/\s/g, '').length) {
     //     return setErrors(['Please name your puzzle.'])
     //   }
-      if (!givePuzzleId) {
-        return setErrors(['Please choose one of your puzzles to trade.'])
-      }
+    if (!givePuzzleId) {
+      return setErrors(['Please choose one of your puzzles to trade.'])
+    }
 
 
-      if (message.replace(/\s/g, '').length) {
-        newSwap.message = message
-      }
+    if (message.replace(/\s/g, '').length) {
+      newSwap.message = message
+    }
 
-      let newSwapDb = null
-      if (newSwap) {
+    let newSwapDb = null
+    if (newSwap) {
 
-          newSwapDb = await dispatch(createSwap(newSwap));
-          // dispatch(getPuzzles())
+      newSwapDb = await dispatch(createSwap(newSwap));
+      // dispatch(getPuzzles())
 
-      }
+    }
     modalSetter(true);
 
-      return history.push(`/swaps`)
+    return history.push(`/swaps`)
 
   };
 
-  const onPuzzleSelect = async(e) => {
+  const onPuzzleSelect = async (e) => {
     e.preventDefault();
 
-    console.log(' e.currentTarget', e.currentTarget, 'e.currentTarget.id', e.currentTarget.id)
-    console.log(' e.target', e.target, 'e.target.id', e.target.id)
-
     setGivePuzzleId(e.currentTarget.id)
-    e.currentTarget.className = "puz-select-button selected-puzzle"
-    // setGetPuzzleId(puzzleId)
+    if (givePuzzleSelected !== '') {
+      givePuzzleSelected.className = 'puz-select-button'
+    }
+    setGivePuzzleSelected(e.currentTarget)
+    e.currentTarget.className = "puz-select-button selected-give-puzzle"
   }
 
 
@@ -102,6 +104,7 @@ const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
   };
 
 
+
   return (<div>
 
     <span className='puzzle-decor-holder'>
@@ -120,42 +123,42 @@ const SwapForm = ({ modalSetter, puzzleOwnerId }) => {
         {userPuzzles &&
           userPuzzles.map(puzzle => {
             return (
-                  <button  id={puzzle.id} onClick={(e) => {
-                    e.preventDefault();
-                    onPuzzleSelect(e);
-                  }} className='puz-select-button'>
-              <li key={puzzle.id} className='puzzle-card-wrapper puz-card-wrap-form'>
-                <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background puzzle-card-background-swap-form'}>
-                  <span className='puzzle-card-title puz-title-swap-form'>{puzzle.title}</span>
-                  <span className='puzzle-card-rating'></span>
-                    <img   className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo logo-swap-form'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+              <button id={puzzle.id} onClick={(e) => {
+                e.preventDefault();
+                onPuzzleSelect(e);
+              }} className='puz-select-button'>
+                <li key={puzzle.id} className='puzzle-card-wrapper puz-card-wrap-form'>
+                  <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background puzzle-card-background-swap-form'}>
+                    <span className='puzzle-card-title puz-title-swap-form'>{puzzle.title}</span>
+                    <span className='puzzle-card-rating'></span>
+                    <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo logo-swap-form'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
 
 
-                </div>
+                  </div>
 
-              </li >
-                  </button>
+                </li >
+              </button>
             )
           })
         }
       </ul>
 
- <div className='LabelAndInputContainer'>
-          {/* <label className="puzzle-form-label">Puzzle Name</label> */}
-          <input
-            type='text'
-            name='message'
-            onChange={updateMessage}
-            value={message}
-            // required
-            autoComplete="off"
-            className="puzzle-form-input swap-message-input"
-            placeholder="Leave a message with your swap request"
+      <div className='LabelAndInputContainer'>
+        {/* <label className="puzzle-form-label">Puzzle Name</label> */}
+        <input
+          type='text'
+          name='message'
+          onChange={updateMessage}
+          value={message}
+          // required
+          autoComplete="off"
+          className="puzzle-form-input swap-message-input"
+          placeholder="Leave a message with your swap request"
 
-          ></input>
-                  <button className='new-puzzle-submit-button' type='submit'>{'Submit Swap Request!'}</button>
+        ></input>
+        <button className='new-puzzle-submit-button' type='submit'>{'Submit Swap Request!'}</button>
 
-        </div>
+      </div>
 
 
 
