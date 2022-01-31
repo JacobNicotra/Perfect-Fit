@@ -65,7 +65,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
   const handleDelete = async () => {
 
     const deletedPuzzleId = await dispatch(deletePuzzle(puzzleId));
-    dispatch(getPuzzleOne(puzzleId))
+    // dispatch(getPuzzleOne(puzzleId))
     
     modalSetter(true);
     return history.push(`/puzzles/`)

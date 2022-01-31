@@ -161,15 +161,15 @@ const puzzleReducer = (state = initialState, action) => {
             const deletePuzzleId = action.puzzleId;
             const puzzleArray = state.puzzleArray;
             const puzzles = state.puzzles;
-            delete puzzles[deletePuzzleId]
-            let index;
-            for (let i = 0; i < puzzleArray.length; i++) {
-                const puzzle = puzzleArray[i];
-                if (puzzle.id === deletePuzzleId) {
-                    index = i
-                }
-            }
-            puzzleArray.splice(index, 1)
+            // delete puzzles[deletePuzzleId]
+            // let index;
+            // for (let i = 0; i < puzzleArray.length; i++) {
+            //     const puzzle = puzzleArray[i];
+            //     if (puzzle.id === deletePuzzleId) {
+            //         index = i
+            //     }
+            // }
+            // puzzleArray.splice(index, 1)
             const newState = {
                 ...state, puzzles, puzzleArray
             }
