@@ -152,7 +152,7 @@ def update_server(puzzle_id):
             puzzle.userId = data['userId']
         if 'cityId' in data:
             puzzle.cityId = data['cityId']
-        if 'piece_count' in data:
+        if 'pieceCount' in data:
             puzzle.piece_count = data['pieceCount']
         if 'image' in data:
             puzzle.image = data['image']

@@ -37,6 +37,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
     }
     if (pieceCount.length > 0) {
       newPuzzle.pieceCount = parseInt(pieceCount)
+      console.log(pieceCount,'pieceCount')
     }
     if (image.replace(/\s/g, '').length) {
       newPuzzle.image = image
@@ -49,7 +50,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
     }
     let newPuzzleDb = null
     if (newPuzzle) {
-
+      console.log(newPuzzle)
       newPuzzleDb = await dispatch(editPuzzle(newPuzzle));
       dispatch(getPuzzleOne(puzzleId))
 
