@@ -63,6 +63,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
   };
 
   const handleDelete = async () => {
+    e.preventDefault();
 
     const deletedPuzzleId = await dispatch(deletePuzzle(puzzleId));
     // dispatch(getPuzzleOne(puzzleId))
