@@ -1,9 +1,14 @@
 // constants
+const GIVE_INFO = 'session/GIVE_INFO';
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 
 const setUser = (user) => ({
   type: SET_USER,
+  payload: user
+});
+const giveInfo = (user) => ({
+  type: GIVE_INFO,
   payload: user
 });
 
@@ -26,6 +31,22 @@ export const authenticate = () => async (dispatch) => {
     }
   
     dispatch(setUser(data));
+  }
+}
+
+export const getUserInfo = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/auth/${userId}`, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+  
+    dispatch(giveInfo(data));
   }
 }
 

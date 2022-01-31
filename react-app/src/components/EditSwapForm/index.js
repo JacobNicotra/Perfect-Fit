@@ -5,7 +5,7 @@ import { createPuzzle } from '../../store/puzzle';
 import { getPuzzlesUser, getPuzzlesRecipient } from '../../store/puzzle';
 import { useEffect } from 'react';
 import "./EditSwap.css"
-import logoBW from '../../logo-bw-bg.png'
+import logoBW from '../../logo-black.png'
 import { createSwap, editSwap, deleteSwap, getUserSwaps } from '../../store/swap'
 
 

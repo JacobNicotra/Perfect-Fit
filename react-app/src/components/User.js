@@ -5,7 +5,7 @@ import { getUserSwaps } from '../store/swap';
 import Swaps from './Swap.js';
 import { getPuzzlesUser } from '../store/puzzle';
 
-import logoBW from '../logo-bw-bg.png'
+import logoBW from '../logo-black.png'
 
 function User() {
   const dispatch = useDispatch();
@@ -24,11 +24,11 @@ function User() {
     return state.puzzles.userPuzzleArray
   })
 
-  console.log('userPuzzles', userPuzzles)
+  const sessionUser = useSelector(state => state.session.user);
 
 
 
-  useEffect( async() => {
+  useEffect(async () => {
     await dispatch(getPuzzlesUser(userId));
     if (!userId) {
       return;
@@ -40,49 +40,41 @@ function User() {
     })();
   }, [dispatch, userId]);
 
-  useEffect(async () => {
-    console.log('USERID', userId)
-    await dispatch(getUserSwaps(userId));
-    // await dispatch(getRecipientSwaps(userId));
-    return
-  }, [dispatch])
-
-  if (!user) {
-    return null;
-  }
-
-  if (userPuzzles) {
+  if (userPuzzles && userId) {
     return (
-      <div>
-        <ul id="puzzle-cards">
-          {userPuzzles.map(puzzle => {
-            let color
-            if (puzzle.image !== 'none') {
-              color = 'transparent'
-            } else {
-              color = 'white'
-            }
-            return (
-              <li key={puzzle.id} className='puzzle-card-wrapper'>
-                <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
-                  <span className='puzzle-card-title'>{puzzle.title}</span>
-                  <span className='puzzle-card-rating'></span>
-                  <NavLink to={`/puzzles/${puzzle.id}`}>
-                    <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
-                  </NavLink>
+      <div className='background'>
+        <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
+        <div className='user-holder'>
+          <ul id="puzzle-cards">
+            {userPuzzles.map(puzzle => {
+              let color
+              if (puzzle.image !== 'none') {
+                color = 'transparent'
+              } else {
+                color = 'white'
+              }
+              return (
+                <li key={puzzle.id} className='puzzle-card-wrapper'>
+                  <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                    <span className='puzzle-card-title'>{puzzle.title}</span>
+                    <span className='puzzle-card-rating'></span>
+                    <NavLink to={`/puzzles/${puzzle.id}`}>
+                      <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                    </NavLink>
 
 
-                </div>
+                  </div>
 
-              </li >
-            )
-          })}
-        </ul >
+                </li >
+              )
+            })}
+          </ul >
+        </div >
       </div >
-      
+
     )
   } else {
-    return (<div className="loader"></div>
+    return (<div className='background'><div className="loader"></div></div>
     )
   }
 }

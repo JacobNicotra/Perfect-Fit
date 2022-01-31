@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import ProfileModal from './ProfileModal'
 import LoginFormModal from './LoginFormModal'
-import logo from './../logobg.png'
+import logo from './../logo-black.png'
 const Logo = () => {
   return (
     <nav id="nav">

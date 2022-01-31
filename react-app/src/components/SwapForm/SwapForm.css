@@ -1,10 +1,10 @@
 .swap-btn {
   border: none;
-  font-size: 1.6em;
-  padding-top: 30px;
+  font-size: 1em;
+  /* padding-top: 30px; */
   color: #88dfac;
   background: none;
-  padding-left: 30px;
+  /* padding-left: 30px; */
   font-weight: bold;
 }
 
@@ -47,15 +47,15 @@
   border-radius: 0;
 }
 
-.puzzle-card-logo {
+/* .puzzle-card-logo {
     height: 140px;
     margin-top: 13px;
-}
+} */
 
 .logo-swap-form {
   width: 90px;
-  height: 110px;
-  padding-top: 15px;
+  height: auto;
+  padding-top: 30px;
 }
 
 .puzzle-card-background-swap-form {

@@ -1,8 +1,11 @@
 #puz-det {
   display: flex;
   flex-direction: column;
-  align-content: flex-end
-
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  backdrop-filter: blur(4.5px);
+  padding-bottom: 50px;
 }
 #puz-details-ul {
 text-align: center;
@@ -41,12 +44,14 @@ max-height: 500px;
 
 #puz-det-images {
   display: flex;
-  padding-left: 5px;
+  padding-left: 35px;
   padding-right: 5px;
 }
 
 #puzzle-details-ul {
-  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .puzzle-details-title {
@@ -88,4 +93,35 @@ max-height: 500px;
 .puz-det-title-owner {
   padding-bottom: 20px;
 
+}
+
+.PuzzleDetailsContainer {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.fa-sync-alt {
+  font-size: 1.3em;
+  color: black;
+}
+.fa-sync-alt:hover {
+  color: #345341;
+}
+
+.swap-btn {
+  padding-top: 35px;
+  padding-left: 10px;
+}
+
+.puz-det-other-owner {
+  display: flex;
+}
+
+
+.user-link-page {
+  color: #0e8841;
+  font-weight: bold;
 }

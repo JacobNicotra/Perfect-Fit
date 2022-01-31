@@ -1,0 +1,16 @@
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: #9bffc5;
+  color: black;
+  text-align: center;
+  width: 100vw;
+}
+
+.about-links {
+  text-align: center;
+  justify-content: center;
+  padding: 13px 0 5px 0;
+  font-size: .9em;
+}

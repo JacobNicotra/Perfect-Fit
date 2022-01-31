@@ -31,34 +31,42 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
+    <div className='background'>
+
+      <form onSubmit={onLogin} className='login-form'>
+        <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
-      </div>
-      <div>
-        <label htmlFor='email'>Email</label>
+
+        </div>
+
+        <div className='login-title'>Login</div>
+
+
         <input
           name='email'
           type='text'
           placeholder='Email'
           value={email}
           onChange={updateEmail}
+          className='login-form-input'
+          placeholder='Email'
         />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
         <input
           name='password'
           type='password'
           placeholder='Password'
           value={password}
           onChange={updatePassword}
+          className='login-form-input'
+          placeholder='Password'
+
+
         />
-        <button type='submit'>Login</button>
-      </div>
-    </form>
+        <button className='new-puzzle-submit-button' type='submit'>Login</button>
+      </form>
+    </div>
   );
 };
 

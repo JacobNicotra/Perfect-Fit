@@ -10,7 +10,7 @@ import AddPuzzleModal from './AddPuzzleForm/AddPuzzleModal';
 import Swaps from './Swap.js';
 
 
-import logo from './../logobg.png'
+import logo from './../logo-green.png'
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
@@ -21,33 +21,42 @@ const NavBar = () => {
 
         {/* <img id="logo" src={logo}></img> */}
         <NavLink to='/puzzles' exact={true} activeClassName='active'>
-        <i className="fas fa-puzzle-piece font-logo"></i>
-          </NavLink>
+          <i className="fas fa-puzzle-piece font-logo"></i>
+        </NavLink>
+        <NavLink to='/puzzles' exact={true} activeClassName='active'>
 
-        {/* <div><i className='fas fa-plus add-puzzle-button'></i></div> */}
-        <AddPuzzleModal edit={false} className="puzzle-modal"/>
-      </span>
-      <h1 id="perfect-fit">Perfect Fit</h1>
+          <h1 id="perfect-fit">Perfect Fit</h1>
+        </NavLink>
 
-      <span className='nav-username-pro-btn'>
-        {sessionUser && 
-        <NavLink to='/swaps' exact={true} >
-      <button className='nav-swap-btn'><i className="fas fa-envelope swap-icon"></i></button>
-        </NavLink >
-        }
-      {sessionUser && <span className='nav-username'>{ sessionUser.username}</span>}
-      <ProfileModal />
-       
       </span>
-        {/* <li>
+
+      <div className='nav-right'>
+
+
+
+        <span className='nav-username-pro-btn'>
+          {sessionUser &&
+            <div className='nav-middle'>
+              <AddPuzzleModal edit={false} className="puzzle-modal" />
+              <NavLink to='/swaps' exact={true} >
+                <button className='nav-swap-btn'><i className="fas fa-envelope swap-icon"></i></button>
+              </NavLink >
+            </div>
+          }
+          <div className='profile-buttons-holder'>
+            {/* {sessionUser ? <span className='nav-username'>{sessionUser.username}</span> : } */}
+            <ProfileModal />
+          </div>
+        </span>
+      </div>
+      {/* <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
           </NavLink>
         </li> */}
-      
+
     </nav>
   );
 }
 
 export default NavBar;
-
