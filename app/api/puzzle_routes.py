@@ -178,7 +178,6 @@ def update_server(puzzle_id):
 
 @puzzle_routes.route('/<int:puzzle_id>/', methods=['DELETE'])
 def delete_server(puzzle_id):
-    pass
     puzzle = Puzzle.query.filter(Puzzle.id == puzzle_id).first()
     if puzzle:
         db.session.delete(puzzle)
