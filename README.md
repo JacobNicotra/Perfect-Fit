@@ -1,5 +1,5 @@
 # Perfect Fit
-[Commoji](https://the-perfect-fit.herokuapp.com/)
+[Perfect Fit](https://the-perfect-fit.herokuapp.com/)
 
 [Wiki](https://github.com/JacobNicotra/perfect-fit-capstone/wiki)
 
