@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
@@ -12,28 +12,38 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  const history = useHistory()
+
   let outsideErrors = []
 
   const onSignUp = async (e) => {
     e.preventDefault();
     setErrors([])
+    let errorPresent = false
 
-console.log('errors', errors)
     if (!username.replace(/\s/g, '').length) {
       setErrors(["Really? Try providing a Username..."])
+      errorPresent = true
     }
     if (username.length < 3) {
       setErrors([...errors, "Username must be longer than 2 characters."])
+      errorPresent = true
+
     }
     if (!email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
       setErrors([...errors, "Provide a valid email"])
+      errorPresent = true
+
     }
     if (password !== repeatPassword) {
       setErrors([...errors, "Passwords do not match."])
+      errorPresent = true
 
+      
     }
-    if (errors.length > 0) {
-      return
+    console.log('errorPresent', errorPresent)
+    if (errorPresent) {
+      return //setErrors([])
     }
 
     if (password === repeatPassword) {
@@ -41,6 +51,8 @@ console.log('errors', errors)
       if (data) {
         setErrors(data)
       }
+      return history.push(`/puzzles`)
+
     } 
   };
 

@@ -40,13 +40,13 @@ function User() {
     })();
   }, [dispatch, userId]);
 
-  if (userPuzzles && userId) {
+  if (userId) {
     return (
       <div className='background'>
         <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
         <div className='user-holder'>
           <ul id="puzzle-cards">
-            {userPuzzles.map(puzzle => {
+            {userPuzzles ? userPuzzles.map(puzzle => {
               let color
               if (puzzle.image !== 'none') {
                 color = 'transparent'
@@ -67,7 +67,10 @@ function User() {
 
                 </li >
               )
-            })}
+            })
+              :
+              <li className='nothing'>Nothing Here Yet...</li>
+          }
           </ul >
         </div >
       </div >

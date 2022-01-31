@@ -54,7 +54,7 @@ export const getPuzzlesUser = (userId) => async dispatch => {
 
     console.log(' GET PUZZLES USER STORE')
 
-    const response = await fetch(`/api/puzzles/users/${userId}`)
+    const response = await fetch(`/api/puzzles/users/${userId}/`)
 
     if (response.ok) {
         const userPuzzleArray = await response.json()

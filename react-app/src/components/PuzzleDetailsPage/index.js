@@ -64,7 +64,7 @@ const PuzzleDetails = () => {
           <span id="puz-det-header">
             <div className='puz-det-title-owner'>
               <div className='puzzle-details-title'>{puzzle.title}</div>
-              <div>{user.id === puzzle.user.id ? 'This puzzle is owned by you' :
+              <div>{user?.id === puzzle.user.id ? 'This puzzle is owned by you' :
                 <div className='puz-det-other-owner'>
 
                   <div>This puzzle is owned by&nbsp;</div>
