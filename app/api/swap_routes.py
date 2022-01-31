@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.models import db, User, Puzzle, Image, Swap
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import or_
 from flask_login import current_user
 
 swap_routes = Blueprint('swaps', __name__)
@@ -30,34 +31,111 @@ def get_all_swaps():
 
 @swap_routes.route('/users/<int:user_id>/')
 def get_all_user_swaps(user_id):
-    userSwaps = Swap.query.filter(Swap.userId == user_id).all()
-    if userSwaps:
+
+    # userSwaps = Swap.query.filter(Swap.userId == user_id).all()
+
+    userSwapGivePuzzles = db.session.query(Swap, Puzzle).join(
+        Puzzle.swap_give_relation).filter(or_(Swap.userId == user_id, Swap.recipientId == user_id)).order_by(Swap.id.desc()).all()
+    # userSwapGivePuzzles = db.session.query(Swap, Puzzle, User).join(
+    #     Puzzle.swap_give_relation).filter(or_(Swap.userId == user_id, Swap.recipientId == user_id), or_(Swap.recipientId == User.id, Swap.userId == User.id)).order_by(Swap.id.desc()).all()
+    # userSwapGivePuzzles = db.session.query(Swap, Puzzle, User).join(
+    #     Puzzle.swap_give_relation).filter(Swap.userId == user_id, Swap.recipientId == User.id).order_by(Swap.id.desc()).all()
+
+
+    userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
+        Puzzle.swap_get_relation).filter(or_(Swap.userId == user_id, Swap.recipientId == user_id)).order_by(Swap.id.desc()).all()
+
+
+    if userSwapGivePuzzles:
         swap_list = [{'id': swap.id,
                       'userId': swap.userId,
-                      'recipientId': swap.recipientId if swap.recipientId else None,
+                      'recipientId': swap.recipientId,
+                      'userUsername': swap.userUsername,
+                      'recipientUsername': swap.recipientUsername,
                       'getPuzzleId': swap.getPuzzleId if swap.getPuzzleId else None,
                       'givePuzzleId': swap.givePuzzleId if swap.givePuzzleId else None,
                       'message': swap.message if swap.message else None,
-                      } for swap in userSwaps]
+                      'givePuzzle': {
+                          'id': give_puzzle.id,
+                          'title': give_puzzle.title,
+                          'userId': give_puzzle.userId,
+                          'cityId': give_puzzle.cityId if give_puzzle.cityId else None,
+                          'pieceCount': give_puzzle.piece_count if give_puzzle.piece_count else None,
+                          'image': give_puzzle.image if give_puzzle.image else None,
+                          'description': give_puzzle.description if give_puzzle.description else None
+                      },
+                      "userAccept": swap.userAccept,
+                      "recipientAccept": swap.recipientAccept,
+                      'getPuzzle': {
+                          'id': userSwapGetPuzzles[i][1].id,
+                          'title': userSwapGetPuzzles[i][1].title,
+                          'userId': userSwapGetPuzzles[i][1].userId,
+                          'cityId': userSwapGetPuzzles[i][1].cityId if userSwapGetPuzzles[i][1].cityId else None,
+                          'pieceCount': userSwapGetPuzzles[i][1].piece_count if userSwapGetPuzzles[i][1].piece_count else None,
+                          'image': userSwapGetPuzzles[i][1].image if userSwapGetPuzzles[i][1].image else None,
+                          'description': userSwapGetPuzzles[i][1].description if userSwapGetPuzzles[i][1].description else None
+                      }
+
+
+                      } for i, (swap, give_puzzle) in enumerate(userSwapGivePuzzles)]
+
         return jsonify(swap_list)
     else:
-        return jsonify("User's swaps not found in database."), 404
+        return jsonify("None"), 200
 
 
 @swap_routes.route('/recipients/<int:recipientId>/')
 def get_all_recipient_swaps(recipientId):
-    userSwaps = Swap.query.filter(Swap.recipientId == recipientId).all()
-    if userSwaps:
+    userSwapGivePuzzles = db.session.query(Swap, Puzzle, User).join(
+        Puzzle.swap_give_relation).filter(Swap.recipientId == recipientId, Swap.userId == User.id).order_by(Swap.id.desc()).all()
+    userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
+        Puzzle.swap_get_relation).filter(Swap.recipientId == recipientId).order_by(Swap.id.desc()).all()
+
+    if userSwapGivePuzzles:
         swap_list = [{'id': swap.id,
                       'userId': swap.userId,
                       'recipientId': swap.recipientId if swap.recipientId else None,
                       'getPuzzleId': swap.getPuzzleId if swap.getPuzzleId else None,
                       'givePuzzleId': swap.givePuzzleId if swap.givePuzzleId else None,
                       'message': swap.message if swap.message else None,
-                      } for swap in userSwaps]
+                      'givePuzzle': {
+                          'id': give_puzzle.id,
+                          'title': give_puzzle.title,
+                          'userId': give_puzzle.userId,
+                          'cityId': give_puzzle.cityId if give_puzzle.cityId else None,
+                          'pieceCount': give_puzzle.piece_count if give_puzzle.piece_count else None,
+                          'image': give_puzzle.image if give_puzzle.image else None,
+                          'description': give_puzzle.description if give_puzzle.description else None
+                      },
+                      'user': {
+                          'id': user.id,
+                          'username': user.username,
+                      },
+                      'getPuzzle': {
+                          'id': userSwapGetPuzzles[i][1].id,
+                          'title': userSwapGetPuzzles[i][1].title,
+                          'userId': userSwapGetPuzzles[i][1].userId,
+                          'cityId': userSwapGetPuzzles[i][1].cityId if userSwapGetPuzzles[i][1].cityId else None,
+                          'pieceCount': userSwapGetPuzzles[i][1].piece_count if userSwapGetPuzzles[i][1].piece_count else None,
+                          'image': userSwapGetPuzzles[i][1].image if userSwapGetPuzzles[i][1].image else None,
+                          'description': userSwapGetPuzzles[i][1].description if userSwapGetPuzzles[i][1].description else None
+                      }
+
+
+                      } for i, (swap, give_puzzle, user) in enumerate(userSwapGivePuzzles)]
+
+    # userSwaps = Swap.query.filter(Swap.recipientId == recipientId).all()
+    # if userSwaps:
+    #     swap_list = [{'id': swap.id,
+    #                   'userId': swap.userId,
+    #                   'recipientId': swap.recipientId if swap.recipientId else None,
+    #                   'getPuzzleId': swap.getPuzzleId if swap.getPuzzleId else None,
+    #                   'givePuzzleId': swap.givePuzzleId if swap.givePuzzleId else None,
+    #                   'message': swap.message if swap.message else None,
+    #                   } for swap in userSwaps]
         return jsonify(swap_list)
     else:
-        return jsonify("Recipient's swaps not found in database."), 404
+        return jsonify("None"), 200
 
 
 @swap_routes.route('/<int:swap_id>/')
@@ -85,10 +163,13 @@ def new_swap():
         new_swap = {
             'userId': data['userId'],
             'recipientId': data['recipientId'],
+            'recipientUsername': data['recipientUsername'],
+            'userUsername': data['userUsername'],
             'getPuzzleId': data['getPuzzleId'],
             'givePuzzleId': data['givePuzzleId'],
             'recipientId': data['recipientId'],
             'message': data['message'],
+            'userAccept': True
         }
 
         if 'message' in data and data["message"] != '':
@@ -142,6 +223,10 @@ def update_swap(swap_id):
             swap.givePuzzleId = data['givePuzzleId']
         if 'message' in data:
             swap.message = data['message']
+        if 'userAccept' in data:
+            swap.userAccept = data['userAccept']
+        if 'recipientAccept' in data:
+            swap.recipientAccept = data['recipientAccept']
 
         db.session.commit()
         if swap:
@@ -151,12 +236,14 @@ def update_swap(swap_id):
                             'getPuzzleId': swap.getPuzzleId if swap.getPuzzleId else None,
                             'givePuzzleId': swap.givePuzzleId if swap.givePuzzleId else None,
                             'message': swap.message if swap.message else None,
+                            'userAccept': swap.userAccept if swap.userAccept else None,
+                            'recipientAccept': swap.recipientAccept if swap.recipientAccept else None,
                             }
         return swap_db_dict
     else:
         return jsonify("server not found in database."), 404
 
-  # 
+  #
   # {
   #    "getPuzzleId": 2,
   #   "givePuzzleId": 3,
@@ -166,10 +253,27 @@ def update_swap(swap_id):
 
 @swap_routes.route('/<int:swap_id>/', methods=['DELETE'])
 def delete_swap(swap_id):
-    pass
     swap = Swap.query.filter(Swap.id == swap_id).first()
     if swap:
         db.session.delete(swap)
+        db.session.commit()
+        return jsonify('deleted swap')
+    else:
+        return jsonify("swap not found in database."), 404
+
+@swap_routes.route('/<int:swap_id>/commit/', methods=['DELETE'])
+def commit_swap(swap_id):
+    swapToDelete = Swap.query.filter(Swap.id == swap_id).first()
+    givePuzzle = Puzzle.query.filter(Puzzle.id == swapToDelete.givePuzzleId).first()
+    getPuzzle = Puzzle.query.filter(Puzzle.id == swapToDelete.getPuzzleId).first()
+
+    if givePuzzle and getPuzzle and swapToDelete:
+  
+
+        givePuzzle.userId = swapToDelete.recipientId
+        getPuzzle.userId = swapToDelete.userId
+
+        db.session.delete(swapToDelete)
         db.session.commit()
         return jsonify('deleted swap')
     else:

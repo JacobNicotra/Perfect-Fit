@@ -1,0 +1,95 @@
+.swap-btn {
+  border: none;
+  font-size: 1em;
+  /* padding-top: 30px; */
+  color: #88dfac;
+  background: none;
+  /* padding-left: 30px; */
+  font-weight: bold;
+}
+
+
+.swap-btn:hover {
+  cursor: pointer;
+  color: #9affc4;
+}
+
+.swap-btn:active {
+  transform: scale(0.94);
+}
+
+
+.user-puz-selection {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+    align-content: center;
+  align-items: center;
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0 34px 0 34px;
+  background-color: #ffffffcb;
+  box-shadow: 0px 1px 9px 5px rgba(0, 0, 0, 0.2);
+  width: 200px;
+}
+
+.swap-form-title {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.swap-message-input {
+  width: 300px
+}
+
+.puzzle-card-image {
+  border-radius: 0;
+}
+
+/* .puzzle-card-logo {
+    height: 140px;
+    margin-top: 13px;
+} */
+
+.logo-swap-form {
+  width: 90px;
+  height: auto;
+  padding-top: 30px;
+}
+
+.puzzle-card-background-swap-form {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+}
+
+.puz-title-swap-form {
+  width: 100%;
+
+}
+
+.puz-select-button {
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  margin: 10px
+}
+
+.selected-puzzle {
+  box-shadow: 0 0 10px 5px red
+}
+.puz-card-wrap-form {
+  margin: 0
+}
+/* .puz-select-button:focus {
+  box-shadow: 0 0 10px 5px red
+
+} */
+
+.red-btn {
+  background-color: red;
+  font-weight: bold;
+}

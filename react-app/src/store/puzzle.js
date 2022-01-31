@@ -1,4 +1,6 @@
 const LOAD = 'puzzles/LOAD';
+const LOAD_USER = 'puzzles/LOAD_USER';
+const LOAD_RECIPIENT = 'puzzles/LOAD_RECIPIENT';
 const LOAD_ONE = 'puzzles/LOAD_ONE';
 const ADD_ONE = 'puzzles/ADD_ONE';
 const DELETE_ONE = 'puzzles/DELETE_ONE'
@@ -7,6 +9,15 @@ const EDIT_ONE = 'puzzles/EDIT_ONE'
 const load = puzzleArray => ({
     type: LOAD,
     puzzleArray
+})
+
+const loadUserPuzzles = userPuzzleArray => ({
+    type: LOAD_USER,
+    userPuzzleArray
+})
+const loadRecipientPuzzles = recipientPuzzleArray => ({
+    type: LOAD_RECIPIENT,
+    recipientPuzzleArray
 })
 
 const loadOne = puzzle => ({
@@ -36,6 +47,27 @@ export const getPuzzles = () => async dispatch => {
     if (response.ok) {
         const puzzleArray = await response.json()
         dispatch(load(puzzleArray))
+    }
+}
+
+export const getPuzzlesUser = (userId) => async dispatch => {
+
+
+    const response = await fetch(`/api/puzzles/users/${userId}/`)
+
+    if (response.ok) {
+        const userPuzzleArray = await response.json()
+        dispatch(loadUserPuzzles(userPuzzleArray))
+    }
+}
+
+export const getPuzzlesRecipient = (recipientId) => async dispatch => {
+
+    const response = await fetch(`/api/puzzles/users/${recipientId}/`)
+
+    if (response.ok) {
+        const recipientPuzzleArray = await response.json()
+        dispatch(loadRecipientPuzzles(recipientPuzzleArray))
     }
 }
 
@@ -97,6 +129,24 @@ const puzzleReducer = (state = initialState, action) => {
             return {
                 ...state, puzzles, puzzleArray
             }}
+        case LOAD_USER:{
+            const userPuzzles = {}
+            const userPuzzleArray = action.userPuzzleArray
+            action.userPuzzleArray.forEach(puzzle => {
+                userPuzzles[puzzle.id] = puzzle
+            });
+            return {
+                ...state, userPuzzles, userPuzzleArray
+            }}
+        case LOAD_RECIPIENT:{
+            const recipientPuzzles = {}
+            const recipientPuzzleArray = action.recipientPuzzleArray
+            action.recipientPuzzleArray.forEach(puzzle => {
+                recipientPuzzles[puzzle.id] = puzzle
+            });
+            return {
+                ...state, recipientPuzzles, recipientPuzzleArray
+            }}
         case LOAD_ONE:{
             const puzzle = action.puzzle
             return {
@@ -111,15 +161,15 @@ const puzzleReducer = (state = initialState, action) => {
             const deletePuzzleId = action.puzzleId;
             const puzzleArray = state.puzzleArray;
             const puzzles = state.puzzles;
-            delete puzzles[deletePuzzleId]
-            let index;
-            for (let i = 0; i < puzzleArray.length; i++) {
-                const puzzle = puzzleArray[i];
-                if (puzzle.id === deletePuzzleId) {
-                    index = i
-                }
-            }
-            puzzleArray.splice(index, 1)
+            // delete puzzles[deletePuzzleId]
+            // let index;
+            // for (let i = 0; i < puzzleArray.length; i++) {
+            //     const puzzle = puzzleArray[i];
+            //     if (puzzle.id === deletePuzzleId) {
+            //         index = i
+            //     }
+            // }
+            // puzzleArray.splice(index, 1)
             const newState = {
                 ...state, puzzles, puzzleArray
             }

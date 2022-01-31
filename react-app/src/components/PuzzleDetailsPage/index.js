@@ -9,9 +9,11 @@ import Profile from '../Profile';
 import AddPuzzleModal from '../AddPuzzleForm/AddPuzzleModal';
 import EditPuzzleModal from '../EditPuzzleForm/EditPuzzleModal'
 import { Modal } from '../../context/Modal';
+import SwapFormModal from '../SwapForm/SwapFormModal';
 
 // import AddServerModal from '../AddServerModal';
 import './PuzzleDetailsPage.css'
+import logoBW from '../../logo-black.png'
 
 
 const PuzzleDetails = () => {
@@ -24,9 +26,6 @@ const PuzzleDetails = () => {
   const [showEditPuzzleModal, setShowEditPuzzleModal] = useState(false);
 
 
-
-
-
   let puzzle = useSelector(state => {
     return state.puzzles.puzzle
   })
@@ -37,8 +36,6 @@ const PuzzleDetails = () => {
     owner = true;
   };
 
-
-
   useEffect(async () => {
     await dispatch(getPuzzleOne(puzzleId));
     // const newPersist = document.querySelector(`.server-${serverId}`);
@@ -46,7 +43,7 @@ const PuzzleDetails = () => {
     // if (anotherPersist) anotherPersist.classList.remove('current-chosen-server');
     // if (newPersist) newPersist.classList.add('current-chosen-server');
     return
-  }, [dispatch])
+  }, [dispatch, puzzleId])
 
   // if (!user) {
   //     return <Redirect to='/' />;
@@ -59,47 +56,68 @@ const PuzzleDetails = () => {
 
 
 
-  if (puzzle) {
+  if (puzzle && puzzle.id === parseInt(puzzleId)) {
     return (
-      <div id="puz-det">
-        <span id="puz-det-header">
-          <div className='puzzle-details-title'>{puzzle.title}</div>
-          <div className="puz-edit-div"
-            hidden={owner !== true}> <EditPuzzleModal className="puzzle-modal" />
-          </div>
+
+      <div className='background'>
+
+        <div id="puz-det">
+          <span id="puz-det-header">
+            <div className='puz-det-title-owner'>
+              <div className='puzzle-details-title'>{puzzle.title}</div>
+              <div>{user?.id === puzzle.user.id ? 'This puzzle is owned by you' :
+                <div className='puz-det-other-owner'>
+
+                  <div>This puzzle is owned by&nbsp;</div>
+                  <NavLink className='user-link-page' to={`/users/${puzzle.userId}`}>{puzzle.user.username}</NavLink>
+
+                </div>
+
+
+              }</div>
+            </div>
+            <div className="puz-edit-div"
+              hidden={owner !== true}> <EditPuzzleModal className="puzzle-modal" />
+            </div>
+            <div className="puz-edit-div"
+              hidden={owner == true}> <SwapFormModal puzzleOwner={puzzle.user} className="puzzle-modal" />
+            </div>
 
 
 
-        </span>
+          </span>
 
-        <span id="puz-det-images">
+          <span id="puz-det-images">
 
-          <div id="puz-det-image-wrap"><img id="puz-det-image" src={puzzle?.image}></img></div>
-          {puzzle?.images &&
-            <ul id="puzzle-details-ul">
-              {puzzle.images.map(image => {
-                return (
-                  <li key={image.id} className='puzzle-details-li'>
-                    <div >
+            <div id="puz-det-image-wrap"><img id="puz-det-image" src={puzzle.image ? puzzle.image : logoBW}></img></div>
+            {puzzle?.images &&
+              <ul id="puzzle-details-ul">
+                {puzzle.images.map(image => {
+                  return (
+                    <li key={image.id} className='puzzle-details-li'>
+                      <div >
 
-                      <img className="puzzle-details-image" src={image.image} alt=''></img>
+                        <img className="puzzle-details-image" src={image.image} alt=''></img>
 
 
 
-                    </div>
+                      </div>
 
-                  </li >
-                )
-              })}
-            </ul >
-          }
-        </span>
+                    </li >
+                  )
+                })}
+              </ul >
+            }
+          </span>
 
-        <div className='puzzle-details-description'>{puzzle.description}</div>
+          <div className='puzzle-details-description'>{puzzle?.pieceCount} pieces</div>
+          <div className='puzzle-details-description'>{puzzle?.description}</div>
+        </div>
       </div>
     )
   }
-  return ('loading puzzle details')
+  return (<div className='background'>
+    <div className="loader"></div></div>)
 }
 
 export default PuzzleDetails;

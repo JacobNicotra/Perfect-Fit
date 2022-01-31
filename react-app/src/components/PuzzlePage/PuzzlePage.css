@@ -18,7 +18,13 @@ body {
   text-align: center;
   margin: 10px; 
   /* background-color: #464947; */
-  border-radius: 66px;
+  /* border-radius: 66px; */
+  box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.2);
+
+}
+
+.puzzle-card-wrapper:hover {
+  box-shadow: 0px 1px 10px 7px #7ac99b88;
 
 }
 
@@ -30,16 +36,24 @@ body {
   justify-content: flex-start;
   flex-direction: column;
   overflow: hidden;
-  /* background-color: #ffffff3f; */
-  border-radius: 18px;
+  /* border-radius: 18px; */
+}
 
+.puzzle-card-background {
+  background-color: #9bffc5;
 
 }
+
 .puzzle-card-title {
   color: white;
-  background-color: #26532B;
-  padding: 10px 3px 10px 3px
+  background-color: black;
+  padding: 10px 5px 10px 5px
 
+}
+
+
+.title-swap {
+  padding-right: 21px;
 }
 
 .PuzzlesContainer {
@@ -47,17 +61,18 @@ body {
 }
 
 .puzzle-card-image {
-  object-fit:contain;
+  object-fit:cover;
   width: 200px;
-  height: auto;
+  height: 200px;
   overflow: hidden;
   border-radius: 0 0 18px 18px;
 
 }
 
 .puzzle-card-logo {
-  height: 140px; 
-  margin-top: 25px;
+  height: 100px; 
+  margin-top: 13px;
+  padding-top: 16px
 
 }
 /* 
@@ -65,3 +80,47 @@ body {
   display: flex;
   justify-content: center;
 } */
+
+
+.loader {
+  border: 16px solid #f3f3f3; 
+  border-top: 16px solid #9bffc5; 
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  top: 40%;
+  left: 46%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.PuzzlesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+}
+
+.latest {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: bold;
+  padding: 15px;
+  padding-top: 20px;
+  backdrop-filter: blur(4px);
+  width: fit-content;
+}
+
+.puz-page-holder {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+}

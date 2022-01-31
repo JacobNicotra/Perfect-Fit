@@ -14,7 +14,7 @@ function EditPuzzleModal() {
     <>
       {/* <button className='add-puzzle-button puzzle-buttons' onClick={() => setShowModal(true)}><i className="far fa-plus-square"></i></button> */}
       <button className='puz-edit-button' onClick={() => setShowModal(true)}>
-      <i className="fas fa-edit"></i>
+      <i className="fas fa-edit edit-puz"></i>
       </button>
       {showModal && (
         <Modal className="add-puzzle-modal" onClose={() => setShowModal(false)}>

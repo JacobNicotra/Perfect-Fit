@@ -41,6 +41,20 @@ def get_all_puzzles_for_city(city_id):
     else:
         return jsonify("Puzzles not found in database."), 404
 
+@puzzle_routes.route('/users/<int:userId>/')
+def get_all_puzzles_for_user(userId):
+    puzzles = Puzzle.query.filter(Puzzle.userId == userId).all()
+    if puzzles:
+        puzzle_list = [{'id': puzzle.id, 'title': puzzle.title, 'userId': puzzle.userId,
+                        'cityId': puzzle.cityId if puzzle.cityId else None,
+                        'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
+                        'image': puzzle.image if puzzle.image else None,
+                        'description': puzzle.description if puzzle.description else None,
+                        } for puzzle in puzzles]
+        return jsonify(puzzle_list)
+    else:
+        return jsonify("Puzzles not found in database."), 404
+
 
 @puzzle_routes.route('/', methods=['POST'])
 def new_puzzle():
@@ -93,22 +107,27 @@ def new_puzzle():
 
 @puzzle_routes.route('/<int:puzzle_id>/')
 def get_puzzle(puzzle_id):
-    puzzle = Puzzle.query.filter(Puzzle.id == puzzle_id).first()
+    # puzzle = Puzzle.query.join(User, Puzzle.userId == User.id).filter(Puzzle.id == puzzle_id).first()
+    puzzle_user_tup = db.session.query(Puzzle, User).join(User, Puzzle.userId == User.id).filter(Puzzle.id == puzzle_id).first()
     images = Image.query.filter(Image.puzzleId == puzzle_id).all()
     images_list = None
     if len(images) > 0:
         images_list = [{'id': image.id,'puzzleId': image.puzzleId, 'image': image.image} for image in images]
 
-    if puzzle:
+    if puzzle_user_tup:
         puzzle_db_dict = {
-            'id': puzzle.id,
-            'title': puzzle.title,
-            'userId': puzzle.userId,
-            'cityId': puzzle.cityId if puzzle.cityId else None,
-            'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
-            'image': puzzle.image if puzzle.image else None,
-            'description': puzzle.description if puzzle.description else None,
-            'images': images_list
+            'id': puzzle_user_tup[0].id,
+            'title': puzzle_user_tup[0].title,
+            'userId': puzzle_user_tup[0].userId,
+            'cityId': puzzle_user_tup[0].cityId if puzzle_user_tup[0].cityId else None,
+            'pieceCount': puzzle_user_tup[0].piece_count if puzzle_user_tup[0].piece_count else None,
+            'image': puzzle_user_tup[0].image if puzzle_user_tup[0].image else None,
+            'description': puzzle_user_tup[0].description if puzzle_user_tup[0].description else None,
+            'images': images_list,
+            'user': {
+                "id": puzzle_user_tup[1].id,
+                "username": puzzle_user_tup[1].username,
+            }
         }
         return puzzle_db_dict
     else:
@@ -133,7 +152,7 @@ def update_server(puzzle_id):
             puzzle.userId = data['userId']
         if 'cityId' in data:
             puzzle.cityId = data['cityId']
-        if 'piece_count' in data:
+        if 'pieceCount' in data:
             puzzle.piece_count = data['pieceCount']
         if 'image' in data:
             puzzle.image = data['image']
@@ -159,7 +178,6 @@ def update_server(puzzle_id):
 
 @puzzle_routes.route('/<int:puzzle_id>/', methods=['DELETE'])
 def delete_server(puzzle_id):
-    pass
     puzzle = Puzzle.query.filter(Puzzle.id == puzzle_id).first()
     if puzzle:
         db.session.delete(puzzle)

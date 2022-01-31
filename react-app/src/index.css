@@ -6,7 +6,7 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-a:visited { 
+.visited-link { 
   text-decoration: none; 
   color: rgb(0, 0, 0); 
  }
@@ -16,27 +16,49 @@ a:visited {
    height: 90px;
  }
  .font-logo {
-   font-size: 60px;
-   color: white;
+   font-size: 34px;
+   color: black;
    margin-left: 10px;
+   /* border:rgb(0, 0, 0) solid 2px */
+   padding-right: px;
+   margin-right: 0;
+   transform: rotate(270deg);
+   padding-bottom: 4px;
  }
 
  .font-logo:hover {
-   color: #30da77;
+   color: rgb(77, 77, 77);
+ }
+ .font-logo:active {
+  transform: scale(.97, .97) rotate(270deg);
+
  }
 
+ .profile-buttons-holder {
+   display: flex;
+   flex-direction: column;
+   padding-top: 3.4px;
+
+ }
+.nav-middle {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
 
  #nav {
    display: flex;
    justify-content: space-between;
-   background-color: #26532b;
+   background-color: #9bffc5;
    align-items: center;
    height: 90px;
+   width: 100vw;
 
  }
 
  .profile-button {
-   background-color: white;
+   background-color: #9bffc5;
    background-image: url("./profile.png");
    background-size:     cover;                      /* <------ */
    background-repeat:   no-repeat;
@@ -46,27 +68,267 @@ a:visited {
    border: none;
    border-radius: 100px;
    margin-right: 10px;
+
  }
 
  .profile-button:hover {
    cursor: pointer;
+   background-color: #7ac99b;
+
+
+ }
+
+ .profile-button:active {
+
+  transform: scale(.97, .97);
  }
 
  #perfect-fit {
-   font-size: 40px;
-   color: white;
-   margin-right: 50px;
+   font-size: 25px;
+   font-weight: bold;
+   color: black;
+   /* margin-right: 50px; */
+   /* position: absolute;  */
+
+   margin: 0;
+   padding:0;
+   margin-top: 15px;
+ }
+
+ 
+
+ .add-puzzle-button {
+   color: black;
+   font-size: 37px;
+   margin-left: 30px;
  }
 
  .add-puzzle-button {
-   color: white;
-   font-size: 47px;
-   margin-left: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-bottom: 4px;
+  height: 50px;
+  width: 50px;
+  margin-top: 15px;
+  margin-left: 15px;
  }
+
+.add-puzzle-button:hover {
+  color: rgb(77, 77, 77);
+}
+
+.add-puzzle-button:active {
+  transform: scale(.97, .97);
+ }
+
 
  #nav-left {
    display: flex;
    align-items: center;
-   align-content: center;
-   justify-content: center
+   align-content: flex-start;
+   justify-content: center;
+
  }
+
+
+ 
+
+ .puz-pair-ul-wrapper {
+  display:inline;
+  background-color: #7ac99b;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+ }
+
+ .puz-pair-ul {
+   display: flex;
+   align-items: center;
+   align-content: center;
+   width: fit-content;
+   padding: 0;
+   margin: 0;
+ }
+
+ .user-wrapper {
+   display: flex;
+   flex-direction: column;
+   align-content: center;
+   align-items: center;
+   justify-content: center;
+
+ }
+
+ .download,.upload {
+  margin-right: 10px;
+ }
+
+ .download {
+   color: rgb(44, 255, 44);
+ }
+
+ .upload {
+   color: rgb(255, 53, 53);
+ }
+
+ .nav-username-pro-btn {
+   display: flex;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+
+ }
+
+
+
+
+.nav-username {
+  padding-right: 34px;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.nav-swap-btn {
+  border: none;
+  background-color: none;
+  background: none;
+}
+
+.swap-icon {
+  font-size: 1.8em;
+}
+
+
+.swap-icon {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 10px;
+  font-size: 30px;
+}
+
+.swap-icon:hover {
+  color: rgb(77, 77, 77);
+}
+
+
+.nav-swap-btn:active {
+ transform: scale(.97, .97);
+}
+
+.nav-right {
+  padding-top: 5px;
+  padding-right: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-page-owner {
+  padding: 30px;
+  margin-top: 30px;
+  background-color: #9bffc5;
+  box-shadow: 0px 1px 9px 3px rgba(0, 0, 0, 0.2);
+
+}
+
+.user-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+}
+
+#puzzle-cards {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1050px;
+  
+}
+
+
+.login-form {
+  padding: 30px;
+  margin-top: 30px;
+  background-color: #9bffc5;
+  box-shadow: 0px 1px 9px 3px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  height: 400px;
+  width: 300px;
+}
+
+.form-label {
+  padding: 10px;
+
+}
+
+.login-form-input {
+  padding: 9px;
+  border: none;
+  background-color: #efefef;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-title {
+  padding: 15px;
+  padding-bottom: 70px;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.errors {
+  position: absolute;
+  position: absolute;
+  top: 200px;
+  /* background-color: white; */
+  border-radius: 4px;
+
+}
+.error {
+  color: rgb(233, 3, 3);
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.profile-button-signedin {
+  background: none;
+  border: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding-right:5px;
+
+}
+
+.profile-button-signedin:hover {
+  color: rgb(61, 61, 61);
+  cursor: pointer;
+}
+.profile-button-signedin:active {
+  transform: scale(.94);
+  
+}
+
+.nothing {
+  list-style: none;
+  background-color: #9bffc5;
+  padding:35px;
+  box-shadow: 0px 1px 9px 3px rgba(0, 0, 0, 0.2);
+
+
+}

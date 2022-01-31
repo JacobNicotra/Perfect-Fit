@@ -1,17 +1,4 @@
-.add-puzzle-button {
-  background-color: #26532b; 
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  padding-bottom: 4px;
- }
 
-.add-puzzle-button:hover {
-  color: #30da77;
- }
 
  .LabelAndInputContainer {
    margin: 15px;
@@ -68,4 +55,21 @@
    color: black;
    font-size: 1.2em;
    margin: 10px;
+   border: none;
  }
+
+ .puz-edit-button:hover {
+  color: rgb(58, 58, 58);
+   cursor: pointer;
+ }
+
+ .puz-edit-button:active {
+  transform: scale(.97, .97);
+ }
+
+
+ /* .edit-puz {
+   border: none;
+   background-color: red;
+   color: green;
+ } */

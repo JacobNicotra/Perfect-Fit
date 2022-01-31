@@ -1,0 +1,28 @@
+.edit-swap-lists-wrapper {
+  display: flex;
+  width: 650px;
+  justify-content: space-around;
+}
+
+.selected-give-puzzle {
+  box-shadow: 0 0 7px 4px red
+}
+
+.edit-swap{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+}
+.LabelAndInputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+}
+
+.new-puzzle-submit-button:hover {
+  cursor: pointer;
+}
