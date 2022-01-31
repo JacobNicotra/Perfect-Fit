@@ -200,7 +200,7 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
           <span className='edit-swap-lists-wrapper'>
 
             <div>
-              <div>Your Owned Puzzles</div>
+              <div>Their Owned Puzzles</div>
               <ul className='user-puz-selection'>
                 {recipientPuzzles &&
                   recipientPuzzles.map(puzzle => {
@@ -226,7 +226,7 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
               </ul>
             </div>
             <div>
-              <div>Their Owned Puzzles</div>
+              <div>Your Owned Puzzles</div>
               <ul className='user-puz-selection'>
                 {userPuzzles &&
                   userPuzzles.map(puzzle => {

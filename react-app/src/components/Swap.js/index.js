@@ -113,7 +113,7 @@ function Swaps() {
 
                               :
 
-                              <div>
+                              <div className='swap-users-links'>
                                 <div>Your swap request from&nbsp;</div>
 
                                 <NavLink to={`/users/${swap.userId}`}>
@@ -148,26 +148,53 @@ function Swaps() {
                         }</div>
                         <div className='puz-pair-ul-wrapper'>
 
-                          <ul className='puz-pair-ul'>
-                            <li key={swap.getPuzzle.id} className='puzzle-card-wrapper'>
-                              <div className={swap.getPuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
-                                <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-down download"></i>{swap.getPuzzle.title}</span>
-                                <span className='puzzle-card-rating'></span>
-                                <NavLink to={`/puzzles/${swap.getPuzzle.id}`}>
-                                  <img className={swap.getPuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.getPuzzle.image ? swap.getPuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
-                                </NavLink>
-                              </div>
-                            </li >
+                          <ul className='puz-pair-ul'>{
+                            user.id === swap.userId ?
+                              <li key={swap.getPuzzle.id} className='puzzle-card-wrapper'>
+                                <div className={swap.getPuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                                  <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-down download"></i>{swap.getPuzzle.title}</span>
+                                  <span className='puzzle-card-rating'></span>
+                                  <NavLink to={`/puzzles/${swap.getPuzzle.id}`}>
+                                    <img className={swap.getPuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.getPuzzle.image ? swap.getPuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                                  </NavLink>
+                                </div>
+                              </li >
+                              :
+
+                              <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
+                                <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                                  <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-down download"></i>{swap.givePuzzle.title}</span>
+                                  <span className='puzzle-card-rating'></span>
+                                  <NavLink to={`/puzzles/${swap.givePuzzle.id}`}>
+                                    <img className={swap.givePuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.givePuzzle.image ? swap.givePuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                                  </NavLink>
+                                </div>
+                              </li >
+                          }
                             <li><i className="fas fa-exchange-alt swap-symbol"></i></li>
-                            <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
-                              <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
-                                <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.givePuzzle.title}</span>
-                                <span className='puzzle-card-rating'></span>
-                                <NavLink to={`/puzzles/${swap.givePuzzle.id}`}>
-                                  <img className={swap.givePuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.givePuzzle.image ? swap.givePuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
-                                </NavLink>
-                              </div>
-                            </li >
+                            {user.id === swap.userId ?
+
+                              <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>
+                                <div className={swap.givePuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                                  <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.givePuzzle.title}</span>
+                                  <span className='puzzle-card-rating'></span>
+                                  <NavLink to={`/puzzles/${swap.givePuzzle.id}`}>
+                                    <img className={swap.givePuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.givePuzzle.image ? swap.givePuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                                  </NavLink>
+                                </div>
+                              </li >
+                              :
+                              <li key={swap.getPuzzle.id} className='puzzle-card-wrapper'>
+                                <div className={swap.getPuzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                                  <span className='puzzle-card-title title-swap'><i className="fas fa-arrow-alt-circle-up upload"></i>{swap.getPuzzle.title}</span>
+                                  <span className='puzzle-card-rating'></span>
+                                  <NavLink to={`/puzzles/${swap.getPuzzle.id}`}>
+                                    <img className={swap.getPuzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={swap.getPuzzle.image ? swap.getPuzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                                  </NavLink>
+                                </div>
+                              </li >
+
+                            }
                           </ul>
                           <div>{swap.message}</div>
 
