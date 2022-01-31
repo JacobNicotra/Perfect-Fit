@@ -28,7 +28,6 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
   const params = useParams();
   const puzzleId = params.puzzleId
 
-  console.log('___________puzzleOWNERID', puzzleOwner, 'USERID', user.id)
   useEffect(() => {
     dispatch(getPuzzlesUser(user.id))
     // dispatch(getPuzzlesRecipient(puzzleOwnerId))
@@ -36,7 +35,6 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('#############SUBMIT')
     setErrors([])
 
     let newSwap = {
@@ -48,7 +46,6 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
       getPuzzleId: puzzleId,
       userAccept: true
     }
-    console.log('_______NEW SWAP', newSwap)
 
     //   if (!title.replace(/\s/g, '').length) {
     //     return setErrors(['Please name your puzzle.'])

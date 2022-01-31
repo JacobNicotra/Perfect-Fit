@@ -14,7 +14,6 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
   let oldSelectedGetPuzzle = document.getElementById(`${swap.getPuzzleId}`);
   let oldSelectedGivePuzzle = document.getElementById(`${swap.givePuzzleId}`);
 
-  console.log('--------preload ---> swap', swap, 'swap.getPuzzleId', swap.getPuzzleId, 'oldSelectedGetPuzzle', oldSelectedGetPuzzle, 'swap.givePuzzleId', swap.givePuzzleId,)
 
 
   const [errors, setErrors] = useState([]);
@@ -30,14 +29,12 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
   const userPuzzles = useSelector(state => state.puzzles.userPuzzleArray);
   const recipientPuzzles = useSelector(state => state.puzzles.recipientPuzzleArray);
 
-  console.log('otherUserId', otherUserId)
 
   const dispatch = useDispatch()
   const history = useHistory()
 
   const params = useParams();
 
-  // console.log('___________puzzleOWNERID', puzzleOwnerId, 'USERID', user.id)
 
 
   useEffect(() => {
@@ -46,11 +43,9 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
 
   }, [dispatch])
 
-  console.log('swap.userId', swap.userId, 'user.Id', user.id)
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('#############SUBMIT')
     setErrors([])
 
     let owner = swap.userId === user.id
@@ -101,9 +96,7 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
   };
 
   const onPuzzleSelectGet = async (first, e) => {
-    console.log('_____ onPuzzleSelectGet _invoked')
     if (first) {
-      console.log('eeeee', e)
       setGetPuzzleId(e.id)
       if (getPuzzleSelected !== '') {
         getPuzzleSelected.className = 'puz-select-button'
@@ -115,7 +108,6 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
 
     e.preventDefault();
 
-    console.log(' e.currentTarget', e.currentTarget, 'e.currentTarget.id', e.currentTarget.id)
 
     setGetPuzzleId(e.currentTarget.id)
 
@@ -128,11 +120,9 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
   }
 
   const onPuzzleSelectGive = async (first, e) => {
-    console.log('_____ onPuzzleSelectGive _invoked')
 
 
     if (first) {
-      console.log('eeeee', e)
       setGivePuzzleId(e.id)
       if (givePuzzleSelected !== '') {
         givePuzzleSelected.className = 'puz-select-button'
@@ -143,7 +133,6 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
     }
     e.preventDefault();
 
-    console.log(' e.currentTarget', e.currentTarget, 'e.currentTarget.id', e.currentTarget.id)
 
     setGivePuzzleId(e.currentTarget.id)
 
@@ -162,11 +151,9 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
     let oldSelectedGivePuzzle = document.getElementById(`${swap.givePuzzleId}`);
 
     if (oldSelectedGetPuzzle && oldSelectedGivePuzzle) {
-      console.log('OLD ARE TRUTHY')
 
       if (getPuzzleSelected == '') {
 
-        console.log('onPuzzleSelectGive EMPTY')
         onPuzzleSelectGet(true, oldSelectedGetPuzzle)
         onPuzzleSelectGive(true, oldSelectedGivePuzzle)
       }
@@ -176,7 +163,6 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
 
 
   const handleDelete = async () => {
-    console.log('DELETE PRESSED')
     const deletedSwap = await dispatch(deleteSwap(swap.id));
     dispatch(getUserSwaps(user.id))
     // dispatch(getRecipientSwaps(user.id))
@@ -197,7 +183,7 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
   if (swap) {
     return (
 
-      <div>
+      <div className='edit-swap'>
 
         <span className='puzzle-decor-holder'>
           <div className='puzzle-decor1'><i className="fas fa-puzzle-piece"></i></div>
@@ -212,10 +198,9 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
         <h1 className='swap-form-title'>Swap for this Puzzle!</h1>
         <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
           <span className='edit-swap-lists-wrapper'>
-            put stuff here
 
             <div>
-              <div>Change the Puzzle that you are requesting</div>
+              <div>Your Owned Puzzles</div>
               <ul className='user-puz-selection'>
                 {recipientPuzzles &&
                   recipientPuzzles.map(puzzle => {
@@ -241,7 +226,7 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
               </ul>
             </div>
             <div>
-              <div>Change the puzzle of yours that you wish to exchange</div>
+              <div>Their Owned Puzzles</div>
               <ul className='user-puz-selection'>
                 {userPuzzles &&
                   userPuzzles.map(puzzle => {
@@ -281,7 +266,7 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
               placeholder="Leave a message with your swap request"
 
             ></input>
-            <button className='new-puzzle-submit-button' type='submit'>{'Submit Swap Request!'}</button>
+            <button className='new-puzzle-submit-button' type='submit'>{'Submit'}</button>
 
           </div>
 
@@ -293,7 +278,7 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
 
 
         </form>
-        <button onClick={handleDelete} className='new-puzzle-submit-button'>{'Revoke this swap request'}</button>
+        <button onClick={handleDelete} className='new-puzzle-submit-button red-btn'>{'Revoke this request'}</button>
 
       </div>
 

@@ -109,7 +109,6 @@ def new_puzzle():
 def get_puzzle(puzzle_id):
     # puzzle = Puzzle.query.join(User, Puzzle.userId == User.id).filter(Puzzle.id == puzzle_id).first()
     puzzle_user_tup = db.session.query(Puzzle, User).join(User, Puzzle.userId == User.id).filter(Puzzle.id == puzzle_id).first()
-    print('--------------__________----------puzzle route', puzzle_user_tup)
     images = Image.query.filter(Image.puzzleId == puzzle_id).all()
     images_list = None
     if len(images) > 0:

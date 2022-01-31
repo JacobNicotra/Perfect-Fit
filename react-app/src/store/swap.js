@@ -63,7 +63,6 @@ export const getUserSwaps = (userId) => async dispatch => {
 
     if (response.ok) {
         const swaps = await response.json()
-            console.log('---------user swaps res from backend', swaps)
 
         if (swaps === "None") return "None"
         dispatch(loadUser(swaps))
@@ -89,7 +88,6 @@ export const createSwap = (newSwap) => async dispatch => {
         body: JSON.stringify(newSwap)
     })
     const swap = await response.json()
-    console.log('- - - - - - store response from backend', swap)
     if (response.ok) dispatch(addOneswap(swap))
     return swap
 }
@@ -142,7 +140,6 @@ const swapReducer = (state = initialState, action) => {
                 ...state, userSwaps, userSwapArray
             }}
         // case LOAD_RECIPIENT: {
-        //     console.log('_____LOAD_RECIPIENT')
         //     const recipientSwaps = {}
         //     const recipientSwapArray = action.swapArray
         //     action.swapArray.forEach(swap => {

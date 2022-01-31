@@ -41,23 +41,10 @@ def get_all_user_swaps(user_id):
     # userSwapGivePuzzles = db.session.query(Swap, Puzzle, User).join(
     #     Puzzle.swap_give_relation).filter(Swap.userId == user_id, Swap.recipientId == User.id).order_by(Swap.id.desc()).all()
 
-    print('!!!!!!!!!!!!!!!!!!!! should see all swaps userSwapGivePuzzles',
-          userSwapGivePuzzles)
-    # print('_______________------------____-------____userSwapGivePuzzles___', userSwapGivePuzzles)
-    # print('_______________0', userSwapGivePuzzles[0], userSwapGivePuzzles[0][2].id, userSwapGivePuzzles[0][2].username)
-    # print('_______________1', userSwapGivePuzzles[1], userSwapGivePuzzles[1][2].id, userSwapGivePuzzles[1][2].username)
-    # print('_______________2', userSwapGivePuzzles[2], userSwapGivePuzzles[2][2].id, userSwapGivePuzzles[2][2].username)
-    # print('_______________3', userSwapGivePuzzles[3], userSwapGivePuzzles[3][2].id, userSwapGivePuzzles[3][2].username)
-    # print('_______________4', userSwapGivePuzzles[4], userSwapGivePuzzles[4][2].id, userSwapGivePuzzles[4][2].username)
-    # print('_______________5', userSwapGivePuzzles[5], userSwapGivePuzzles[5][2].id, userSwapGivePuzzles[5][2].username)
-    # print('_______________6', userSwapGivePuzzles[6], userSwapGivePuzzles[6][2].id, userSwapGivePuzzles[6][2].username)
-    # print('_______________7', userSwapGivePuzzles[7], userSwapGivePuzzles[7][2].id, userSwapGivePuzzles[7][2].username)
-    # print('_______________8', userSwapGivePuzzles[8], userSwapGivePuzzles[8][2].id, userSwapGivePuzzles[8][2].username)
 
     userSwapGetPuzzles = db.session.query(Swap, Puzzle).join(
         Puzzle.swap_get_relation).filter(or_(Swap.userId == user_id, Swap.recipientId == user_id)).order_by(Swap.id.desc()).all()
 
-    print('!!!!!!!!!!!!!!!!!!!! userSwapGetPuzzles', userSwapGetPuzzles)
 
     if userSwapGivePuzzles:
         swap_list = [{'id': swap.id,
@@ -281,11 +268,7 @@ def commit_swap(swap_id):
     getPuzzle = Puzzle.query.filter(Puzzle.id == swapToDelete.getPuzzleId).first()
 
     if givePuzzle and getPuzzle and swapToDelete:
-        print('all truthy !!!!!!! ! ! ! ! !')
-        print('swapToDelete.userId', swapToDelete.userId)
-        print('swapToDelete.recipientId', swapToDelete.recipientId)
-        print('givePuzzle.userId', givePuzzle.userId)
-        print('getPuzzle.uerId', getPuzzle.userId)
+  
 
         givePuzzle.userId = swapToDelete.recipientId
         getPuzzle.userId = swapToDelete.userId

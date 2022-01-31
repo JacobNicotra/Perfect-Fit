@@ -41,7 +41,6 @@ const SignUpForm = () => {
 
       
     }
-    console.log('errorPresent', errorPresent)
     if (errorPresent) {
       return //setErrors([])
     }

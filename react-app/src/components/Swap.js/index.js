@@ -29,23 +29,24 @@ function Swaps() {
   // })
 
   const swapEditDetector = () => {
+    console.log('!!!!!!!!!!!!!!!!! edit detected ')
 
     if (swapEdit === false) setSwapEdit(true)
-    else setSwapEdit(true)
+    else setSwapEdit(false)
     return
   }
 
 
-  useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      // setUser(user);
-    })();
-  }, [userId]);
+  // useEffect(() => {
+  //   if (!userId) {
+  //     return;
+  //   }
+  //   (async () => {
+  //     const response = await fetch(`/api/users/${userId}`);
+  //     const user = await response.json();
+  //     // setUser(user);
+  //   })();
+  // }, [userId]);
 
   useEffect(async () => {
     await dispatch(getUserSwaps(userId));
@@ -57,7 +58,6 @@ function Swaps() {
     return null;
   }
 
-  console.log('userSwaps', userSwaps)
 
   const handleAccept = async (swap, owner) => {
     //  thunk for committing swap and deleting swap req 
