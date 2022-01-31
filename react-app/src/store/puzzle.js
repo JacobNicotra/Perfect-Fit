@@ -63,7 +63,7 @@ export const getPuzzlesUser = (userId) => async dispatch => {
 
 export const getPuzzlesRecipient = (recipientId) => async dispatch => {
 
-    const response = await fetch(`/api/puzzles/users/${recipientId}`)
+    const response = await fetch(`/api/puzzles/users/${recipientId}/`)
 
     if (response.ok) {
         const recipientPuzzleArray = await response.json()
