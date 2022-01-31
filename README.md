@@ -19,17 +19,17 @@ Perfect Fit is built with a REACT frontend and an Flask backend. PostgreSQL is u
 
 ## Technical Implementation
 
-![Splash Page](https://the-perfect-fit.herokuapp.com/)
+[Splash Page](https://the-perfect-fit.herokuapp.com/)
 On the landing page you can create an account or login to an existing account. You can also use the Demo button to log in as a demo user.
 
 ***
 
-![The Puzzles Page](https://the-perfect-fit.herokuapp.com/puzzles)
+[The Puzzles Page](https://the-perfect-fit.herokuapp.com/puzzles)
 The puzzles page shows the latest puzzles that are posted to the website. You can click on any individual puzzle to see additional details about it, as well as send a swap request to the owner of the puzzle. If you are the owner of the puzzle, you can edit or delete you puzzle.  
 
 ***
 
-![Swaps Page](https://the-perfect-fit.herokuapp.com/swaps)
+[Swaps Page](https://the-perfect-fit.herokuapp.com/swaps)
 On the Swaps page, you can see any pending swap requests to or from you. You can edit the swap requests, accept them, or delete them from this page. 
 
 ***
