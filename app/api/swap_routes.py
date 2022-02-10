@@ -168,7 +168,6 @@ def new_swap():
             'getPuzzleId': data['getPuzzleId'],
             'givePuzzleId': data['givePuzzleId'],
             'recipientId': data['recipientId'],
-            'message': data['message'],
             'userAccept': True
         }
 

@@ -6,6 +6,9 @@ import LoginFormModal from '../LoginFormModal';
 
 import "./Landing.css"
 
+import landingImage from '../../landing-image.png'
+
+
 const Landing = () => {
     const sessionUser = useSelector(state => state.session.user);
     let user = sessionUser
@@ -31,6 +34,11 @@ const Landing = () => {
                             <h5 className='splash_text'>For existing users, please log in.</h5>
                         </div>
                     </div>
+                    <div className='landing-img-div'>
+                        <img className='landing-img' src={landingImage} alt='Welcome'></img>
+
+                    </div>
+
                     <div className='landing-btns'>
 
                         {sessionUser ?
@@ -58,7 +66,7 @@ const Landing = () => {
 
                         }
                     </div>
-                   
+
                 </div>
 
             </div>

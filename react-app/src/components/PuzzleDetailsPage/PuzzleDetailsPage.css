@@ -46,6 +46,7 @@ max-height: 500px;
   display: flex;
   padding-left: 35px;
   padding-right: 5px;
+  max-width: 920px;
 }
 
 #puzzle-details-ul {
@@ -66,9 +67,10 @@ max-height: 500px;
   display: flex;
   justify-content: center;
   font-size: 1.2em;
-  max-width: 80vw;
+  max-width: 840px;
   margin-top: 15px;
   padding: 10px
+
   
 }
 

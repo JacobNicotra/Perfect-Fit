@@ -106,7 +106,15 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
 
   return (<div>
 
-    <span className='puzzle-decor-holder'>
+    {errors.length > 0 ? <div className='puz-swap-errors'>
+      {errors.map((error, ind) => (
+        <div key={ind}>{error}</div>
+      ))}
+    </div>
+
+:
+
+  <span className='puzzle-decor-holder'>
       <div className='puzzle-decor1'><i className="fas fa-puzzle-piece"></i></div>
       <div className='puzzle-decor2'><i className="fas fa-puzzle-piece"></i></div>
       <div className='puzzle-decor3'><i className="fas fa-puzzle-piece"></i></div>
@@ -114,6 +122,12 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
       <div className='puzzle-decor5'><i className="fas fa-puzzle-piece"></i></div>
       <div className='puzzle-decor6'><i className="fas fa-puzzle-piece"></i></div>
     </span>
+
+
+      
+    }
+
+  
 
     <h1 className='swap-form-title'>Swap for this Puzzle!</h1>
     <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>

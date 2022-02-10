@@ -29,6 +29,8 @@ html,body{
   flex-direction: column;
   align-content: center;
   align-items: center;
+  box-shadow: 0px 1px 12px 8px rgba(0, 0, 0, 0.2);
+
 }
 
 #root {
@@ -89,4 +91,11 @@ html,body{
 .logout-button-li-landing {
   list-style: none;
 
+}
+
+.landing-img {
+  width: 600px;
+  height: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
