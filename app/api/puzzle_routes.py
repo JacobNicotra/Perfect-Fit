@@ -14,7 +14,8 @@ def get_all_puzzles():
     #     user = current_user.to_dict()
 
     # servers = Server.query.filter(Server.ownerId == user.id).all()
-    puzzles = Puzzle.query.all()
+    puzzles = Puzzle.query.order_by(Puzzle.id.desc()).all()
+
     if puzzles:
         puzzle_list = [{'id': puzzle.id, 'title': puzzle.title, 'userId': puzzle.userId,
                         'cityId': puzzle.cityId if puzzle.cityId else None,
