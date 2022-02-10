@@ -171,7 +171,7 @@ function Swaps() {
                                 </div>
                               </li >
                           }
-                            <li><i className="fas fa-exchange-alt swap-symbol"></i></li>
+                            <li className='li-nostyle'><i className="fas fa-exchange-alt swap-symbol"></i></li>
                             {user.id === swap.userId ?
 
                               <li key={swap.givePuzzle.id} className='puzzle-card-wrapper'>

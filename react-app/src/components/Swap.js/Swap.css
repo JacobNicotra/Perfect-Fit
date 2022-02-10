@@ -83,6 +83,10 @@
   box-shadow: 0px 1px 9px 5px rgba(0, 0, 0, 0.2);
 
  }
+
+ .li-nostyle {
+   list-style: none;
+ }
  
 
  #pending-swaps {

@@ -15,6 +15,7 @@ html,body{
 }
 
 .background {
+  padding-top: 90px;
   height: fit-content;
   min-height:1500px;
   background-color: white;
