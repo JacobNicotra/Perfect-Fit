@@ -91,7 +91,7 @@ const PuzzleDetails = () => {
           <span id="puz-det-images">
 
             <div id="puz-det-image-wrap"><img id="puz-det-image" src={puzzle.image ? puzzle.image : logoBW}></img></div>
-            <ImageUploadModal />
+            <div hidden={owner !== true} ><  ImageUploadModal /></div>
             {puzzle?.images &&
               <ul id="puzzle-details-ul">
                 {puzzle.images.map(image => {
