@@ -60,23 +60,52 @@ def get_all_puzzles_for_user(userId):
         return jsonify("Puzzles not found in database."), 404
 
 
+@puzzle_routes.route('/img/<int:id>/', methods=['POST'])
+def upload_image(id):
+    print('-------------   -  - - - - - - -  - --ROUTE ROUTE ROUTE ROUTE')
+    if "image" not in request.files:
+        print('!!!!!!!!!!!!!!!!! iamge not in request.files', request.form)
+        for file in request.files:
+            print('***************************    *** file', file)
+        return {"errors": "image required"}, 400
+
+    image = request.files["image"]
+    print('IMAGE IMGAE ^^^^^^^^^^^^^^^^^^^^^^^^', image)
+
+    if not allowed_file(image.filename):
+        print('!!!!!!!!!!!!!!!!! wrong filetype')
+
+        return {"errors": "file type not permitted"}, 400
+    
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        print('-=-=-=-=--= url not in upload!!!!!!!!!')
+        return upload, 400
+
+    url = upload["url"]
+    print('____________________ ____________________________________________________________ ____________ URL', url)
+    # flask_login allows us to get the current user from the request
+    puzzle = Puzzle.query.filter(Puzzle.id == id).first()
+    print(' \\\\\\\\\\\\\\\\\\\\ PUZZLE', puzzle)
+    puzzle.image = url
+
+    db.session.commit()
+    return {"url": url}
+
+
 @puzzle_routes.route('/', methods=['POST'])
 def new_puzzle():
     data = request.json
     title = data["title"]
 # AWS image upload:
-    image = None
-    url = None
-    if "image" in request.files:
-        image = request.files["image"]
 
-        if not allowed_file(image.filename):
-            return {"errors": "file type not permitted"}, 400
 
-        upload = upload_file_to_s3(image)
-        if "url" not in upload:
-            return upload, 400
-        url = upload["url"]
 
     if title == '':
         return jsonify("bad data")
@@ -85,8 +114,8 @@ def new_puzzle():
             'title': data['title'],
             'userId': data['userId']
         }
-        if url:
-            new_puzzle['image'] = url
+        if 'image' in data and data["image"] != '':
+            new_puzzle['image'] = data['image']
         if 'cityId' in data and data["cityId"] != '':
             new_puzzle['cityId'] = data['cityId']
         if 'pieceCount' in data and data["pieceCount"] != '':

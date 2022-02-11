@@ -82,14 +82,28 @@ export const getPuzzleOne = (puzzleId) => async dispatch => {
 }
 
 export const createPuzzle = (newPuzzle) => async dispatch => {
+    console.log('----------- --------newPuzzle', newPuzzle)
     const response = await fetch(`/api/puzzles/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newPuzzle)
     })
+    
     const puzzle = await response.json()
     if (response.ok) dispatch(addOnePuzzle(puzzle))
+    console.log('----------STORE puzzle', puzzle)
     return puzzle
+}
+
+export const addImg = (formData, id) => async dispatch => {
+    console.log('----------- --------formData', formData)
+    const response = await fetch(`/api/puzzles/img/${id}/`, {
+        method: 'POST',
+        body: formData
+    })
+    const image = await response.json()
+    // if (response.ok) dispatch(addOnePuzzle(puzzle))
+    return image
 }
 
 export const deletePuzzle = (puzzleId) => async dispatch => {

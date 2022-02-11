@@ -11,6 +11,7 @@ import EditPuzzleModal from '../EditPuzzleForm/EditPuzzleModal'
 import { Modal } from '../../context/Modal';
 import SwapFormModal from '../SwapForm/SwapFormModal';
 
+import ImageUploadModal from '../ImageUpload/ImageUploadModal';
 // import AddServerModal from '../AddServerModal';
 import './PuzzleDetailsPage.css'
 import logoBW from '../../logo-black.png'
@@ -90,6 +91,7 @@ const PuzzleDetails = () => {
           <span id="puz-det-images">
 
             <div id="puz-det-image-wrap"><img id="puz-det-image" src={puzzle.image ? puzzle.image : logoBW}></img></div>
+            <ImageUploadModal />
             {puzzle?.images &&
               <ul id="puzzle-details-ul">
                 {puzzle.images.map(image => {

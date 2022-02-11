@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom';
-import { createPuzzle } from '../../store/puzzle';
+import { createPuzzle, addImg } from '../../store/puzzle';
 import { getPuzzles } from '../../store/puzzle';
 import { useEffect } from 'react';
 import "./PuzzleForm.css"
@@ -11,7 +11,12 @@ const AddPuzzleForm = ({ modalSetter }) => {
   const [title, setTitle] = useState('');
   const [pieceCount, setPieceCount] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
+
+
+
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch()
   const history = useHistory()
@@ -25,6 +30,12 @@ const AddPuzzleForm = ({ modalSetter }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("image", image);
+    // console.log('_____________formData', formData)
+    setImageLoading(true);
+
     const userId = user.id
     setErrors([])
 
@@ -46,9 +57,9 @@ const AddPuzzleForm = ({ modalSetter }) => {
     if (pieceCount.length > 0) {
       newPuzzle.pieceCount = parseInt(pieceCount)
     }
-    if (image.replace(/\s/g, '').length) {
-      newPuzzle.image = image
-    }
+    // if (image.replace(/\s/g, '').length) {
+    //   newPuzzle.image = image
+    // }
     if (description.replace(/\s/g, '').length) {
       newPuzzle.description = description
     }
@@ -57,9 +68,14 @@ const AddPuzzleForm = ({ modalSetter }) => {
     }
     let newPuzzleDb = null
     if (newPuzzle) {
-     
-        newPuzzleDb = await dispatch(createPuzzle(newPuzzle));
-        dispatch(getPuzzles())
+
+      newPuzzleDb = await dispatch(createPuzzle(newPuzzle));
+      if (newPuzzleDb) {
+        
+      }
+   
+
+      dispatch(getPuzzles())
 
     }
     modalSetter(true);
@@ -140,7 +156,8 @@ const AddPuzzleForm = ({ modalSetter }) => {
         <div className='LabelAndInputContainer'>
           {/* <label className="puzzle-form-label">Image Url</label> */}
           <input
-            type='text'
+            type='file'
+            accept="image/*"
             name='image'
             onChange={updateImage}
             value={image}
@@ -151,6 +168,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
           ></input>
         </div>
         <button className='new-puzzle-submit-button' type='submit'>{'Create Puzzle'}</button>
+        {(imageLoading) && <p>Loading...</p>}
       </form>
     </>
   );

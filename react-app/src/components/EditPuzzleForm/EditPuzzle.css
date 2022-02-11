@@ -56,6 +56,7 @@
    font-size: 1.2em;
    margin: 10px;
    border: none;
+   background-color: #ffffff;
  }
 
  .puz-edit-button:hover {
