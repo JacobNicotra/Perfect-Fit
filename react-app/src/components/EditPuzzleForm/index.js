@@ -39,9 +39,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
       newPuzzle.pieceCount = parseInt(pieceCount)
       console.log(pieceCount, 'pieceCount')
     }
-    if (image.replace(/\s/g, '').length) {
-      newPuzzle.image = image
-    }
+  
     if (description.replace(/\s/g, '').length) {
       newPuzzle.description = description
     }
@@ -142,19 +140,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
 
           ></input>
         </div>
-        <div className='LabelAndInputContainer'>
-          {/* <label className="puzzle-form-label">Image Url</label> */}
-          <input
-            type='text'
-            name='image'
-            onChange={updateImage}
-            value={image}
-            autoComplete="off"
-            className="puzzle-form-input"
-            placeholder="Image Url"
-
-          ></input>
-        </div>
+        
         <button className='new-puzzle-submit-button' type='submit'>{'Submit'}</button>
         <button className='edit-puzzle-delete-button puzzle-form-input' onClick={(e) => {
           e.preventDefault();

@@ -153,20 +153,6 @@ const AddPuzzleForm = ({ modalSetter }) => {
 
           ></input>
         </div>
-        <div className='LabelAndInputContainer'>
-          {/* <label className="puzzle-form-label">Image Url</label> */}
-          <input
-            type='file'
-            accept="image/*"
-            name='image'
-            onChange={updateImage}
-            value={image}
-            autoComplete="off"
-            className="puzzle-form-input"
-            placeholder="Image Url"
-
-          ></input>
-        </div>
         <button className='new-puzzle-submit-button' type='submit'>{'Create Puzzle'}</button>
         {(imageLoading) && <p>Loading...</p>}
       </form>
