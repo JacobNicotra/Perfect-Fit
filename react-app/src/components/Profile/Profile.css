@@ -111,6 +111,17 @@ transform: scale(.94);
   top:0px;
   left: 165px;
 }
+.puzzle-decor-holder-no-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 10px;
+  flex-direction: row;
+  font-size: 1.6em;
+  margin-bottom: 30px;
+  
+}
 
 .puz-swap-errors {
   border: none;

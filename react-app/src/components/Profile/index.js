@@ -21,7 +21,7 @@ const Profile = () => {
 
 
       <div className='user-disp'>
-        <span className='puzzle-decor-holder'>
+        <span className='puzzle-decor-holder-no-center'>
           <div className='puzzle-decor1'><i className="fas fa-puzzle-piece"></i></div>
           <div className='puzzle-decor2'><i className="fas fa-puzzle-piece"></i></div>
           <div className='puzzle-decor3'><i className="fas fa-puzzle-piece"></i></div>

@@ -32,6 +32,7 @@
   background-color: #ffffffcb;
   box-shadow: 0px 1px 9px 5px rgba(0, 0, 0, 0.2);
   width: 200px;
+  max-height: 280px;
 }
 
 .swap-form-title {

@@ -185,17 +185,10 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
 
       <div className='edit-swap'>
 
-        <span className='puzzle-decor-holder'>
-          <div className='puzzle-decor1'><i className="fas fa-puzzle-piece"></i></div>
-          <div className='puzzle-decor2'><i className="fas fa-puzzle-piece"></i></div>
-          <div className='puzzle-decor3'><i className="fas fa-puzzle-piece"></i></div>
-          <div className='puzzle-decor4'><i className="fas fa-puzzle-piece"></i></div>
-          <div className='puzzle-decor5'><i className="fas fa-puzzle-piece"></i></div>
-          <div className='puzzle-decor6'><i className="fas fa-puzzle-piece"></i></div>
-        </span>
 
 
-        <h1 className='swap-form-title'>Swap for this Puzzle!</h1>
+
+        <h1 className='swap-form-title'>Change Swap Details</h1>
         <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
           <span className='edit-swap-lists-wrapper'>
 
@@ -266,7 +259,13 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
               placeholder="Leave a message with your swap request"
 
             ></input>
-            <button className='new-puzzle-submit-button' type='submit'>{'Submit'}</button>
+
+            <div className='edit-swap-buttons'>
+
+              <button className='new-puzzle-submit-button' type='submit'>{'Submit'}</button>
+
+              <button onClick={handleDelete} className='new-puzzle-submit-button red-btn'>{'Revoke'}</button>
+            </div>
 
           </div>
 
@@ -278,7 +277,6 @@ const SwapForm = ({ modalSetter, otherUserId, swap, swapEditDetector }) => {
 
 
         </form>
-        <button onClick={handleDelete} className='new-puzzle-submit-button red-btn'>{'Revoke this request'}</button>
 
       </div>
 
