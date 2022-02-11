@@ -17,12 +17,13 @@ max-height: 500px;
   margin: 0 10px 10px 10px; 
   overflow: hidden;
   border-radius: 10px;
+  box-shadow: 0px 1px 6px 6px rgba(0, 0, 0, 0.2);
 
 }
 .puzzle-details-image {
   object-fit:contain;
-  width: auto;
-  height: 240px;
+  width: 230px;
+  height: auto;
   overflow: hidden;
 
 
@@ -30,10 +31,12 @@ max-height: 500px;
 
 #puz-det-image {
   object-fit:contain;
-  width: auto;
-  height: 500px;
+  width: 500px;
+  height: auto;
   overflow: hidden;
-  border-radius: 10px;
+   box-shadow: 0px 1px 6px 6px rgba(0, 0, 0, 0.2);
+   background: none;
+
 
 }
 
