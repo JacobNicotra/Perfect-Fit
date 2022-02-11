@@ -3,6 +3,9 @@ from app.models import db, User, Puzzle, Image
 from sqlalchemy.exc import IntegrityError
 from flask_login import current_user
 
+from app.s3_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
+
 puzzle_routes = Blueprint('servers', __name__)
 
 # http://localhost:5000/channels/?title=firsttitle&description=someDescriptiveStuff&ownerId=1
@@ -61,6 +64,20 @@ def get_all_puzzles_for_user(userId):
 def new_puzzle():
     data = request.json
     title = data["title"]
+# AWS image upload:
+    image = None
+    url = None
+    if "image" in request.files:
+        image = request.files["image"]
+
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            return upload, 400
+        url = upload["url"]
+
     if title == '':
         return jsonify("bad data")
     try:
@@ -68,8 +85,8 @@ def new_puzzle():
             'title': data['title'],
             'userId': data['userId']
         }
-        if 'image' in data and data["image"] != '':
-            new_puzzle['image'] = data['image']
+        if url:
+            new_puzzle['image'] = url
         if 'cityId' in data and data["cityId"] != '':
             new_puzzle['cityId'] = data['cityId']
         if 'pieceCount' in data and data["pieceCount"] != '':
