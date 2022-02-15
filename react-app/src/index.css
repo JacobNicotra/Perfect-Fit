@@ -105,27 +105,48 @@
  
 
  .add-puzzle-button {
-   color: black;
-   font-size: 37px;
+   color: rgb(255, 255, 255);
+   font-size: 25px;
    margin-left: 30px;
- }
+  background-image: url("./add-puzzle-bg.png");
+  background-size: 65px;
+  background-repeat: no-repeat;
+  background-position: bottom -4px left 0px;
+}
 
  .add-puzzle-button {
   border: none;
   cursor: pointer;
   font-weight: bold;
   display: flex;
-  justify-content: center;
-  align-content: center;
   padding-bottom: 4px;
   height: 50px;
-  width: 50px;
-  margin-top: 15px;
+  width: 65px;
+  margin-top: 4px;
   margin-left: 15px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
  }
+ .fa-plus {
+   margin-bottom: 0px;
+   margin-top: 6px;
+   margin-right: 0px;
+   font-size: 1.9em;
+   color: black;
+   font-weight: bold;
+
+ }
+ 
+ .fa-plus:hover {
+   margin-top: 8px;
+   font-size: 2.2em;
+   color: #283e31;
+  }
 
 .add-puzzle-button:hover {
-  color: rgb(77, 77, 77);
+  color: rgb(0, 59, 37);
 }
 
 .add-puzzle-button:active {
@@ -221,6 +242,7 @@
 
 .swap-icon:hover {
   color: rgb(77, 77, 77);
+  cursor: pointer;
 }
 
 
@@ -338,4 +360,32 @@
   box-shadow: 0px 1px 9px 3px rgba(0, 0, 0, 0.2);
 
 
+}
+
+
+.hovertext {
+  position: relative;
+}
+
+.hovertext:before {
+  content: attr(data-hover);
+  visibility: hidden;
+  opacity: 0;
+  width: 140px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 0;
+  transition: opacity 1s ease-in-out;
+
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 110%;
+}
+
+.hovertext:hover:before {
+  opacity: 1;
+  visibility: visible;
 }

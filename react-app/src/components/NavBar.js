@@ -20,8 +20,8 @@ const NavBar = () => {
       <span id="nav-left">
 
         {/* <img id="logo" src={logo}></img> */}
-        <NavLink to='/puzzles' exact={true} activeClassName='active'>
-          <i className="fas fa-puzzle-piece font-logo"></i>
+        <NavLink to='/puzzles' exact={true} activeClassName='active hovertext' data-hover="See Latest Puzzles">
+          <i className="fas fa-puzzle-piece font-logo" ></i>
         </NavLink>
         <NavLink to='/puzzles' exact={true} activeClassName='active'>
 
@@ -38,7 +38,7 @@ const NavBar = () => {
           {sessionUser &&
             <div className='nav-middle'>
               <AddPuzzleModal edit={false} className="puzzle-modal" />
-              <NavLink to='/swaps' exact={true} >
+              <NavLink to='/swaps' exact={true} data-hover="See your Swap Requests" className="hovertext">
                 <button className='nav-swap-btn'><i className="fas fa-envelope swap-icon"></i></button>
               </NavLink >
             </div>

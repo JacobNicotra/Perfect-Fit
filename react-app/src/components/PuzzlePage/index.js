@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { NavLink, Redirect, useParams } from 'react-router-dom';
+import Tour from 'reactour'
+
 import { getPuzzles } from '../../store/puzzle';
 
 // import AddServerModal from '../AddServerModal';
@@ -15,6 +16,7 @@ const Puzzle = () => {
   const params = useParams();
   // const serverId = params.serverId
   const user = useSelector(state => state.session.user);
+  const [isTourOpen, setIsTourOpen] = useState(true);
 
   let puzzles = useSelector(state => {
     return state.puzzles.puzzleArray
@@ -34,9 +36,35 @@ const Puzzle = () => {
   //     return <Redirect to='/' />;
   // }
 
+  const steps = [
+    {
+      selector: '.first-step',
+      content: 'This is my first Step',
+    },
+    {
+      selector: '.second-step',
+      content: 'This is my second Step',
+    },
+    {
+      selector: '.third-step',
+      content: 'This is my third Step',
+    },
+    // ...
+  ]
+
   if (puzzles) {
     return (
+
       <div className='background'>
+
+        <>
+          { /* other stuff */}
+          <Tour
+            steps={steps}
+            isOpen={isTourOpen}
+            onRequestClose={() => setIsTourOpen(false)}
+          />
+        </>
         <div className='puz-page-holder'>
           <div className='latest'>Latest Puzzles</div>
           <ul id="puzzle-cards">
