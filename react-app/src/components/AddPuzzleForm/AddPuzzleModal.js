@@ -16,7 +16,7 @@ function AddPuzzleModal({ edit }) {
     <>
       {/* <button className='add-puzzle-button puzzle-buttons' onClick={() => setShowModal(true)}><i className="far fa-plus-square"></i></button> */}
       {/* <button className='add-puzzle-button puzzle-buttons hovertext' onClick={() => setShowModal(true)} data-hover="Register your puzzle!"><i className="fas fa-plus-circle"></i></button> */}
-      <button className='add-puzzle-button puzzle-buttons hovertext' onClick={() => setShowModal(true)} data-hover="Register your puzzle!"><i className="fas fa-plus"></i></button>
+      <button id='add-puzzle-btn' className='add-puzzle-button puzzle-buttons hovertext' onClick={() => setShowModal(true)} data-hover="Register your puzzle!"><i className="fas fa-plus"></i></button>
       {showModal && (
         <Modal className="add-puzzle-modal" onClose={() => setShowModal(false)}>
 

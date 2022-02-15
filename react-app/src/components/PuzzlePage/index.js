@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Redirect, useParams } from 'react-router-dom';
-import Tour from 'reactour'
+
 
 import { getPuzzles } from '../../store/puzzle';
 
@@ -10,13 +10,18 @@ import './PuzzlePage.css'
 import logo from '../../logo-black.png'
 import logoBW from '../../logo-black.png'
 
+import Intro from '../Intro';
+
 
 const Puzzle = () => {
   const dispatch = useDispatch();
   const params = useParams();
   // const serverId = params.serverId
+  const [stepsEnabled, setStepsEnabled] = useState(true)
+  const [initialStep, setInitalStep] = useState(0)
+
+
   const user = useSelector(state => state.session.user);
-  const [isTourOpen, setIsTourOpen] = useState(true);
 
   let puzzles = useSelector(state => {
     return state.puzzles.puzzleArray
@@ -36,35 +41,14 @@ const Puzzle = () => {
   //     return <Redirect to='/' />;
   // }
 
-  const steps = [
-    {
-      selector: '.first-step',
-      content: 'This is my first Step',
-    },
-    {
-      selector: '.second-step',
-      content: 'This is my second Step',
-    },
-    {
-      selector: '.third-step',
-      content: 'This is my third Step',
-    },
-    // ...
-  ]
+
 
   if (puzzles) {
     return (
 
       <div className='background'>
+        <Intro puzzle={puzzles[6]} />
 
-        <>
-          { /* other stuff */}
-          <Tour
-            steps={steps}
-            isOpen={isTourOpen}
-            onRequestClose={() => setIsTourOpen(false)}
-          />
-        </>
         <div className='puz-page-holder'>
           <div className='latest'>Latest Puzzles</div>
           <ul id="puzzle-cards">
@@ -76,7 +60,7 @@ const Puzzle = () => {
                 color = 'white'
               }
               return (
-                <li key={puzzle.id} className='puzzle-card-wrapper'>
+                <li key={puzzle.id} className='puzzle-card-wrapper' id={`puzzle-${puzzle.id}`}>
                   <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
                     <span className='puzzle-card-title'>{puzzle.title}</span>
                     <span className='puzzle-card-rating'></span>

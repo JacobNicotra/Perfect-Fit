@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import Puzzle from './components/PuzzlePage';
 import PuzzleDetails from './components/PuzzleDetailsPage';
 import Swaps from './components/Swap.js';
+import Intro from './components/Intro';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -64,6 +65,7 @@ function App() {
         </ProtectedRoute>
         <Route path='/puzzles' exact>
           <div className='PuzzlesContainer'>
+            {/* <Intro /> */}
             <NavBar />
             <Puzzle />
             <Footer notLanding={true} />
