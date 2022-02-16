@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { Steps, Hints } from "intro.js-react";
+import introJs from "intro.js"
 
 import "intro.js/introjs.css";
 import "./index.css";
 
+
+
 class Intro extends Component {
-  constructor({puzzle}) {
-    super({puzzle});
+  constructor({ puzzle }) {
+    super({ puzzle });
 
     let latest = document.getElementsByClassName('latest')
     let puzzleEl = document.getElementById(`puzzle-${puzzle.id}`)
@@ -47,81 +50,85 @@ class Intro extends Component {
           }
         ]
       };
+      
     } else {
       console.log('------ NO LATEST NO N O NO')
     }
 
-    }
-
-  render() {
-    const {
-      stepsEnabled,
-      steps,
-      initialStep,
-      hintsEnabled,
-      hints,
-      scrollToElement,
-      scrollPadding
-
-    } = this.state;
-
-    return (
-      <div>
-        <Steps
-          enabled={stepsEnabled}
-          steps={steps}
-          initialStep={initialStep}
-          onExit={this.onExit}
-          scrollToElement={this.scrollToElement}
-          scrollPadding={this.scrollPadding}
-        />
-        <Hints enabled={hintsEnabled} hints={hints} />
-
-        <div className="controls">
-          <div>
-            <button onClick={this.toggleSteps}>Toggle Steps</button>
-            <button onClick={this.addStep}>Add Step</button>
-          </div>
-          <div>
-            <button onClick={this.toggleHints}>Toggle Hints</button>
-            <button onClick={this.addHint}>Add Hint</button>
-          </div>
-        </div>
-
-      </div>
-    );
   }
 
-  onExit = () => {
-    this.setState(() => ({ stepsEnabled: false }));
+
+
+
+render() {
+  const {
+    stepsEnabled,
+    steps,
+    initialStep,
+    hintsEnabled,
+    hints,
+    scrollToElement,
+    scrollPadding
+
+  } = this.state;
+
+  return (
+    <div>
+      <Steps
+        enabled={stepsEnabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={this.onExit}
+        scrollToElement={this.scrollToElement}
+        scrollPadding={this.scrollPadding}
+      />
+      <Hints enabled={hintsEnabled} hints={hints} />
+
+      <div className="controls">
+        <div>
+          <button onClick={this.toggleSteps}>Toggle Steps</button>
+          <button onClick={this.addStep}>Add Step</button>
+        </div>
+        <div>
+          <button onClick={this.toggleHints}>Toggle Hints</button>
+          <button onClick={this.addHint}>Add Hint</button>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+onExit = () => {
+  this.setState(() => ({ stepsEnabled: false }));
+};
+
+toggleSteps = () => {
+  this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+};
+
+addStep = () => {
+  const newStep = {
+    element: ".alive",
+    intro: "Alive step"
   };
 
-  toggleSteps = () => {
-    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+  this.setState(prevState => ({ steps: [...prevState.steps, newStep] }));
+};
+
+toggleHints = () => {
+  this.setState(prevState => ({ hintsEnabled: !prevState.hintsEnabled }));
+};
+
+addHint = () => {
+  const newHint = {
+    element: ".alive",
+    hint: "Alive hint",
+    hintPosition: "middle-right"
   };
 
-  addStep = () => {
-    const newStep = {
-      element: ".alive",
-      intro: "Alive step"
-    };
-
-    this.setState(prevState => ({ steps: [...prevState.steps, newStep] }));
-  };
-
-  toggleHints = () => {
-    this.setState(prevState => ({ hintsEnabled: !prevState.hintsEnabled }));
-  };
-
-  addHint = () => {
-    const newHint = {
-      element: ".alive",
-      hint: "Alive hint",
-      hintPosition: "middle-right"
-    };
-
-    this.setState(prevState => ({ hints: [...prevState.hints, newHint] }));
-  };
+  this.setState(prevState => ({ hints: [...prevState.hints, newHint] }));
+};
 }
 
 export default Intro
