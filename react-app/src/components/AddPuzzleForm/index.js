@@ -13,7 +13,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [difficulty, setDifficulty] = useState('');
-  const [delivery, setDelivery] = useState(false);
+  const [delivery, setDelivery] = useState(null);
   const [pickup, setPickup] = useState(false);
 
   const [image, setImage] = useState(null);
@@ -56,6 +56,12 @@ const AddPuzzleForm = ({ modalSetter }) => {
     if (!title.replace(/\s/g, '').length) {
       return setErrors(['Please name your puzzle.'])
     }
+    if (!delivery) {
+      return setErrors([...errors, 'Please choose a delivery method'])
+    }
+    if (!category) {
+      return setErrors([...errors, 'Please choose a delivery method'])
+    }
 
 
     if (pieceCount.length > 0) {
@@ -71,16 +77,17 @@ const AddPuzzleForm = ({ modalSetter }) => {
       newPuzzle.categoryId = parseInt(category)
     }
     if (difficulty) {
-      newPuzzle.difficultyId = difficulty
+      newPuzzle.difficulty = difficulty
     }
     if (delivery) {
-      newPuzzle.deliveryId = delivery
+      newPuzzle.delivery = delivery
     }
     if (user.cityId) {
       newPuzzle.cityId = user.cityId
     }
     let newPuzzleDb = null
     if (newPuzzle) {
+      console.log('_____frontend newPuz', newPuzzle)
       newPuzzleDb = await dispatch(createPuzzle(newPuzzle));
       if (newPuzzleDb) {
       }
@@ -109,18 +116,17 @@ const AddPuzzleForm = ({ modalSetter }) => {
     setDifficulty(e.target.value);
   };
   const updateDelivery = (e) => {
-    if (delivery) {
-      setDelivery(false)
-    } else {
-      setDelivery(true)
-    }
+    if (e.target.checked) {
+      setDelivery(e.target.value)
+    } return
   };
   const updatePickup = (e) => {
     if (pickup) {
       setPickup(false)
     } else {
       setPickup(true)
-    }  };
+    }
+  };
   const updateImage = (e) => {
     setImage(e.target.value);
   };
@@ -167,7 +173,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
         </div>
         <div className='LabelAndInputContainer'>
           {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-          <select name="category" id="category-select" className="puzzle-form-input"
+          <select name="category" id="category-select" className="puzzle-form-input puz-form-sel"
             onChange={updateCategory}
             value={category}
           >
@@ -196,7 +202,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
         </div>
         <div className='LabelAndInputContainer'>
           {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-          <select name="category" id="category-select" className="puzzle-form-input"
+          <select name="category" id="category-select" className="puzzle-form-input puz-form-sel"
             onChange={updateDifficulty}
             value={category}
           >
@@ -226,17 +232,51 @@ const AddPuzzleForm = ({ modalSetter }) => {
         </div>
 
 
+        <div className='radio-wrapper'>
+          <span className='radio-prompt'>How would you like users <br />to swap for this puzzle?</span>
 
-        <div>
-         
-          <input type="radio" id="huey" name="delivery" 
-            // checked
-            onChange={updateDelivery}
-            checked={delivery}
-          >
+        <div className='delivery-input'>
+          <label>
+            <input type="radio" name='delivery-method'
+              // checked
+              onChange={updateDelivery}
+              checked={delivery == 'either'}
+              value='either'
+            >
             </input>
-          
+            <span>Mail & Local Pickup</span>
+          </label>
+
         </div>
+        <div className='delivery-input'>
+          <label>
+            <input type="radio" name='delivery-method'
+              // checked
+              onChange={updateDelivery}
+              checked={delivery == 'pickup'}
+              value='pickup'
+            >
+            </input>
+            <span>Local Pickup</span>
+          </label>
+
+        </div>
+        <div className='delivery-input'>
+          <label>
+
+            <input type="radio" name='delivery-method'
+              // checked
+              onChange={updateDelivery}
+              checked={delivery == 'delivery'}
+                value='delivery'
+                
+            >
+            </input>
+            <span>Mail</span>
+          </label>
+
+        </div>
+</div>
 
 
         <button className='new-puzzle-submit-button' type='submit'>{'Create Puzzle'}</button>
