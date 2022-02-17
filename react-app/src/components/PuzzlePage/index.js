@@ -10,7 +10,7 @@ import './PuzzlePage.css'
 import logo from '../../logo-black.png'
 import logoBW from '../../logo-black.png'
 
-import Intro from '../Intro';
+// import Intro from '../Intro';
 
 
 const Puzzle = () => {
@@ -47,7 +47,7 @@ const Puzzle = () => {
     return (
 
       <div className='background'>
-        <Intro puzzle={puzzles[6]} />
+        {/* <Intro puzzle={puzzles[6]} /> */}
 
         <div className='puz-page-holder'>
           <div className='latest'>Latest Puzzles</div>

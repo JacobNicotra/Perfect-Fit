@@ -103,8 +103,6 @@ def upload_image(id):
 def new_puzzle():
     data = request.json
     title = data["title"]
-# AWS image upload:
-
 
 
     if title == '':
@@ -118,10 +116,16 @@ def new_puzzle():
             new_puzzle['image'] = data['image']
         if 'cityId' in data and data["cityId"] != '':
             new_puzzle['cityId'] = data['cityId']
+        if 'categoryId' in data and data["categoryId"] != '':
+            new_puzzle['categoryId'] = data['categoryId']
         if 'pieceCount' in data and data["pieceCount"] != '':
             new_puzzle['piece_count'] = int(data['pieceCount'])
         if 'description' in data and data["description"] != '':
             new_puzzle['description'] = data['description']
+        if 'delivery' in data and data["delivery"] != '':
+            new_puzzle['delivery'] = data['delivery']
+        if 'difficulty' in data and data["difficulty"] != '':
+            new_puzzle['difficulty'] = data['difficulty']
         new_puzzle_db = Puzzle(
             **new_puzzle
         )
@@ -133,9 +137,12 @@ def new_puzzle():
             'title': new_puzzle_db.title,
             'userId': new_puzzle_db.userId,
             'cityId': new_puzzle_db.cityId if new_puzzle_db.cityId else None,
+            'categoryId': new_puzzle_db.categoryId if new_puzzle_db.categoryId else None,
             'piece_count': new_puzzle_db.piece_count if new_puzzle_db.piece_count else None,
             'image': new_puzzle_db.image if new_puzzle_db.image else None,
             'description': new_puzzle_db.description if new_puzzle_db.description else None,
+            'delivery': new_puzzle_db.delivery if new_puzzle_db.delivery else None,
+            'difficulty': new_puzzle_db.difficulty if new_puzzle_db.difficulty else None,
         }
         return new_puzzle_db_dict
     except IntegrityError as e:
@@ -199,12 +206,20 @@ def update_server(puzzle_id):
             puzzle.userId = data['userId']
         if 'cityId' in data:
             puzzle.cityId = data['cityId']
+        if 'categoryId' in data:
+            puzzle.categoryId = data['categoryId']
         if 'pieceCount' in data:
             puzzle.piece_count = data['pieceCount']
         if 'image' in data:
             puzzle.image = data['image']
         if 'description' in data:
             puzzle.description = data['description']
+        if 'difficulty' in data:
+            puzzle.difficulty = data['difficulty']
+        if 'delivery' in data:
+            puzzle.delivery = data['delivery']
+        if 'category' in data:
+            puzzle.category = data['category']
 
         db.session.commit()
         if puzzle:
@@ -216,6 +231,9 @@ def update_server(puzzle_id):
                     'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
                     'image': puzzle.image if puzzle.image else None,
                     'description': puzzle.description if puzzle.description else None,
+                    'difficulty': puzzle.difficulty if puzzle.difficulty else None,
+                    'delivery': puzzle.delivery if puzzle.delivery else None,
+                    'category': puzzle.category if puzzle.category else None,
                     # 'images': images_list
                 }
         return puzzle_db_dict

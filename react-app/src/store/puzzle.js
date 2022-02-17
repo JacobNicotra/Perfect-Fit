@@ -82,7 +82,6 @@ export const getPuzzleOne = (puzzleId) => async dispatch => {
 }
 
 export const createPuzzle = (newPuzzle) => async dispatch => {
-    console.log('----------- --------newPuzzle', newPuzzle)
     const response = await fetch(`/api/puzzles/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -96,7 +95,6 @@ export const createPuzzle = (newPuzzle) => async dispatch => {
 }
 
 export const addImg = (formData, id) => async dispatch => {
-    console.log('----------- --------formData', formData)
     const response = await fetch(`/api/puzzles/img/${id}/`, {
         method: 'POST',
         body: formData

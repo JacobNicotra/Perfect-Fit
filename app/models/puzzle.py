@@ -1,6 +1,8 @@
+from unicodedata import category
 from .db import db
 from .user import User
 from .city import City
+from .category import Category
 
 
 class Puzzle(db.Model):
@@ -10,15 +12,21 @@ class Puzzle(db.Model):
     title = db.Column(db.String(100), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     cityId = db.Column(db.Integer, db.ForeignKey(City.id))
+    categoryId = db.Column(db.Integer, db.ForeignKey(Category.id))
     piece_count = db.Column(db.Integer)
+    difficulty = db.Column(db.String(50))
     image = db.Column(db.Text)
     description = db.Column(db.Text)
+    delivery = db.Column(db.String(50))
+    
 
     owner_relation = db.relationship("User", back_populates="puzzles_relation")
     city_relation = db.relationship("City", back_populates="puzzles_relation")
     rating_relation = db.relationship("PuzzleReview", back_populates="reviewer_relation", cascade="all, delete")
     images_relation = db.relationship("Image", back_populates="puzzle_relation")
     previous_owners_relation = db.relationship("PreviousOwner", back_populates="puzzle_relation", cascade="all, delete")
+    category_relation = db.relationship("Category", back_populates="puzzles_relation")
+
 
     # swap_give_relation = db.relationship("Swap", back_populates="give_puzzle_relation", cascade="all, delete")
     # swap_give_relation = db.relationship("Swap", back_populates="get_puzzle_relation", cascade="all, delete")

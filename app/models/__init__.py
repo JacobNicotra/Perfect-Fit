@@ -6,3 +6,4 @@ from .previous_owners import PreviousOwner
 from .puzzle_review import PuzzleReview
 from .puzzle import Puzzle
 from .swap import Swap
+from .category import Category

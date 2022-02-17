@@ -36,5 +36,5 @@ def seed_Images():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_images():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE images RESTART IDENTITY CASCADE;')
     db.session.commit()

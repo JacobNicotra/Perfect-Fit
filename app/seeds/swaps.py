@@ -20,5 +20,5 @@ def seed_swaps():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_swaps():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE swaps RESTART IDENTITY CASCADE;')
     db.session.commit()

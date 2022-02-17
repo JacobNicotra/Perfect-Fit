@@ -56,5 +56,5 @@ def seed_cities():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_cities():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE cities RESTART IDENTITY CASCADE;')
     db.session.commit()

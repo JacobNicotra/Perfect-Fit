@@ -4,6 +4,7 @@ from .users import seed_users, undo_users
 from .puzzles import seed_puzzles, undo_puzzles
 from .swaps import seed_swaps, undo_swaps
 from .images import seed_Images, undo_images
+from .categories import seed_categories, undo_categories
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -14,6 +15,7 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_cities()
+    seed_categories()
     seed_users()
     seed_puzzles()
     # seed_swaps()
@@ -25,6 +27,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_cities()
+    undo_categories()
     undo_users()
     undo_puzzles()
     # undo_swaps()
