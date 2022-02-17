@@ -8,11 +8,11 @@ import "./PuzzleForm.css"
 
 const AddPuzzleForm = ({ modalSetter }) => {
   const [errors, setErrors] = useState([]);
-  const [title, setTitle] = useState('');
-  const [pieceCount, setPieceCount] = useState('');
+  const [title, setTitle] = useState(null);
+  const [pieceCount, setPieceCount] = useState(null);
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
-  const [difficulty, setDifficulty] = useState('');
+  const [category, setCategory] = useState(null);
+  const [difficulty, setDifficulty] = useState(null);
   const [delivery, setDelivery] = useState(null);
   const [pickup, setPickup] = useState(false);
 
@@ -53,20 +53,79 @@ const AddPuzzleForm = ({ modalSetter }) => {
       userId,
     }
 
-    if (!title.replace(/\s/g, '').length) {
-      return setErrors(['Please name your puzzle.'])
+    let modal = document.getElementById('modal-content')
+    let titleInput = document.getElementById('title-input')
+    let deliveryInput = document.getElementById('delivery-input')
+    let difficultyInput = document.getElementById('difficulty-input')
+    let categoryInput = document.getElementById('category-input')
+    let descriptionInput = document.getElementById('description-input')
+    let pieceCountInput = document.getElementById('pieceCountInput')
+
+    let tempErrors = []
+
+    if (!title || !title.replace(/\s/g, '').length) {
+      titleInput.className = 'puzzle-form-input error-input'
+      modal.className = 'modal-content error-input'
+      tempErrors = ['Name your puzzle.']
+    } else {
+      let titleInput = document.getElementById('title-input')
+      modal.className = 'modal-content'
+      titleInput.className = 'puzzle-form-input'
     }
     if (!delivery) {
-      return setErrors([...errors, 'Please choose a delivery method'])
+      deliveryInput.className = 'radio-wrapper error-input'
+      modal.className = 'modal-content error-input'
+      tempErrors = [...tempErrors, 'Specify delivery method.']
+    } else {
+      let deliveryInput = document.getElementById('delivery-input')
+      modal.className = 'modal-content'
+      deliveryInput.className = 'radio-wrapper'
     }
     if (!category) {
-      return setErrors([...errors, 'Please choose a delivery method'])
+      categoryInput.className = 'puzzle-form-input puz-form-sel error-input'
+      modal.className = 'modal-content error-input'
+      tempErrors = [...tempErrors, 'Select Category.']
+    } else {
+      let categoryInput = document.getElementById('category-input')
+      modal.className = 'modal-content'
+      categoryInput.className = 'puzzle-form-input puz-form-sel'
+    }
+    if (!description) {
+      descriptionInput.className = 'puzzle-form-input error-input'
+      modal.className = 'modal-content error-input'
+      tempErrors = [...tempErrors, 'Provide description.']
+    } else {
+      let descriptionInput = document.getElementById('description-input')
+      modal.className = 'modal-content'
+      descriptionInput.className = 'puzzle-form-input'
+    }
+    if (!difficulty) {
+      difficultyInput.className = 'puzzle-form-input puz-form-sel error-input'
+      modal.className = 'modal-content error-input'
+      tempErrors = [...tempErrors, 'Select difficulty']
+    } else {
+      let difficultyInput = document.getElementById('difficulty-input')
+      modal.className = 'modal-content'
+      difficultyInput.className = 'puzzle-form-input puz-form-sel'
+    }
+    if (!pieceCount) {
+      pieceCountInput.className = 'puzzle-form-input error-input'
+      modal.className = 'modal-content error-input'
+      tempErrors = [...tempErrors, 'Select pieceCountInput']
+    } else {
+      let pieceCountInput = document.getElementById('pieceCountInput-input')
+      modal.className = 'modal-content'
+      pieceCountInput.className = 'puzzle-form-input'
     }
 
+    if (tempErrors.length > 0) {
+      return setErrors(tempErrors)
 
-    if (pieceCount.length > 0) {
-      newPuzzle.pieceCount = parseInt(pieceCount)
     }
+
+    
+    newPuzzle.pieceCount = parseInt(pieceCount)
+   
     // if (image.replace(/\s/g, '').length) {
     //   newPuzzle.image = image
     // }
@@ -135,7 +194,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
   return (
     <>
       <h2 className='modal-label'>{'New Puzzle'}</h2>
-      <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
+      <form autoComplete="off" className='add-puzzle-form' id='add-puz-form' onSubmit={onSubmit}>
         {errors.length > 0 && <div className='puz-form-erros'>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
@@ -145,6 +204,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
         <div className='LabelAndInputContainer'>
           {/* <label className="puzzle-form-label">Puzzle Name</label> */}
           <input
+            id='title-input'
             type='text'
             name='title'
             onChange={updateTitle}
@@ -160,6 +220,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
           {/* <label className="puzzle-form-label">Number of Pieces</label> */}
           <input
             type='number'
+            id='pieceCountInput'
             name='pieceCount'
             onChange={updatePieceCount}
             value={pieceCount}
@@ -173,7 +234,8 @@ const AddPuzzleForm = ({ modalSetter }) => {
         </div>
         <div className='LabelAndInputContainer'>
           {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-          <select name="category" id="category-select" className="puzzle-form-input puz-form-sel"
+          <select name="category" id="category-select" className="puzzle-form-input puz-form-sel" id='category-input'
+
             onChange={updateCategory}
             value={category}
           >
@@ -202,7 +264,8 @@ const AddPuzzleForm = ({ modalSetter }) => {
         </div>
         <div className='LabelAndInputContainer'>
           {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-          <select name="category" id="category-select" className="puzzle-form-input puz-form-sel"
+          <select name="category" id="category-select" className="puzzle-form-input puz-form-sel" id='difficulty-input'
+
             onChange={updateDifficulty}
             value={category}
           >
@@ -219,6 +282,8 @@ const AddPuzzleForm = ({ modalSetter }) => {
           {/* <label className="puzzle-form-label">Description</label> */}
           <input
             type='text'
+            id='description-input'
+
             name='title'
             onChange={updateDescription}
             value={description}
@@ -232,55 +297,60 @@ const AddPuzzleForm = ({ modalSetter }) => {
         </div>
 
 
-        <div className='radio-wrapper'>
+        <div className='radio-wrapper' id='delivery-input'
+        >
           <span className='radio-prompt'>How would you like users <br />to swap for this puzzle?</span>
 
-        <div className='delivery-input'>
-          <label>
-            <input type="radio" name='delivery-method'
-              // checked
-              onChange={updateDelivery}
-              checked={delivery == 'either'}
-              value='either'
-            >
-            </input>
-            <span>Mail & Local Pickup</span>
-          </label>
+          <div className='delivery-input'>
+            <label>
+              <input type="radio" name='delivery-method'
+                // checked
+                onChange={updateDelivery}
+                checked={delivery == 'either'}
+                value='either'
+              >
+              </input>
+              <span>Mail & Local Pickup</span>
+            </label>
 
-        </div>
-        <div className='delivery-input'>
-          <label>
-            <input type="radio" name='delivery-method'
-              // checked
-              onChange={updateDelivery}
-              checked={delivery == 'pickup'}
-              value='pickup'
-            >
-            </input>
-            <span>Local Pickup</span>
-          </label>
+          </div>
+          <div className='delivery-input'>
+            <label>
+              <input type="radio" name='delivery-method'
+                // checked
+                onChange={updateDelivery}
+                checked={delivery == 'pickup'}
+                value='pickup'
+              >
+              </input>
+              <span>Local Pickup</span>
+            </label>
 
-        </div>
-        <div className='delivery-input'>
-          <label>
+          </div>
+          <div className='delivery-input'>
+            <label>
 
-            <input type="radio" name='delivery-method'
-              // checked
-              onChange={updateDelivery}
-              checked={delivery == 'delivery'}
+              <input type="radio" name='delivery-method'
+                // checked
+                onChange={updateDelivery}
+                checked={delivery == 'delivery'}
                 value='delivery'
-                
-            >
-            </input>
-            <span>Mail</span>
-          </label>
 
+              >
+              </input>
+              <span>Mail</span>
+            </label>
+
+          </div>
         </div>
-</div>
 
 
+        {errors.length > 0 ? <p id='error-prompt'>Please Provide <br />Required Information</p>
+          :
+
+
+          (imageLoading) && <p>Loading...</p>}
         <button className='new-puzzle-submit-button' type='submit'>{'Create Puzzle'}</button>
-        {(imageLoading) && <p>Loading...</p>}
       </form>
     </>
   );
