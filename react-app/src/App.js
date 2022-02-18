@@ -15,6 +15,7 @@ import Puzzle from './components/PuzzlePage';
 import PuzzleDetails from './components/PuzzleDetailsPage';
 import Swaps from './components/Swap.js';
 import Intro from './components/Intro';
+import Home from './components/Home';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -63,6 +64,14 @@ function App() {
           <User />
           <Footer notLanding={true} />
         </ProtectedRoute>
+        <Route path='/home' exact>
+          <div className='PuzzlesContainer'>
+            {/* <Intro /> */}
+            <NavBar />
+            <Home />
+            <Footer notLanding={true} />
+          </div>
+        </Route>
         <Route path='/puzzles' exact>
           <div className='PuzzlesContainer'>
             {/* <Intro /> */}

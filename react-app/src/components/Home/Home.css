@@ -1,0 +1,84 @@
+.inner-home-container {
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-content: space-between;
+}
+
+.text-align {
+  text-align: center;
+}
+
+.center-flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-content: space-between;
+}
+
+#welcome-span {
+  background-color: rgba(180, 180, 180, 0.683);
+  margin: 8px 10px 0 10px
+}
+
+
+.reviews-ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5px 0 5px
+}
+.reviews-ul > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+  margin: 0 5px 0 5px;
+  padding: 0 5px 10px 5px;
+  background-color: rgba(183, 183, 183, 0.183);
+  align-items: center;
+  align-content: center
+}
+
+.popular-category {
+  background-color: rgba(195, 195, 195, 0.409);
+  width: 60px;
+  height: 60px;
+  margin-right: 5px;
+}
+.popular-category-ul {
+  display: flex;
+  padding: 0;
+
+}
+
+.home-bottom {
+  display: flex;
+  width: 100vw;
+  justify-content: space-between
+}
+
+.right-home {
+  display: flex;
+  padding-top: 16px;
+  padding-right: 10px;
+
+}
+.right-left {
+  padding-left: 10px;
+
+}
+
+.whats-new {
+  background-color: grey;
+  height: 135px;
+  width: 195px;
+  margin-right: 20px;
+}
+.near-you {
+  background-color: grey;
+  height: 135px;
+  width: 195px;
+}

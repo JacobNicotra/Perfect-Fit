@@ -17,9 +17,59 @@ const NavBar = () => {
 
   return (
     <nav id="nav">
+
+      <span id='nav-puzzles'>
+        <NavLink to='/puzzles' exact={true} activeClassName='active' className='visited-link'>
+
+          Puzzles
+        </NavLink>
+      </span>
+      <span id='nav-custom-order'>
+        Custom Order
+      </span>
+
       <span id="nav-left">
 
-        {/* <img id="logo" src={logo}></img> */}
+        <NavLink to='/puzzles' exact={true} activeClassName='active hovertext' data-hover="See Latest Puzzles">
+          <i className="fas fa-puzzle-piece font-logo" ></i>
+        </NavLink>
+        <NavLink to='/puzzles' exact={true} activeClassName='active'>
+
+          <h1 id="perfect-fit">Perfect Fit</h1>
+        </NavLink>
+
+      </span>
+
+      <span id='nav-FAQs'>
+        FAQs
+      </span>
+      <span id='nav-my-profile'>
+
+        {sessionUser ?
+           <NavLink to={'/users/' + sessionUser.id} className='visited-link' >My Profile</NavLink> 
+
+          :
+          <ul className='user-disp-ul-logged-out'>
+            <li className='login-button-li'>
+              <NavLink to='/login' exact={true} activeClassName='active'>
+                <LoginFormModal />
+              </NavLink>
+            </li>
+            <li className='signup-button-li'>
+              <NavLink to='/sign-up' exact={true} className='signup-button'>
+                Sign Up
+              </NavLink>
+            </li>
+          </ul>
+
+        }
+      </span>
+
+
+
+
+      {/* <span id="nav-left">
+
         <NavLink to='/puzzles' exact={true} activeClassName='active hovertext' data-hover="See Latest Puzzles">
           <i className="fas fa-puzzle-piece font-logo" ></i>
         </NavLink>
@@ -32,8 +82,6 @@ const NavBar = () => {
 
       <div className='nav-right'>
 
-
-
         <span className='nav-username-pro-btn'>
           {sessionUser &&
             <div className='nav-middle'>
@@ -44,16 +92,14 @@ const NavBar = () => {
             </div>
           }
           <div className='profile-buttons-holder'>
-            {/* {sessionUser ? <span className='nav-username'>{sessionUser.username}</span> : } */}
             <ProfileModal />
           </div>
         </span>
-      </div>
-      {/* <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li> */}
+
+
+        
+      </div> */}
+
 
     </nav>
   );

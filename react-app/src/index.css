@@ -228,6 +228,13 @@
   background: none;
 }
 
+#nav-puzzles {
+  padding-left: 10px;
+}
+#nav-my-profile {
+  padding-right: 10px;
+}
+
 .swap-icon {
   font-size: 1.8em;
 }
