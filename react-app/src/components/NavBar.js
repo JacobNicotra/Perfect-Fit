@@ -19,7 +19,7 @@ const NavBar = () => {
     <nav id="nav">
 
       <span id='nav-puzzles'>
-        <NavLink to='/puzzles' exact={true} activeClassName='active' className='visited-link'>
+        <NavLink to='/puzzles' exact={true} activeClassName='active' className='visited-link hovertext' data-hover="Explore Puzzles">
 
           Puzzles
         </NavLink>
@@ -30,12 +30,8 @@ const NavBar = () => {
 
       <span id="nav-left">
 
-        <NavLink to='/puzzles' exact={true} activeClassName='active hovertext' data-hover="See Latest Puzzles">
+        <NavLink to='/home' exact={true} activeClassName='active hovertext' data-hover="Go to Home">
           <i className="fas fa-puzzle-piece font-logo" ></i>
-        </NavLink>
-        <NavLink to='/puzzles' exact={true} activeClassName='active'>
-
-          <h1 id="perfect-fit">Perfect Fit</h1>
         </NavLink>
 
       </span>

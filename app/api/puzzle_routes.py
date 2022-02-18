@@ -25,6 +25,9 @@ def get_all_puzzles():
                         'pieceCount': puzzle.piece_count if puzzle.piece_count else None,
                         'image': puzzle.image if puzzle.image else None,
                         'description': puzzle.description if puzzle.description else None,
+                        'difficulty': puzzle.difficulty if puzzle.difficulty else None,
+                        'delivery': puzzle.delivery if puzzle.delivery else None,
+                        'categoryId': puzzle.categoryId if puzzle.description else None,
                         } for puzzle in puzzles]
         return jsonify(puzzle_list)
     else:

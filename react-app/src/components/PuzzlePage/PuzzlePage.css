@@ -125,6 +125,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   background-color: #ffffff00;
+  margin-top: 60px;
 }
 
 
@@ -166,4 +167,16 @@ hr {
 .controls button:hover {
   color: Snow;
   background-color: RoyalBlue;
+}
+
+.puz-filter-ul {
+  width: 100%;
+  display: flex;
+  padding: 0 20px 0 20px;
+  justify-content: space-around
+}
+
+.puz-filter {
+  border-radius: 0;
+  width: auto;
 }
