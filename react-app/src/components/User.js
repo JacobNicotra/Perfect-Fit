@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUserSwaps } from '../store/swap';
 import Swaps from './Swap.js';
 import { getPuzzlesUser } from '../store/puzzle';
+import AddPuzzleModal from './AddPuzzleForm/AddPuzzleModal';
 
 import logoBW from '../logo-black.png'
 
@@ -25,6 +26,7 @@ function User() {
   })
 
   const sessionUser = useSelector(state => state.session.user);
+  let owner = sessionUser?.id === parseInt(userId)
 
 
 
@@ -43,7 +45,23 @@ function User() {
   if (userId) {
     return (
       <div className='background'>
-        <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
+        <span>
+          <span className='nav-username-pro-btn'>
+            {owner ?
+              <div className='nav-middle'>
+                <AddPuzzleModal edit={false} className="puzzle-modal" />
+                <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
+                <NavLink to='/swaps' exact={true} data-hover="See your Swap Requests" className="hovertext">
+                  <button className='nav-swap-btn'><i className="fas fa-envelope swap-icon"></i></button>
+                </NavLink >
+              </div>
+
+              :
+              <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
+            }
+
+          </span>
+        </span>
         <div className='user-holder'>
           <ul id="puzzle-cards">
             {userPuzzles ? userPuzzles.map(puzzle => {
@@ -70,7 +88,7 @@ function User() {
             })
               :
               <li className='nothing'>Nothing Here Yet...</li>
-          }
+            }
           </ul >
         </div >
       </div >

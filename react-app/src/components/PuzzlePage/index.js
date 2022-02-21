@@ -52,20 +52,65 @@ const Puzzle = () => {
   let pieceCountKey = [[0, 99], [100, 200], [201, 500], [501, 1000], [1001, 2000], [2001, 5000], [5001, 99999999]]
 
 
+  const filterPieceCount = (arr, val) => {
+    let filteredArr
+    filteredArr = arr.filter(puzzle =>
+      parseInt(puzzle.pieceCount) <= parseInt(pieceCountKey[val][1])
+      && parseInt(puzzle.pieceCount) >= parseInt(pieceCountKey[val][0]))
+    setFilteredPuzzles(filteredArr)
+    return filteredArr
+  }
+  const filterCategory = (arr, val) => {
+    let filteredArr
+    filteredArr = arr.filter(puzzle =>
+      puzzle.categoryId == val)
+    setFilteredPuzzles(filteredArr)
+    return filteredArr
+  }
+  const filterLocation = (arr, val) => {
+    let filteredArr
+    filteredArr = arr.filter(puzzle =>
+      puzzle.cityId == val)
+    setFilteredPuzzles(filteredArr)
+    return filteredArr
+  }
+  const filterDifficulty = (arr, val) => {
+    let filteredArr
+    filteredArr = arr.filter(puzzle =>
+      puzzle.difficulty == val)
+    setFilteredPuzzles(filteredArr)
+    return filteredArr
+  }
+
   const filter = (type, value) => {
 
     // return setFilteredPuzzles(puzzles.slice(0, 2))
-    switch (type) {
-      case 'pieceCount': {
-        console.log(' MIN MIN MIN ', value, pieceCountKey[value][0], pieceCountKey[value][1])
-        filteredPuzzles ? setFilteredPuzzles(filteredPuzzles.filter(puzzle =>
-          puzzle.pieceCount < pieceCountKey[value][1] && puzzle.pieceCount > pieceCountKey[value][0]))
-          :
-          setFilteredPuzzles(puzzles.filter(puzzle =>
-            puzzle.pieceCount < pieceCountKey[value][1] && puzzle.pieceCount > pieceCountKey[value][0]))
-          }
+    let dominoPuzzles
+    if (type == 'pieceCount') {
+  
+      dominoPuzzles = filterPieceCount(puzzles, value)
+      if (category) {
+        dominoPuzzles = filterCategory(dominoPuzzles, category)
+      }
+      if (location) {
+        dominoPuzzles = filterLocation(dominoPuzzles, location)
+      }
+      if (difficulty) {
+        // console.log(' SET difficukty', difficulty)
+        dominoPuzzles = filterDifficulty(dominoPuzzles, difficulty)
+      }
 
     }
+    else if (type == 'category') {
+      console.log(' -----CASE category ', value,)
+      //   filteredPuzzles ? setFilteredPuzzles(filteredPuzzles.filter(puzzle =>
+      //     puzzle.categoryId == value))
+      //     :
+      //     setFilteredPuzzles(puzzles.filter(puzzle =>
+      //       puzzle.categoryId == value))
+    }
+
+
 
 
     console.log('category', category)
@@ -80,7 +125,7 @@ const Puzzle = () => {
   };
   const updateCategory = (e) => {
     setCategory(e.target.value);
-    filter()
+    filter('category', e.target.value)
   };
   const updateDifficulty = (e) => {
     setDifficulty(e.target.value);
@@ -93,6 +138,8 @@ const Puzzle = () => {
     setOrderBy(e.target.value);
     filter()
   };
+
+  console.log(' return filteredPuzzles', filteredPuzzles)
   if (puzzles) {
     return (
 

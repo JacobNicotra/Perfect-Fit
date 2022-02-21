@@ -113,7 +113,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
       modal.className = 'modal-content error-input'
       tempErrors = [...tempErrors, 'Select pieceCountInput']
     } else {
-      let pieceCountInput = document.getElementById('pieceCountInput-input')
+      let pieceCountInput = document.getElementById('pieceCountInput')
       modal.className = 'modal-content'
       pieceCountInput.className = 'puzzle-form-input'
     }
