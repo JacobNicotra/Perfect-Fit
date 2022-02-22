@@ -16,12 +16,15 @@ import logoBW from '../../logo-black.png'
 const Puzzle = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  // const serverId = params.serverId
-  const [stepsEnabled, setStepsEnabled] = useState(true)
-  const [initialStep, setInitalStep] = useState(0)
+
   const [pieceCount, setPieceCount] = useState(null);
   const [category, setCategory] = useState(null);
-  const [difficulty, setDifficulty] = useState(null);
+  const [difficulty, setDifficulty] = useState(() => {
+    // getting stored value
+    const saved = localStorage.getItem("difficulty");
+    const initialValue = JSON.parse(saved);
+    return initialValue || 'empty';
+  });
   const [location, setLocation] = useState(null);
   const [orderBy, setOrderBy] = useState(null);
 
@@ -37,12 +40,25 @@ const Puzzle = () => {
 
   useEffect(async () => {
     await dispatch(getPuzzles());
-    // const newPersist = document.querySelector(`.server-${serverId}`);
-    // const anotherPersist = document.querySelector('.current-chosen-server');
-    // if (anotherPersist) anotherPersist.classList.remove('current-chosen-server');
-    // if (newPersist) newPersist.classList.add('current-chosen-server');
+
     return
   }, [dispatch])
+
+
+  useEffect(async () => {
+    localStorage.setItem('difficulty', JSON.stringify(difficulty));
+
+    return
+  }, [dispatch, difficulty])
+
+  useEffect(async () => {
+    const saved = localStorage.getItem("difficulty");
+    const initialValue = JSON.parse(saved);
+    if (initialValue != 'empty') {
+      makeDifficultyTag()
+    }
+    return setDifficulty(initialValue || 'empty')
+  }, [dispatch, category, puzzles])
 
   // if (!user) {
   //     return <Redirect to='/' />;
@@ -51,30 +67,129 @@ const Puzzle = () => {
 
   let pieceCountKey = [[0, 99], [100, 200], [201, 500], [501, 1000], [1001, 2000], [2001, 5000], [5001, 99999999]]
 
+  const makeDifficultyTag = () => {
+    const checkButton = document.getElementById('difficulty_tag_button')
+    if (!checkButton) {
+      const ul = document.getElementById("filter_tags_ul");
+      if (!ul) return
+      const li = document.createElement("li");
+      li.id = 'difficulty_tag_li'
+      const button = document.createElement("button");
+      button.id = 'difficulty_tag_button'
+      button.className = "tag_remove_btn"
+      button.innerHTML = '<div id="difficulty_tag_div">x</div>';
+      button.value = 'empty'
+      button.onclick = () => {
+        console.log('set---Difficulty (filterDifficulty)')
+
+        setDifficulty('empty');
+        filter('difficulty', 'empty')
+        const liToDelete = document.getElementById('difficulty_tag_li')
+        const buttonToDelete = document.getElementById('difficulty_tag_button')
+        const divToDelete = document.getElementById('difficulty_tag_div')
+        liToDelete?.remove()
+        buttonToDelete?.remove()
+        divToDelete?.remove()
+      }
+      li.className = "li-nostyle filter_tag"
+      li.innerHTML = '<div id="difficulty_tag">Difficulty</div>';
+      ul.appendChild(li);
+      ul.appendChild(button);
+    }
+  }
 
   const filterPieceCount = (arr, val) => {
     let filteredArr
     if (val == 'empty') {
-      console.log('arr filterPieceCount', arr)
       setFilteredPuzzles(arr)
+      // delete tag
+      const liToDelete = document.getElementById('piece_count_tag_li')
+      const buttonToDelete = document.getElementById('piece_count_tag_button')
+      const divToDelete = document.getElementById('piece_count_tag_div')
+      liToDelete.remove()
+      buttonToDelete.remove()
+      divToDelete.remove()
       return arr
     }
     filteredArr = arr.filter(puzzle =>
       parseInt(puzzle.pieceCount) <= parseInt(pieceCountKey[val][1])
       && parseInt(puzzle.pieceCount) >= parseInt(pieceCountKey[val][0]))
     setFilteredPuzzles(filteredArr)
+    if (pieceCount && pieceCount !== 'empty') {
+      return filteredArr
+    }
+
+    // TAG:
+    const ul = document.getElementById("filter_tags_ul");
+    const li = document.createElement("li");
+    li.id = 'piece_count_tag_li'
+    const button = document.createElement("button");
+    button.id = 'piece_count_tag_button'
+    button.className = "tag_remove_btn"
+    button.innerHTML = '<div id="piece_count_tag_div">x</div>';
+    button.value = 'empty'
+    button.onclick = () => {
+      setPieceCount('empty');
+      filter('pieceCount', 'empty')
+      const liToDelete = document.getElementById('piece_count_tag_li')
+      const buttonToDelete = document.getElementById('piece_count_tag_button')
+      const divToDelete = document.getElementById('piece_count_tag_div')
+      liToDelete?.remove()
+      buttonToDelete?.remove()
+      divToDelete?.remove()
+    }
+    li.className = "li-nostyle filter_tag"
+    li.innerHTML = '<div id="piece_count_tag">Piece Count</div>';
+    ul.appendChild(li);
+    ul.appendChild(button);
     return filteredArr
   }
 
   const filterCategory = (arr, val) => {
     let filteredArr
+
+
     if (val == 'empty') {
       setFilteredPuzzles(arr)
+      // delete tag
+      const liToDelete = document.getElementById('category_tag_li')
+      const buttonToDelete = document.getElementById('category_tag_button')
+      const divToDelete = document.getElementById('category_tag_div')
+      liToDelete.remove()
+      buttonToDelete.remove()
+      divToDelete.remove()
       return arr
     }
     filteredArr = arr.filter(puzzle =>
       puzzle.categoryId == val)
     setFilteredPuzzles(filteredArr)
+    if (category && category !== 'empty') {
+      return filteredArr
+    }
+
+    // TAG:
+    const ul = document.getElementById("filter_tags_ul");
+    const li = document.createElement("li");
+    li.id = 'category_tag_li'
+    const button = document.createElement("button");
+    button.id = 'category_tag_button'
+    button.className = "tag_remove_btn"
+    button.innerHTML = '<div id="category_tag_div">x</div>';
+    button.value = 'empty'
+    button.onclick = () => {
+      setCategory('empty');
+      filter('category', 'empty')
+      const liToDelete = document.getElementById('category_tag_li')
+      const buttonToDelete = document.getElementById('category_tag_button')
+      const divToDelete = document.getElementById('category_tag_div')
+      liToDelete?.remove()
+      buttonToDelete?.remove()
+      divToDelete?.remove()
+    }
+    li.className = "li-nostyle filter_tag"
+    li.innerHTML = '<div id="category_tag">Category</div>';
+    ul.appendChild(li);
+    ul.appendChild(button);
     return filteredArr
   }
 
@@ -82,35 +197,115 @@ const Puzzle = () => {
     let filteredArr
     if (val == 'empty') {
       setFilteredPuzzles(arr)
+      // delete tag
+      const liToDelete = document.getElementById('location_tag_li')
+      const buttonToDelete = document.getElementById('location_tag_button')
+      const divToDelete = document.getElementById('location_tag_div')
+      liToDelete.remove()
+      buttonToDelete.remove()
+      divToDelete.remove()
       return arr
     }
     filteredArr = arr.filter(puzzle =>
       puzzle.cityId == val)
     setFilteredPuzzles(filteredArr)
+    if (location && location !== 'empty') {
+      return filteredArr
+    }
+
+    // TAG:
+    const ul = document.getElementById("filter_tags_ul");
+    const li = document.createElement("li");
+    li.id = 'location_tag_li'
+    const button = document.createElement("button");
+    button.id = 'location_tag_button'
+    button.className = "tag_remove_btn"
+    button.innerHTML = '<div id="location_tag_div">x</div>';
+    button.value = 'empty'
+    button.onclick = () => {
+      setLocation('empty');
+      filter('location', 'empty')
+      const liToDelete = document.getElementById('location_tag_li')
+      const buttonToDelete = document.getElementById('location_tag_button')
+      const divToDelete = document.getElementById('location_tag_div')
+      liToDelete?.remove()
+      buttonToDelete?.remove()
+      divToDelete?.remove()
+    }
+    li.className = "li-nostyle filter_tag"
+    li.innerHTML = '<div id="location_tag">Location</div>';
+    ul.appendChild(li);
+    ul.appendChild(button);
     return filteredArr
   }
+
   const filterDifficulty = (arr, val) => {
     let filteredArr
     if (val == 'empty') {
       setFilteredPuzzles(arr)
+      // delete tag
+      const liToDelete = document.getElementById('difficulty_tag_li')
+      const buttonToDelete = document.getElementById('difficulty_tag_button')
+      const divToDelete = document.getElementById('difficulty_tag_div')
+      liToDelete?.remove()
+      buttonToDelete.remove()
+      divToDelete.remove()
       return arr
     }
+
     filteredArr = arr.filter(puzzle =>
       puzzle.difficulty == val)
-    console.log('********* filterDif filteredArr', filteredArr)
-
     setFilteredPuzzles(filteredArr)
+    if (difficulty && difficulty !== 'empty') {
+      return filteredArr
+    }
+
+    // TAG:
+    makeDifficultyTag()
     return filteredArr
   }
+
+  // const filterCategory = (arr, val) => {
+  //   let filteredArr
+  //   if (val == 'empty') {
+  //     setFilteredPuzzles(arr)
+  //     return arr
+  //   }
+  //   filteredArr = arr.filter(puzzle =>
+  //     puzzle.categoryId == val)
+  //   setFilteredPuzzles(filteredArr)
+  //   return filteredArr
+  // }
+
+  // const filterLocation = (arr, val) => {
+  //   let filteredArr
+  //   if (val == 'empty') {
+  //     setFilteredPuzzles(arr)
+  //     return arr
+  //   }
+  //   filteredArr = arr.filter(puzzle =>
+  //     puzzle.cityId == val)
+  //   setFilteredPuzzles(filteredArr)
+  //   return filteredArr
+  // }
+  // const filterDifficulty = (arr, val) => {
+  //   let filteredArr
+  //   if (val == 'empty') {
+  //     setFilteredPuzzles(arr)
+  //     return arr
+  //   }
+  //   filteredArr = arr.filter(puzzle =>
+  //     puzzle.difficulty == val)
+
+  //   setFilteredPuzzles(filteredArr)
+  //   return filteredArr
+  // }
 
   const filter = (type, value) => {
 
     // return setFilteredPuzzles(puzzles.slice(0, 2))
     let dominoPuzzles
-    console.log('VALUE NULL?????',value)
     if (type == 'pieceCount') {
-
-      console.log('filter, puzles', puzzles)
       dominoPuzzles = filterPieceCount(puzzles, value)
       if (category) {
         dominoPuzzles = filterCategory(dominoPuzzles, category)
@@ -119,66 +314,62 @@ const Puzzle = () => {
         dominoPuzzles = filterLocation(dominoPuzzles, location)
       }
       if (difficulty) {
-        // console.log(' SET difficukty', difficulty)
         dominoPuzzles = filterDifficulty(dominoPuzzles, difficulty)
       }
 
     }
     else if (type == 'category') {
-      console.log(' -----CASE category ', value,)
+
       dominoPuzzles = filterCategory(puzzles, value)
-      if (pieceCount) {
+
+      if (pieceCount && pieceCount != 'empty') {
         dominoPuzzles = filterPieceCount(dominoPuzzles, pieceCount)
       }
-      if (location) {
+      if (location && location != 'empty') {
         dominoPuzzles = filterLocation(dominoPuzzles, location)
       }
-      if (difficulty) {
-        // console.log(' SET difficukty', difficulty)
-        dominoPuzzles = filterDifficulty(dominoPuzzles, difficulty)
+
+      const savedDifficulty = localStorage.getItem("difficulty");
+      const parsedDifficulty = JSON.parse(savedDifficulty);
+      // if ((difficulty && difficulty != 'empty') || dif) {
+      //   if (dif) {
+      //     dominoPuzzles = filterDifficulty(dominoPuzzles, dif)
+      //   } else {
+      //     dominoPuzzles = filterDifficulty(dominoPuzzles, difficulty)
+      //   }
+      // }
+      if (parsedDifficulty && parsedDifficulty != 'empty') {
+        dominoPuzzles = filterDifficulty(dominoPuzzles, parsedDifficulty)
       }
     }
     else if (type == 'location') {
-      console.log(' -----CASE location ', value,)
       dominoPuzzles = filterLocation(puzzles, value)
-      if (pieceCount) {
+      if (pieceCount && pieceCount != 'empty') {
         dominoPuzzles = filterPieceCount(dominoPuzzles, pieceCount)
       }
-      if (difficulty) {
+      if (difficulty && difficulty != 'empty') {
         dominoPuzzles = filterDifficulty(dominoPuzzles, difficulty)
       }
-      if (category) {
-        // console.log(' SET difficukty', difficulty)
+      if (category && category != 'empty') {
         dominoPuzzles = filterCategory(dominoPuzzles, category)
       }
     }
     else if (type == 'difficulty') {
-      console.log(' -----CASE difficulty ', value,)
       dominoPuzzles = filterDifficulty(puzzles, value)
-      if (pieceCount) {
+      if (pieceCount && pieceCount != 'empty') {
         dominoPuzzles = filterPieceCount(dominoPuzzles, pieceCount)
       }
-      if (location) {
+      if (location && location != 'empty') {
         dominoPuzzles = filterLocation(dominoPuzzles, location)
       }
-      if (category) {
-        // console.log(' SET difficukty', difficulty)
+      if (category && category != 'empty') {
         dominoPuzzles = filterCategory(dominoPuzzles, category)
       }
     }
-
-
-
-
-    console.log('category', category)
-    console.log('location', location)
-    console.log('difficulty', difficulty)
-    console.log('pieceCount', pieceCount)
   }
 
   const updatePieceCount = (e) => {
 
-    console.log(' updatePieceCount e.target.value', e.target.value)
     setPieceCount(e.target.value);
     filter('pieceCount', e.target.value)
   };
@@ -187,9 +378,9 @@ const Puzzle = () => {
     filter('category', e.target.value)
   };
   const updateDifficulty = (e) => {
+    console.log('set-Difficulty (updateDifficulty)')
     setDifficulty(e.target.value);
     filter('difficulty', e.target.value)
-
   };
   const updateLocation = (e) => {
     setLocation(e.target.value);
@@ -200,7 +391,8 @@ const Puzzle = () => {
     filter('orderBy', e.target.value)
   };
 
-  console.log(' return filteredPuzzles', filteredPuzzles)
+
+
   if (puzzles) {
     return (
 
@@ -314,6 +506,13 @@ const Puzzle = () => {
           </li>
 
         </ul>
+
+        <ul id='filter_tags_ul'>
+
+
+
+        </ul>
+
         <div className='latest'>Latest Puzzles</div>
         <ul id="puzzle-cards">
           {filteredPuzzles ?

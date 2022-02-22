@@ -180,3 +180,8 @@ hr {
   border-radius: 0;
   width: auto;
 }
+
+#filter_tags_ul {
+  display: flex;
+
+}
