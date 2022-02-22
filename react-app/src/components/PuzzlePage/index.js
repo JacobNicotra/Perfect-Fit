@@ -54,6 +54,11 @@ const Puzzle = () => {
 
   const filterPieceCount = (arr, val) => {
     let filteredArr
+    if (val == 'empty') {
+      console.log('arr filterPieceCount', arr)
+      setFilteredPuzzles(arr)
+      return arr
+    }
     filteredArr = arr.filter(puzzle =>
       parseInt(puzzle.pieceCount) <= parseInt(pieceCountKey[val][1])
       && parseInt(puzzle.pieceCount) >= parseInt(pieceCountKey[val][0]))
@@ -75,9 +80,12 @@ const Puzzle = () => {
     return filteredArr
   }
   const filterDifficulty = (arr, val) => {
+    console.log('********* filterDif Arr', arr)
     let filteredArr
     filteredArr = arr.filter(puzzle =>
       puzzle.difficulty == val)
+    console.log('********* filterDif filteredArr', filteredArr)
+
     setFilteredPuzzles(filteredArr)
     return filteredArr
   }
@@ -86,8 +94,10 @@ const Puzzle = () => {
 
     // return setFilteredPuzzles(puzzles.slice(0, 2))
     let dominoPuzzles
+    console.log('VALUE NULL?????',value)
     if (type == 'pieceCount') {
-  
+
+      console.log('filter, puzles', puzzles)
       dominoPuzzles = filterPieceCount(puzzles, value)
       if (category) {
         dominoPuzzles = filterCategory(dominoPuzzles, category)
@@ -103,11 +113,45 @@ const Puzzle = () => {
     }
     else if (type == 'category') {
       console.log(' -----CASE category ', value,)
-      //   filteredPuzzles ? setFilteredPuzzles(filteredPuzzles.filter(puzzle =>
-      //     puzzle.categoryId == value))
-      //     :
-      //     setFilteredPuzzles(puzzles.filter(puzzle =>
-      //       puzzle.categoryId == value))
+      dominoPuzzles = filterCategory(puzzles, value)
+      if (pieceCount) {
+        dominoPuzzles = filterPieceCount(dominoPuzzles, pieceCount)
+      }
+      if (location) {
+        dominoPuzzles = filterLocation(dominoPuzzles, location)
+      }
+      if (difficulty) {
+        // console.log(' SET difficukty', difficulty)
+        dominoPuzzles = filterDifficulty(dominoPuzzles, difficulty)
+      }
+    }
+    else if (type == 'location') {
+      console.log(' -----CASE location ', value,)
+      dominoPuzzles = filterLocation(puzzles, value)
+      if (pieceCount) {
+        dominoPuzzles = filterPieceCount(dominoPuzzles, pieceCount)
+      }
+      if (difficulty) {
+        dominoPuzzles = filterDifficulty(dominoPuzzles, difficulty)
+      }
+      if (category) {
+        // console.log(' SET difficukty', difficulty)
+        dominoPuzzles = filterCategory(dominoPuzzles, category)
+      }
+    }
+    else if (type == 'difficulty') {
+      console.log(' -----CASE difficulty ', value,)
+      dominoPuzzles = filterDifficulty(puzzles, value)
+      if (pieceCount) {
+        dominoPuzzles = filterPieceCount(dominoPuzzles, pieceCount)
+      }
+      if (location) {
+        dominoPuzzles = filterLocation(dominoPuzzles, location)
+      }
+      if (category) {
+        // console.log(' SET difficukty', difficulty)
+        dominoPuzzles = filterCategory(dominoPuzzles, category)
+      }
     }
 
 
@@ -120,6 +164,8 @@ const Puzzle = () => {
   }
 
   const updatePieceCount = (e) => {
+
+    console.log(' updatePieceCount e.target.value', e.target.value)
     setPieceCount(e.target.value);
     filter('pieceCount', e.target.value)
   };
@@ -129,14 +175,16 @@ const Puzzle = () => {
   };
   const updateDifficulty = (e) => {
     setDifficulty(e.target.value);
+    filter('difficulty', e.target.value)
+
   };
   const updateLocation = (e) => {
     setLocation(e.target.value);
-    filter()
+    filter('location', e.target.value)
   };
   const updateOrderBy = (e) => {
     setOrderBy(e.target.value);
-    filter()
+    filter('orderBy', e.target.value)
   };
 
   console.log(' return filteredPuzzles', filteredPuzzles)
@@ -157,7 +205,7 @@ const Puzzle = () => {
                 value={category}
               >
 
-                <option value="">Category</option>
+                <option value="empty">Category</option>
                 <option value={1}>Movies</option>
                 <option value={2}>Nature</option>
                 <option value={3}>Architecture</option>
@@ -189,7 +237,7 @@ const Puzzle = () => {
                 value={location}
               >
 
-                <option value="">Location</option>
+                <option value="empty">Location</option>
                 <option value='easy'>Easy</option>
                 <option value='medium'>Medium</option>
                 <option value='hard'>Hard</option>
@@ -207,7 +255,7 @@ const Puzzle = () => {
                 value={difficulty}
               >
 
-                <option value="">Difficulty level</option>
+                <option value="empty">Difficulty level</option>
                 <option value='easy'>Easy</option>
                 <option value='medium'>Medium</option>
                 <option value='hard'>Hard</option>
@@ -224,7 +272,7 @@ const Puzzle = () => {
                 onChange={updatePieceCount}
                 value={pieceCount}
               >
-                <option value="">Piece Count</option>
+                <option value="empty">Piece Count</option>
                 <option value={0}> - 99</option>
                 <option value={1}>100 - 200</option>
                 <option value={2}>201 - 500</option>
@@ -244,7 +292,7 @@ const Puzzle = () => {
                 value={orderBy}
               >
 
-                <option value="">Order By</option>
+                <option value="empty">Order By</option>
                 <option value='easy'>Newest</option>
                 <option value='medium'>Oldest</option>
 
