@@ -65,23 +65,36 @@ const Puzzle = () => {
     setFilteredPuzzles(filteredArr)
     return filteredArr
   }
+
   const filterCategory = (arr, val) => {
     let filteredArr
+    if (val == 'empty') {
+      setFilteredPuzzles(arr)
+      return arr
+    }
     filteredArr = arr.filter(puzzle =>
       puzzle.categoryId == val)
     setFilteredPuzzles(filteredArr)
     return filteredArr
   }
+
   const filterLocation = (arr, val) => {
     let filteredArr
+    if (val == 'empty') {
+      setFilteredPuzzles(arr)
+      return arr
+    }
     filteredArr = arr.filter(puzzle =>
       puzzle.cityId == val)
     setFilteredPuzzles(filteredArr)
     return filteredArr
   }
   const filterDifficulty = (arr, val) => {
-    console.log('********* filterDif Arr', arr)
     let filteredArr
+    if (val == 'empty') {
+      setFilteredPuzzles(arr)
+      return arr
+    }
     filteredArr = arr.filter(puzzle =>
       puzzle.difficulty == val)
     console.log('********* filterDif filteredArr', filteredArr)
