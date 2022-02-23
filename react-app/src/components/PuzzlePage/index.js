@@ -82,16 +82,17 @@ const Puzzle = () => {
     localStorage.setItem('pieceCount', JSON.stringify(pieceCount));
 
     return
-  }, [dispatch, pieceCount, location, category, difficulty])
+  }, [dispatch, pieceCount])
 
 
 
   useEffect(async () => {
     if (!puzzles) return
+
     const savedCategory = localStorage.getItem("category");
     const parsedCategory = JSON.parse(savedCategory);
     if (parsedCategory != 'empty') {
-      console.log('calling make+CategoryTag in parsed Category', parsedCategory)
+      console.log('useEffect setCat() -> ', parsedCategory)
       makeCategoryTag(categoryKey[parseInt(parsedCategory) - 1])
       filter('category', parseInt(parsedCategory))
       setCategory(parseInt(parsedCategory))
@@ -103,20 +104,20 @@ const Puzzle = () => {
 
       makeLocationTag(locationKey[parseInt(parsedLocation) - 1])
       filter('location', parseInt(parsedLocation))
-      setCategory(parseInt(parsedLocation))
+      setLocation(parseInt(parsedLocation))
 
     }
 
     const savedDifficulty = localStorage.getItem("difficulty");
     const parsedDifficulty = JSON.parse(savedDifficulty);
     if (parsedDifficulty != 'empty') {
-      makeDifficultyTag()
+      makeDifficultyTag(parsedDifficulty)
     }
 
     const pieceCount = localStorage.getItem("pieceCount");
     const parsedPieceCount = JSON.parse(pieceCount);
     if (parsedPieceCount != 'empty') {
-      makePieceCountTag()
+      makePieceCountTag(parsedPieceCount)
     }
     return
 
@@ -128,25 +129,26 @@ const Puzzle = () => {
 
 
   let pieceCountKey = [[0, 99], [100, 200], [201, 500], [501, 1000], [1001, 2000], [2001, 5000], [5001, 99999999]]
+  let pieceCountStringKey = [' - 99', '100 - 200', '201 - 500', '501 - 1000', '1001 - 2000', '2001 - 5000', '5000+']
   let locationKey = ['San Francisco	', 'New York', 'Chicago', 'Los Angeles', 'Miami', 'Boston', 'Denver',
     'San Diego', 'Dallas', 'Las Vegas', 'Seattle', 'Philidelphia', 'Houston', 'Pheonix']
   let categoryKey = ['Movies/TV', 'Nature', 'Architecture', 'Landmarks', 'History', 'Fantasy', 'Animals',
     'Kids', 'Art', 'Religious', 'Food', 'Comedy', 'Holidays', 'Celebrities', 'Sports', 'Space', 'Tech', 'Cars', 'Misc']
 
-  const makeDifficultyTag = () => {
+  const makeDifficultyTag = (val) => {
     const checkButton = document.getElementById('difficulty_tag_button')
     if (!checkButton) {
       const ul = document.getElementById("filter_tags_ul");
       if (!ul) return
       const li = document.createElement("li");
       li.id = 'difficulty_tag_li'
+      li.className = "li-nostyle filter_tag"
       const button = document.createElement("button");
       button.id = 'difficulty_tag_button'
       button.className = "tag_remove_btn"
-      button.innerHTML = '<div id="difficulty_tag_div">x</div>';
+      button.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>'
       button.value = 'empty'
       button.onclick = () => {
-        console.log('set---Difficulty (filterDifficulty)')
 
         setDifficulty('empty');
         filter('difficulty', 'empty')
@@ -158,13 +160,19 @@ const Puzzle = () => {
         divToDelete?.remove()
       }
       li.className = "li-nostyle filter_tag"
-      li.innerHTML = '<div id="difficulty_tag">Difficulty</div>';
+      li.innerHTML = `<div id="difficulty_tag_div" class="tag_div">${val}</div>`
       ul.appendChild(li);
-      ul.appendChild(button);
+      li.appendChild(button);
+    } else {
+      const divToChange = document.getElementById('difficulty_tag_div')
+      if (divToChange) divToChange.innerHTML = `${val}`
     }
   }
 
-  const makePieceCountTag = () => {
+  const makePieceCountTag = (val) => {
+
+    console.log('piece Count StringKey[parseInt(val)]', pieceCountStringKey[parseInt(val)])
+    console.log('va', val)
     const checkButton = document.getElementById('piece_count_tag_button')
     if (!checkButton) {
       const ul = document.getElementById("filter_tags_ul");
@@ -174,7 +182,7 @@ const Puzzle = () => {
       const button = document.createElement("button");
       button.id = 'piece_count_tag_button'
       button.className = "tag_remove_btn"
-      button.innerHTML = '<div id="piece_count_tag_div">x</div>';
+      button.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>'
       button.value = 'empty'
       button.onclick = () => {
         setPieceCount('empty');
@@ -187,16 +195,19 @@ const Puzzle = () => {
         divToDelete?.remove()
       }
       li.className = "li-nostyle filter_tag"
-      li.innerHTML = '<div id="piece_count_tag">Piece Count</div>';
+      li.innerHTML = `<div id="piece_count_tag_div" class="tag_div">${pieceCountStringKey[parseInt(val)]}</div>`
       ul.appendChild(li);
-      ul.appendChild(button);
+      li.appendChild(button);
+    }  else {
+      console.log('CHANGE PIECE COYNT')
+      const divToChange = document.getElementById('piece_count_tag_div')
+      if (divToChange) divToChange.innerHTML = `${pieceCountStringKey[parseInt(val)]}`
     }
   }
 
   const makeCategoryTag = (val) => {
     const checkLi = document.getElementById('category_tag_li')
     if (!checkLi) {
-      console.log('********** !checkLi')
       const ul = document.getElementById("filter_tags_ul");
       if (!ul) return
       const li = document.createElement("li");
@@ -207,6 +218,7 @@ const Puzzle = () => {
       button.value = 'empty'
       button.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>'
       button.onclick = () => {
+        console.log('make CategoryTag')
         setCategory('empty');
         filter('category', 'empty')
         const liToDelete = document.getElementById('category_tag_li')
@@ -221,9 +233,8 @@ const Puzzle = () => {
       ul.appendChild(li);
       li.appendChild(button);
     } else {
-      console.log('********** Truthy: checkLi')
       const divToChange = document.getElementById('category_tag_div')
-      divToChange.innerHTML = `${val}`
+      if (divToChange) divToChange.innerHTML = `${val}`
     }
   }
 
@@ -237,9 +248,8 @@ const Puzzle = () => {
       const button = document.createElement("button");
       button.id = 'location_tag_button'
       button.className = "tag_remove_btn"
-      li.innerHTML = `<div id="location_tag">${val}</div>`
       button.value = 'empty'
-      button.innerHTML = 'x'
+      button.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>'
       button.onclick = () => {
         setLocation('empty');
         filter('location', 'empty')
@@ -251,12 +261,12 @@ const Puzzle = () => {
         divToDelete?.remove()
       }
       li.className = "li-nostyle filter_tag"
-      li.innerHTML = `<div id="lcoation_tag_div">${val}</div>`
+      li.innerHTML = `<div id="location_tag_div" class="tag_div">${val}</div>`
       ul.appendChild(li);
-      ul.appendChild(button);
+      li.appendChild(button);
     } else {
-      checkLi.innerHTML = `<div id="location_tag_div">${val}</div>`
-
+      const divToChange = document.getElementById('location_tag_div')
+      if (divToChange) divToChange.innerHTML = `${val}`
     }
   }
 
@@ -282,7 +292,7 @@ const Puzzle = () => {
     }
 
     // TAG:
-    makePieceCountTag()
+    makePieceCountTag(val)
 
     return filteredArr
   }
@@ -322,9 +332,9 @@ const Puzzle = () => {
       const liToDelete = document.getElementById('location_tag_li')
       const buttonToDelete = document.getElementById('location_tag_button')
       const divToDelete = document.getElementById('location_tag_div')
-      liToDelete.remove()
-      buttonToDelete.remove()
-      divToDelete.remove()
+      liToDelete?.remove()
+      buttonToDelete?.remove()
+      divToDelete?.remove()
       return arr
     }
     filteredArr = arr.filter(puzzle =>
@@ -335,7 +345,7 @@ const Puzzle = () => {
     }
 
     // TAG:
-    makeLocationTag()
+    makeLocationTag(locationKey[parseInt(val) - 1])
     return filteredArr
   }
 
@@ -363,7 +373,7 @@ const Puzzle = () => {
     }
 
     // TAG:
-    makeDifficultyTag()
+    makeDifficultyTag(val)
     return filteredArr
   }
 
@@ -521,6 +531,7 @@ const Puzzle = () => {
     filter('pieceCount', e.target.value)
   };
   const updateCategory = (e) => {
+    console.log('update Cat')
     setCategory(e.target.value);
     filter('category', e.target.value)
   };
@@ -545,129 +556,132 @@ const Puzzle = () => {
 
 
       <div className='puz-page-holder'>
-
-        <ul className='puz-filter-ul'>
-          <li className='li-nostyle'>
-            <div className=' filter_input'>
-              {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-              <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
-
-                onChange={updateCategory}
-                value={category}
-              >
-
-                <option value="empty">Category</option>
-                <option value={1}>Movies / TV</option>
-                <option value={2}>Nature</option>
-                <option value={3}>Architecture</option>
-                <option value={4}>Landmarks</option>
-                <option value={5}>History</option>
-                <option value={6}>Fantasy</option>
-                <option value={7}>Animals</option>
-                <option value={8}>Kids</option>
-                <option value={9}>Art</option>
-                <option value={10}>Religious</option>
-                <option value={11}>Food</option>
-                <option value={12}>Comedy</option>
-                <option value={13}>Holidays</option>
-                <option value={14}>Celebrities</option>
-                <option value={15}>Sport</option>
-                <option value={16}>Space</option>
-                <option value={17}>Technology</option>
-                <option value={18}>Cars</option>
-                <option value={19}>Miscellaneous</option>
-              </select>
-            </div>
-          </li>
-          <li className='li-nostyle'>
-            <div className=' filter_input'>
-              {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-              <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
-
-                onChange={updateLocation}
-                value={location}
-              >
-
-                <option value="empty">Location</option>
-                <option value={1} >San Francisco</option>
-                <option value={2} >New York	</option>
-                <option value={3} >Chicago	</option>
-                <option value={4} >Los Angeles	</option>
-                <option value={5} >Miami	</option>
-                <option value={6} >Boston</option>
-                <option value={7} >Denver</option>
-                <option value={8} >San Diego	</option>
-                <option value={9} >Dallas</option>
-                <option value={10}>Las Vegas	</option>
-                <option value={11}>Seattle</option>
-                <option value={12}>Philadelphia</option>
-                <option value={13}>Houston</option>
-                <option value={14}>Phoenix</option>
-
-              </select>
-            </div>
-          </li>
-          <li className='li-nostyle'>
-            <div className=' filter_input'>
-              {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-              <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
-
-                onChange={updateDifficulty}
-                value={difficulty}
-              >
-
-                <option value="empty">Difficulty level</option>
-                <option value='easy'>Easy</option>
-                <option value='medium'>Medium</option>
-                <option value='hard'>Hard</option>
-                <option value='expert'>Expert</option>
-
-              </select>
-            </div>
-          </li>
-          <li className='li-nostyle'>
-            <div className='filter_input'>
-              {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-              <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
-
-                onChange={updatePieceCount}
-                value={pieceCount}
-              >
-                <option value="empty">Piece Count</option>
-                <option value={0}> - 99</option>
-                <option value={1}>100 - 200</option>
-                <option value={2}>201 - 500</option>
-                <option value={3}>501 - 1000</option>
-                <option value={4}>1001 - 2000</option>
-                <option value={5}>2001 - 5000</option>
-                <option value={6}>5000+</option>
-              </select>
-            </div>
-          </li>
-          <li className='li-nostyle'>
-            <div className=' filter_input'>
-              {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-              <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
-
-                onChange={updateOrderBy}
-                value={orderBy}
-              >
-
-                <option value="empty">Order By</option>
-                <option value='easy'>Newest</option>
-                <option value='medium'>Oldest</option>
-
-              </select>
-            </div>
-          </li>
-
-        </ul>
-
-        <ul id='filter_tags_ul'>
+        <div id='tag_wrapper'>
 
 
+          <ul className='puz-filter-ul'>
+            <li className='li-nostyle filter_li'>
+              <div className=' filter_input'>
+                {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+                <select name="category" id="category-select" className=" filter_select" id='category-input'
 
-        </ul>
+                  onChange={updateCategory}
+                  value={category}
+                >
+
+                  <option value="empty">Category</option>
+                  <option value={1}>Movies / TV</option>
+                  <option value={2}>Nature</option>
+                  <option value={3}>Architecture</option>
+                  <option value={4}>Landmarks</option>
+                  <option value={5}>History</option>
+                  <option value={6}>Fantasy</option>
+                  <option value={7}>Animals</option>
+                  <option value={8}>Kids</option>
+                  <option value={9}>Art</option>
+                  <option value={10}>Religious</option>
+                  <option value={11}>Food</option>
+                  <option value={12}>Comedy</option>
+                  <option value={13}>Holidays</option>
+                  <option value={14}>Celebrities</option>
+                  <option value={15}>Sport</option>
+                  <option value={16}>Space</option>
+                  <option value={17}>Technology</option>
+                  <option value={18}>Cars</option>
+                  <option value={19}>Miscellaneous</option>
+                </select>
+              </div>
+            </li>
+            <li className='li-nostyle  filter_li'>
+              <div className=' filter_input'>
+                {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+                <select name="category" id="category-select" className=" filter_select" id='location-input'
+
+                  onChange={updateLocation}
+                  value={location}
+                >
+
+                  <option value="empty">Location</option>
+                  <option value={1} >San Francisco</option>
+                  <option value={2} >New York	</option>
+                  <option value={3} >Chicago	</option>
+                  <option value={4} >Los Angeles	</option>
+                  <option value={5} >Miami	</option>
+                  <option value={6} >Boston</option>
+                  <option value={7} >Denver</option>
+                  <option value={8} >San Diego	</option>
+                  <option value={9} >Dallas</option>
+                  <option value={10}>Las Vegas	</option>
+                  <option value={11}>Seattle</option>
+                  <option value={12}>Philadelphia</option>
+                  <option value={13}>Houston</option>
+                  <option value={14}>Phoenix</option>
+
+                </select>
+              </div>
+            </li>
+            <li className='li-nostyle filter_li'>
+              <div className=' filter_input'>
+                {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+                <select name="category" id="category-select" className=" filter_select" id='difficulty-input'
+
+                  onChange={updateDifficulty}
+                  value={difficulty}
+                >
+
+                  <option value="empty">Difficulty level</option>
+                  <option value='easy'>Easy</option>
+                  <option value='medium'>Medium</option>
+                  <option value='hard'>Hard</option>
+                  <option value='expert'>Expert</option>
+
+                </select>
+              </div>
+            </li>
+            <li className='li-nostyle filter_li'>
+              <div className='filter_input'>
+                {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+                <select name="category" id="category-select" className=" filter_select" id='pieceCount-input'
+
+                  onChange={updatePieceCount}
+                  value={pieceCount}
+                >
+                  <option value="empty">Piece Count</option>
+                  <option value={0}> - 99</option>
+                  <option value={1}>100 - 200</option>
+                  <option value={2}>201 - 500</option>
+                  <option value={3}>501 - 1000</option>
+                  <option value={4}>1001 - 2000</option>
+                  <option value={5}>2001 - 5000</option>
+                  <option value={6}>5000+</option>
+                </select>
+              </div>
+            </li>
+            <li className='li-nostyle filter_li'>
+              <div className=' filter_input'>
+                {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+                <select name="category" id="category-select" className=" filter_select" id='order-input'
+
+                  onChange={updateOrderBy}
+                  value={orderBy}
+                >
+
+                  <option value="empty">Order By</option>
+                  <option value='easy'>Newest</option>
+                  <option value='medium'>Oldest</option>
+
+                </select>
+              </div>
+            </li>
+
+          </ul>
+
+          <ul id='filter_tags_ul'>
+
+
+
+          </ul>
+        </div>
 
         <div className='latest'>Latest Puzzles</div>
         <ul id="puzzle-cards">
