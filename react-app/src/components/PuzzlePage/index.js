@@ -82,22 +82,29 @@ const Puzzle = () => {
     localStorage.setItem('pieceCount', JSON.stringify(pieceCount));
 
     return
-  }, [dispatch, pieceCount])
+  }, [dispatch, pieceCount, location, category, difficulty])
 
 
 
   useEffect(async () => {
+    if (!puzzles) return
     const savedCategory = localStorage.getItem("category");
     const parsedCategory = JSON.parse(savedCategory);
     if (parsedCategory != 'empty') {
-      console.log('calling make+CategoryTag in useeffect')
-      makeCategoryTag()
+      console.log('calling make+CategoryTag in parsed Category', parsedCategory)
+      makeCategoryTag(categoryKey[parseInt(parsedCategory) - 1])
+      filter('category', parseInt(parsedCategory))
+      setCategory(parseInt(parsedCategory))
     }
 
     const savedLocation = localStorage.getItem("location");
     const parsedLocation = JSON.parse(savedLocation);
     if (parsedLocation != 'empty') {
-      makeLocationTag()
+
+      makeLocationTag(locationKey[parseInt(parsedLocation) - 1])
+      filter('location', parseInt(parsedLocation))
+      setCategory(parseInt(parsedLocation))
+
     }
 
     const savedDifficulty = localStorage.getItem("difficulty");
@@ -113,7 +120,7 @@ const Puzzle = () => {
     }
     return
 
-  }, [dispatch, category, puzzles])
+  }, [dispatch, puzzles, category, location, difficulty, pieceCount])
 
   // if (!user) {
   //     return <Redirect to='/' />;
@@ -121,6 +128,10 @@ const Puzzle = () => {
 
 
   let pieceCountKey = [[0, 99], [100, 200], [201, 500], [501, 1000], [1001, 2000], [2001, 5000], [5001, 99999999]]
+  let locationKey = ['San Francisco	', 'New York', 'Chicago', 'Los Angeles', 'Miami', 'Boston', 'Denver',
+    'San Diego', 'Dallas', 'Las Vegas', 'Seattle', 'Philidelphia', 'Houston', 'Pheonix']
+  let categoryKey = ['Movies/TV', 'Nature', 'Architecture', 'Landmarks', 'History', 'Fantasy', 'Animals',
+    'Kids', 'Art', 'Religious', 'Food', 'Comedy', 'Holidays', 'Celebrities', 'Sports', 'Space', 'Tech', 'Cars', 'Misc']
 
   const makeDifficultyTag = () => {
     const checkButton = document.getElementById('difficulty_tag_button')
@@ -182,10 +193,10 @@ const Puzzle = () => {
     }
   }
 
-  const makeCategoryTag = () => {
-    console.log('make=CategoryTag')
-    const checkButton = document.getElementById('category_tag_button')
-    if (!checkButton) {
+  const makeCategoryTag = (val) => {
+    const checkLi = document.getElementById('category_tag_li')
+    if (!checkLi) {
+      console.log('********** !checkLi')
       const ul = document.getElementById("filter_tags_ul");
       if (!ul) return
       const li = document.createElement("li");
@@ -193,8 +204,8 @@ const Puzzle = () => {
       const button = document.createElement("button");
       button.id = 'category_tag_button'
       button.className = "tag_remove_btn"
-      button.innerHTML = '<div id="category_tag_div">x</div>';
       button.value = 'empty'
+      button.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>'
       button.onclick = () => {
         setCategory('empty');
         filter('category', 'empty')
@@ -206,15 +217,19 @@ const Puzzle = () => {
         divToDelete?.remove()
       }
       li.className = "li-nostyle filter_tag"
-      li.innerHTML = '<div id="category_tag">Category</div>';
+      li.innerHTML = `<div id="category_tag_div" class="tag_div">${val}</div>`
       ul.appendChild(li);
-      ul.appendChild(button);
+      li.appendChild(button);
+    } else {
+      console.log('********** Truthy: checkLi')
+      const divToChange = document.getElementById('category_tag_div')
+      divToChange.innerHTML = `${val}`
     }
   }
 
-  const makeLocationTag = () => {
-    const checkButton = document.getElementById('location_tag_button')
-    if (!checkButton) {
+  const makeLocationTag = (val) => {
+    const checkLi = document.getElementById('location_tag_li')
+    if (!checkLi) {
       const ul = document.getElementById("filter_tags_ul");
       if (!ul) return
       const li = document.createElement("li");
@@ -222,8 +237,9 @@ const Puzzle = () => {
       const button = document.createElement("button");
       button.id = 'location_tag_button'
       button.className = "tag_remove_btn"
-      button.innerHTML = '<div id="location_tag_div">x</div>';
+      li.innerHTML = `<div id="location_tag">${val}</div>`
       button.value = 'empty'
+      button.innerHTML = 'x'
       button.onclick = () => {
         setLocation('empty');
         filter('location', 'empty')
@@ -235,9 +251,12 @@ const Puzzle = () => {
         divToDelete?.remove()
       }
       li.className = "li-nostyle filter_tag"
-      li.innerHTML = '<div id="location_tag">Location</div>';
+      li.innerHTML = `<div id="lcoation_tag_div">${val}</div>`
       ul.appendChild(li);
       ul.appendChild(button);
+    } else {
+      checkLi.innerHTML = `<div id="location_tag_div">${val}</div>`
+
     }
   }
 
@@ -291,7 +310,7 @@ const Puzzle = () => {
     }
 
     // TAG:
-    makeCategoryTag()
+    makeCategoryTag(categoryKey[category - 1])
     return filteredArr
   }
 
@@ -321,8 +340,6 @@ const Puzzle = () => {
   }
 
   const filterDifficulty = (arr, val) => {
-
-
 
     let filteredArr
     if (val == 'empty') {
@@ -395,7 +412,7 @@ const Puzzle = () => {
     const parsedCategory = parseInt(JSON.parse(savedCategory));
 
     const savedLocation = localStorage.getItem("location");
-    const parsedLocation = JSON.parse(savedLocation);
+    const parsedLocation = parseInt(JSON.parse(savedLocation));
 
     const savedPieceCount = localStorage.getItem("pieceCount");
     const parsedPieceCount = JSON.parse(savedPieceCount);
@@ -531,7 +548,7 @@ const Puzzle = () => {
 
         <ul className='puz-filter-ul'>
           <li className='li-nostyle'>
-            <div className='LabelAndInputContainer'>
+            <div className=' filter_input'>
               {/* <label className="puzzle-form-label">Number of Pieces</label> */}
               <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
 
@@ -540,7 +557,7 @@ const Puzzle = () => {
               >
 
                 <option value="empty">Category</option>
-                <option value={1}>Movies</option>
+                <option value={1}>Movies / TV</option>
                 <option value={2}>Nature</option>
                 <option value={3}>Architecture</option>
                 <option value={4}>Landmarks</option>
@@ -563,7 +580,7 @@ const Puzzle = () => {
             </div>
           </li>
           <li className='li-nostyle'>
-            <div className='LabelAndInputContainer'>
+            <div className=' filter_input'>
               {/* <label className="puzzle-form-label">Number of Pieces</label> */}
               <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
 
@@ -572,16 +589,26 @@ const Puzzle = () => {
               >
 
                 <option value="empty">Location</option>
-                <option value='easy'>Easy</option>
-                <option value='medium'>Medium</option>
-                <option value='hard'>Hard</option>
-                <option value='expert'>Expert</option>
+                <option value={1} >San Francisco</option>
+                <option value={2} >New York	</option>
+                <option value={3} >Chicago	</option>
+                <option value={4} >Los Angeles	</option>
+                <option value={5} >Miami	</option>
+                <option value={6} >Boston</option>
+                <option value={7} >Denver</option>
+                <option value={8} >San Diego	</option>
+                <option value={9} >Dallas</option>
+                <option value={10}>Las Vegas	</option>
+                <option value={11}>Seattle</option>
+                <option value={12}>Philadelphia</option>
+                <option value={13}>Houston</option>
+                <option value={14}>Phoenix</option>
 
               </select>
             </div>
           </li>
           <li className='li-nostyle'>
-            <div className='LabelAndInputContainer'>
+            <div className=' filter_input'>
               {/* <label className="puzzle-form-label">Number of Pieces</label> */}
               <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
 
@@ -599,7 +626,7 @@ const Puzzle = () => {
             </div>
           </li>
           <li className='li-nostyle'>
-            <div className='LabelAndInputContainer'>
+            <div className='filter_input'>
               {/* <label className="puzzle-form-label">Number of Pieces</label> */}
               <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
 
@@ -618,7 +645,7 @@ const Puzzle = () => {
             </div>
           </li>
           <li className='li-nostyle'>
-            <div className='LabelAndInputContainer'>
+            <div className=' filter_input'>
               {/* <label className="puzzle-form-label">Number of Pieces</label> */}
               <select name="category" id="category-select" className="puzzle-form-input puz-form-sel puz-filter" id='difficulty-input'
 

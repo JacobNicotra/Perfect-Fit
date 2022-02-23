@@ -170,10 +170,11 @@ hr {
 }
 
 .puz-filter-ul {
-  width: 100%;
+  width: 90vw;
   display: flex;
-  padding: 0 20px 0 20px;
-  justify-content: space-around
+  margin: 30px 50px 0 20px;
+  padding: 0;
+  justify-content: space-between;
 }
 
 .puz-filter {
@@ -183,5 +184,42 @@ hr {
 
 #filter_tags_ul {
   display: flex;
+  width: 100vw;
+  height: 30px;
+  justify-content: flex-start;
+  padding: 0;
+  margin-left: 50px;
 
+}
+.tag_remove_btn {
+  border: none;
+  background: none;
+  display: flex;
+  color: rgba(41, 41, 41, 0.492);
+  font-weight: 50;
+  font-size: 1.1em;
+  height: 13px;
+  padding: 0px 0 0px 5px;
+  margin-bottom: 3px;
+}
+
+.tag_remove_btn:hover {
+  color: rgba(255, 0, 0, 0.574);
+cursor:pointer; 
+}
+
+.filter_tag {
+  display: flex;
+  border: black solid 1.px;
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  padding: 6px;
+}
+
+.tag_div {
+  font-size: 0.8em;
+}
+
+.filter_input {
+  margin: 0;
 }
