@@ -198,7 +198,7 @@ const Puzzle = () => {
       li.innerHTML = `<div id="piece_count_tag_div" class="tag_div">${pieceCountStringKey[parseInt(val)]}</div>`
       ul.appendChild(li);
       li.appendChild(button);
-    }  else {
+    } else {
       console.log('CHANGE PIECE COYNT')
       const divToChange = document.getElementById('piece_count_tag_div')
       if (divToChange) divToChange.innerHTML = `${pieceCountStringKey[parseInt(val)]}`
@@ -657,23 +657,6 @@ const Puzzle = () => {
                 </select>
               </div>
             </li>
-            <li className='li-nostyle filter_li'>
-              <div className=' filter_input'>
-                {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-                <select name="category" id="category-select" className=" filter_select" id='order-input'
-
-                  onChange={updateOrderBy}
-                  value={orderBy}
-                >
-
-                  <option value="empty">Order By</option>
-                  <option value='easy'>Newest</option>
-                  <option value='medium'>Oldest</option>
-
-                </select>
-              </div>
-            </li>
-
           </ul>
 
           <ul id='filter_tags_ul'>
@@ -681,6 +664,31 @@ const Puzzle = () => {
 
 
           </ul>
+          <div className='filter_div'>
+            {filteredPuzzles && filteredPuzzles.length > 1 ?
+              <div id='puzzle_count' >{filteredPuzzles?.length} puzzles</div>
+              :
+              <div id='puzzle_count' >{filteredPuzzles?.length} puzzle</div>
+            }
+            <div className='' id='order_input_wrapper'>
+              {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+              <label id='order_label'>
+                Sort By:
+
+                <select name="category" id="category-select" id='order-input'
+
+                  onChange={updateOrderBy}
+                  value={orderBy}
+                >
+                  <option value='easy'>Newest</option>
+                  <option value='medium'>Oldest</option>
+
+                </select>
+              </label>
+            </div>
+          </div>
+
+
         </div>
 
         <div className='latest'>Latest Puzzles</div>

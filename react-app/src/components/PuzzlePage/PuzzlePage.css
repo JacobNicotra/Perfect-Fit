@@ -259,9 +259,8 @@ cursor:pointer;
 }
 
 .filter_tag:hover {
-  cursor: pointer;
   color: white;
-  background-color: #999999;
+  background-color: #9e9d9d;
 }
 
 .tag_div {
@@ -270,4 +269,35 @@ cursor:pointer;
 
 .filter_input {
   margin: 0;
+}
+
+.filter_div {
+  width: 100%;
+  display:flex;
+  justify-content: space-between
+}
+
+#order-input {
+  width: 80px;
+  background: none;
+  border: none;
+}
+#order_input_wrapper {
+  width: fit-content;
+  display: flex;
+}
+
+#order_input_wrapper:hover {
+  cursor: pointer;
+
+}
+
+#order_label {
+  display: flex;
+  font-size: 0.8em;
+  color: #838383;
+}
+#puzzle_count {
+  font-size: 0.8em;
+  color: #838383;
 }
