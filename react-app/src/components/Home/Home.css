@@ -32,13 +32,13 @@
 .reviews-ul > li {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   
   margin: 0 5px 0 5px;
-  padding: 0 5px 10px 5px;
   background-color: rgba(183, 183, 183, 0.183);
   align-items: center;
   align-content: center
+  
 }
 
 .popular-category {
@@ -122,4 +122,12 @@
 .right_home_title {
   /* background-color: white; */
   margin-bottom: 10px;
+}
+
+.review_li {
+width: 270px;
+height: 170px;
+
+padding: 10px;
+
 }

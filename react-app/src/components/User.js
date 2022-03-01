@@ -49,7 +49,8 @@ function User() {
 
   if (userId) {
     return (
-      <div className='background'>
+      <div className='user_wrapper'>
+      
         <span>
           <span className='nav-username-pro-btn'>
             {owner ?
@@ -96,7 +97,7 @@ function User() {
             }
           </ul >
         </div >
-      </div >
+        </div>
 
     )
   } else {

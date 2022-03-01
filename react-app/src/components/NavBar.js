@@ -39,9 +39,9 @@ const NavBar = () => {
 
       </span>
 
-      <span id='nav-FAQs'>
-        FAQs
-      </span>
+      <NavLink to='/about' exact={true} activeClassName='active' className='visited-link' >
+          About
+        </NavLink>
       <span id='nav-my-profile'>
 
         {sessionUser ?

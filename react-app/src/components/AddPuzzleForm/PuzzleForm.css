@@ -1,5 +1,5 @@
 .add-puzzle-button {
-  background-color: #9bffc5; 
+  background: none;
   cursor: pointer;
   font-weight: bold;
   display: flex;

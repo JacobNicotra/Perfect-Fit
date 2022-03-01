@@ -414,3 +414,15 @@
   margin-top: 75px;
   padding: 0 20px 40px 20px;
 }
+
+
+.user-disp-ul {
+  display: flex;
+  padding-right: 30px;
+  justify-content: flex-end
+}
+
+
+.user_wrapper {
+  margin-top: 50px;
+}

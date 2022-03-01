@@ -52,7 +52,7 @@ transform: scale(.94);
  }
 
 
-.user-disp-ul {
+. {
   display: flex;
   flex-direction: column;
   align-content: center;

@@ -16,7 +16,7 @@ import moviePoster from '../../images/movie_poster.jpeg'
 import natureImage from '../../images/nature.jpeg'
 import arch from '../../images/arch.jpg'
 import landmark from '../../images/landmark.jpeg'
-import history from '../../images/history.jpeg'
+import hist from '../../images/history.jpeg'
 import fantasy from '../../images/fantasy.jpeg'
 import space from '../../images/space.jpeg'
 import tech from '../../images/tech.jpeg'
@@ -75,16 +75,16 @@ const Home = () => {
         </span>
 
         <ul className='reviews-ul'>
-          <li className='li-nostyle'>
+          <li className='li-nostyle review_li'>
             <p className='text-align'>“I completed a 1000 piece puzzle and wanted to move onto something more challenging. Perfect Fit helped me do just that!.”</p>
             <span>☆☆☆☆☆</span>
           </li>
-          <li className='li-nostyle'>
-            <p className='text-align'>“I’ve been looking far and wide for a Game of Thrones puzzle. Found a great one on this site.”</p>
+          <li className='li-nostyle review_li'>
+            <p className='text-align'>“Easiest, quickest swap ever! Very easy-to-use and fun to browse!"</p>
             <span>☆☆☆☆☆</span>
           </li>
-          <li className='li-nostyle'>
-            <p className='text-align'>“Easiest, quickest swap ever!"</p>
+          <li className='li-nostyle review_li'>
+            <p className='text-align'>“I’ve been looking far and wide for a Game of Thrones puzzle. Found a great one on this site.”</p>
             <span>☆☆☆☆☆</span>
           </li>
         </ul>
@@ -144,7 +144,7 @@ const Home = () => {
                   }
                 }
               }}>
-                <li className='popular-category li-nostyle'><img src={history} id='history' className='pop_category_img'></img></li>
+                <li className='popular-category li-nostyle'><img src={hist} id='history' className='pop_category_img'></img></li>
               </NavLink>
               <NavLink to={{
                 pathname: '/puzzles',

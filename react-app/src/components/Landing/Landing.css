@@ -90,6 +90,7 @@ html,body{
 
 .logout-button-li-landing {
   list-style: none;
+  width: fit-content;
 
 }
 

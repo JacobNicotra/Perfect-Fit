@@ -18,6 +18,7 @@ import Intro from './components/Intro';
 import Home from './components/Home';
 import Custom from './components/Custom';
 import Thank from './components/Thank';
+import About from './components/About';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -101,6 +102,11 @@ function App() {
             <Thank />
             <Footer notLanding={true} />
           </div>
+        </Route>
+        <Route path='/about' exact>
+            <NavBar />
+            <About />
+            <Footer notLanding={true} />
         </Route>
       </Switch>
     </BrowserRouter>
