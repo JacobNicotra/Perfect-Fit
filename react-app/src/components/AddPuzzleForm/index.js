@@ -267,7 +267,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
           <select name="category" id="category-select" className="puzzle-form-input puz-form-sel" id='difficulty-input'
 
             onChange={updateDifficulty}
-            value={category}
+            value={difficulty}
           >
 
             <option value="">Difficulty level</option>
