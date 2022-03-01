@@ -16,6 +16,8 @@ import PuzzleDetails from './components/PuzzleDetailsPage';
 import Swaps from './components/Swap.js';
 import Intro from './components/Intro';
 import Home from './components/Home';
+import Custom from './components/Custom';
+import Thank from './components/Thank';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,7 +38,6 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact={true}>
-          <NavBar />
           <Landing />
           <Footer notLanding={false} />
         </Route>
@@ -84,6 +85,20 @@ function App() {
           <div className='PuzzleDetailsContainer'>
             <NavBar />
             <PuzzleDetails />
+            <Footer notLanding={true} />
+          </div>
+        </Route>
+        <Route path='/custom' exact>
+          <div className='custom_container'>
+            <NavBar />
+            <Custom />
+            <Footer notLanding={true} />
+          </div>
+        </Route>
+        <Route path='/thanks' exact>
+          <div className='custom_container'>
+            <NavBar />
+            <Thank />
             <Footer notLanding={true} />
           </div>
         </Route>

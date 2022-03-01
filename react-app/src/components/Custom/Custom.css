@@ -1,0 +1,67 @@
+.custom_title {
+  text-align: center;
+}
+#custom_p {
+  text-align: center;
+  font-size: 0.92em;
+}
+#custom_form {
+  width: 500px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.custom_container {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.custom_label_input {
+  width: 60%;
+}
+.custom_input {
+  width: 100%;
+}
+
+#custom_info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#email_custom_div {
+  margin: 0 15px 15px 15px;
+}
+#email_label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+.custom_img {
+  margin-top: 20px;
+}
+
+.custom_label {
+  font-size: 0.85em;
+  font-weight: 100;
+  color: rgb(85, 85, 85);
+}
+
+#request {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+#custom-category {
+  width: 318px;
+}

@@ -19,19 +19,22 @@ const NavBar = () => {
     <nav id="nav">
 
       <span id='nav-puzzles'>
-        <NavLink to='/puzzles' exact={true} activeClassName='active' className='visited-link hovertext' data-hover="Explore Puzzles">
+        <NavLink to='/puzzles' exact={true} activeClassName='active' className='visited-link'>
 
           Puzzles
         </NavLink>
       </span>
       <span id='nav-custom-order'>
-        Custom Order
+      <NavLink to='/custom' exact={true} activeClassName='active' className='visited-link' >
+
+          Custom Order
+          </NavLink>
       </span>
 
       <span id="nav-left">
 
         <NavLink to='/home' exact={true} activeClassName='active hovertext' data-hover="Go to Home">
-          <i className="fas fa-puzzle-piece font-logo" ></i>
+          <i className="fas fa-puzzle-piece font-logo"></i>
         </NavLink>
 
       </span>

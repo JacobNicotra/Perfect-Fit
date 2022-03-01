@@ -14,15 +14,14 @@ const Landing = () => {
     let user = sessionUser
     const dispatch = useDispatch();
     const history = useHistory()
-    // if (user) {
-    //     return <Redirect to='/puzzles' />;
-    // }
+    if (user) {
+        return <Redirect to='/home' />;
+    }
     const onClick = () => {
         dispatch(login('demo@aa.io', 'password'));
         return history.push(`/puzzles`);
     };
     return (
-        <div className='background'>
 
             <div className='splash-container'>
                 <div className='splash-description'>
@@ -33,10 +32,6 @@ const Landing = () => {
                             <h5 className='splash_text'>If you're new here, then signup or continue as a guest user.</h5>
                             <h5 className='splash_text'>For existing users, please log in.</h5>
                         </div>
-                    </div>
-                    <div className='landing-img-div'>
-                        <img className='landing-img' src={landingImage} alt='Welcome'></img>
-
                     </div>
 
                     <div className='landing-btns'>
@@ -70,7 +65,6 @@ const Landing = () => {
                 </div>
 
             </div>
-        </div>
     )
 }
 

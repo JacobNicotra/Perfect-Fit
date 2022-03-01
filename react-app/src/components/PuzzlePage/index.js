@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Redirect, useParams } from 'react-router-dom';
+import { NavLink, Redirect, useParams, useLocation, useHistory } from 'react-router-dom';
 
 
 import { getPuzzles } from '../../store/puzzle';
@@ -14,6 +14,20 @@ import logoBW from '../../logo-black.png'
 
 
 const Puzzle = () => {
+  const history = useHistory()
+
+  const user = useSelector(state => state.session.user);
+  if (!user) {
+    history.push(`/`)
+
+  }
+
+  let loc = useLocation();
+  let cat = loc?.state?.filter?.category
+  let city = loc?.state?.filter?.location
+  window.history.replaceState({}, '')
+
+
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -45,8 +59,6 @@ const Puzzle = () => {
 
 
   const [filteredPuzzles, setFilteredPuzzles] = useState(null);
-
-  const user = useSelector(state => state.session.user);
 
   let puzzles = useSelector(state => {
     return state.puzzles.puzzleArray
@@ -87,6 +99,40 @@ const Puzzle = () => {
 
 
   useEffect(async () => {
+    if (cat) {
+      makeCategoryTag(categoryKey[parseInt(cat) - 1])
+      filter('category', parseInt(cat))
+      localStorage.setItem('category', JSON.stringify(cat));
+
+      localStorage.setItem('difficulty', JSON.stringify('empty'));
+      localStorage.setItem('location', JSON.stringify('empty'));
+      localStorage.setItem('pieceCount', JSON.stringify('empty'));
+
+      setDifficulty('empty')
+      setLocation('empty')
+      setPieceCount('empty')
+      console.log(' **** ** * * * * CAT ')
+      return setCategory(parseInt(cat))
+    } else if (city) {
+      makeLocationTag(parseInt(city))
+      filter('location', parseInt(city))
+      localStorage.setItem('location', JSON.stringify(city));
+
+      localStorage.setItem('difficulty', JSON.stringify('empty'));
+      localStorage.setItem('category', JSON.stringify('empty'));
+      localStorage.setItem('pieceCount', JSON.stringify('empty'));
+
+      setDifficulty('empty')
+      setCategory('empty')
+      setPieceCount('empty')
+      return setLocation(parseInt(city))
+    }
+    return
+  }, [dispatch])
+
+
+  useEffect(async () => {
+
     if (!puzzles) return
 
     const savedCategory = localStorage.getItem("category");
@@ -171,8 +217,6 @@ const Puzzle = () => {
 
   const makePieceCountTag = (val) => {
 
-    console.log('piece Count StringKey[parseInt(val)]', pieceCountStringKey[parseInt(val)])
-    console.log('va', val)
     const checkButton = document.getElementById('piece_count_tag_button')
     if (!checkButton) {
       const ul = document.getElementById("filter_tags_ul");
@@ -199,7 +243,6 @@ const Puzzle = () => {
       ul.appendChild(li);
       li.appendChild(button);
     } else {
-      console.log('CHANGE PIECE COYNT')
       const divToChange = document.getElementById('piece_count_tag_div')
       if (divToChange) divToChange.innerHTML = `${pieceCountStringKey[parseInt(val)]}`
     }
@@ -218,7 +261,6 @@ const Puzzle = () => {
       button.value = 'empty'
       button.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>'
       button.onclick = () => {
-        console.log('make CategoryTag')
         setCategory('empty');
         filter('category', 'empty')
         const liToDelete = document.getElementById('category_tag_li')
@@ -271,6 +313,8 @@ const Puzzle = () => {
   }
 
   const filterPieceCount = (arr, val) => {
+    if (!arr || !val) return
+
     let filteredArr
     if (val == 'empty') {
       setFilteredPuzzles(arr)
@@ -298,6 +342,7 @@ const Puzzle = () => {
   }
 
   const filterCategory = (arr, val) => {
+    if (!arr || !val) return
     let filteredArr
 
 
@@ -312,6 +357,7 @@ const Puzzle = () => {
       divToDelete.remove()
       return arr
     }
+
     filteredArr = arr.filter(puzzle =>
       puzzle.categoryId == val)
     setFilteredPuzzles(filteredArr)
@@ -325,6 +371,8 @@ const Puzzle = () => {
   }
 
   const filterLocation = (arr, val) => {
+    if (!arr || !val) return
+
     let filteredArr
     if (val == 'empty') {
       setFilteredPuzzles(arr)
@@ -350,6 +398,7 @@ const Puzzle = () => {
   }
 
   const filterDifficulty = (arr, val) => {
+    if (!arr || !val) return
 
     let filteredArr
     if (val == 'empty') {
@@ -548,7 +597,15 @@ const Puzzle = () => {
     filter('orderBy', e.target.value)
   };
 
-
+  let puzzleCount;
+  if (!filteredPuzzles) {
+    if (puzzles) {
+      puzzleCount = puzzles.length
+      console.log('! ! ! !  ! puzzleCount', puzzleCount)
+    }
+  } else {
+    puzzleCount = filteredPuzzles.length
+  }
 
   if (puzzles) {
     return (
@@ -664,11 +721,12 @@ const Puzzle = () => {
 
 
           </ul>
+
           <div className='filter_div'>
-            {filteredPuzzles && filteredPuzzles.length > 1 ?
-              <div id='puzzle_count' >{filteredPuzzles?.length} puzzles</div>
+            {puzzleCount > 1 ?
+              <div id='puzzle_count' >{puzzleCount} puzzles</div>
               :
-              <div id='puzzle_count' >{filteredPuzzles?.length} puzzle</div>
+              <div id='puzzle_count' >{puzzleCount} puzzle</div>
             }
             <div className='' id='order_input_wrapper'>
               {/* <label className="puzzle-form-label">Number of Pieces</label> */}

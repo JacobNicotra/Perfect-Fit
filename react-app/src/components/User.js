@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Redirect, useParams } from 'react-router-dom';
+import { NavLink, Redirect, useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserSwaps } from '../store/swap';
 import Swaps from './Swap.js';
@@ -9,6 +9,12 @@ import AddPuzzleModal from './AddPuzzleForm/AddPuzzleModal';
 import logoBW from '../logo-black.png'
 
 function User() {
+  const sessionUser = useSelector(state => state.session.user);
+  const history = useHistory()
+  if (!sessionUser) {
+    history.push(`/`)
+  }
+
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -25,7 +31,6 @@ function User() {
     return state.puzzles.userPuzzleArray
   })
 
-  const sessionUser = useSelector(state => state.session.user);
   let owner = sessionUser?.id === parseInt(userId)
 
 

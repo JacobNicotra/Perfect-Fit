@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
 
+import LogoutButton from '../auth/LogoutButton';
 import './Footer.css'
 
 
@@ -15,11 +16,16 @@ const Footer = ({ notLanding }) => {
       <div className='about-container'>
 
         {notLanding ?
-          <NavLink to='/' exact={true} className='footer-about'>
-            <div className='about-links visited-link'>
-              About
-            </div>
-          </NavLink>
+          // <NavLink to='/' exact={true} className='footer-about'>
+          //   <div className='about-links visited-link'>
+          //     About
+          //   </div>
+          // </NavLink>
+          <ul className='user-disp-ul'>
+            <li className='logout-button-li-landing'>
+              <LogoutButton />
+            </li>
+          </ul>
           :
 
           <div className='about-links' id='about-link'>
