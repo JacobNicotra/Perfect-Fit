@@ -76,7 +76,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className='background'>
+
 
       <form onSubmit={onSignUp}  className='login-form'>
           <div className='login-title'>Signup</div>
@@ -128,7 +128,7 @@ const SignUpForm = () => {
         ></input>
         <button type='submit' className='new-puzzle-submit-button'>Sign Up</button>
       </form>
-    </div>
+
   );
 };
 

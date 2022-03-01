@@ -43,14 +43,12 @@ function App() {
           <Footer notLanding={false} />
         </Route>
         <Route path='/login' exact={true}>
-          <NavBar />
           <LoginForm />
-          <Footer notLanding={true} />
+          <Footer notLanding={false} />
         </Route>
         <Route path='/sign-up' exact={true}>
-          <NavBar />
           <SignUpForm />
-          <Footer notLanding={true} />
+          <Footer notLanding={false} />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />

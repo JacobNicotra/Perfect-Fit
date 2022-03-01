@@ -3,6 +3,8 @@ import { login } from '../../store/session';
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import LoginFormModal from '../LoginFormModal';
+import LoginForm from '../auth/LoginForm';
+import SignUpForm from '../auth/SignUpForm';
 
 import "./Landing.css"
 
@@ -23,48 +25,49 @@ const Landing = () => {
     };
     return (
 
-            <div className='splash-container'>
-                <div className='splash-description'>
-                    <div className='splash-container-inner'>
-                        <h1 className='splash_text'>This is Perfect Fit! </h1>
-                        <div className='description-text'>
-                            <h2 className='splash_text'>A Web Application for Puzzle Swapping!</h2>
-                            <h5 className='splash_text'>If you're new here, then signup or continue as a guest user.</h5>
-                            <h5 className='splash_text'>For existing users, please log in.</h5>
-                        </div>
-                    </div>
+        <div className='splash-container'>
+            <div className='splash-container-inner'>
+                <h1 className='splash_text'>Perfect Fit</h1>
+                <div className='description-text'>
 
-                    <div className='landing-btns'>
-
-                        {sessionUser ?
-                            <ul className='user-disp-ul'>
-                                <li className='logout-button-li-landing'>
-                                    <LogoutButton />
-                                </li>
-                            </ul>
-                            :
-                            <ul className='user-disp-ul-logged-out'>
-                                <li className='login-button-li'>
-                                    <button className='DemoButton signup-button landing-btn' onClick={() => onClick()}>Guest</button>
-                                </li>
-                                <li className='login-button-li'>
-                                    <NavLink to='/login' exact={true} activeClassName='active'>
-                                        <LoginFormModal />
-                                    </NavLink>
-                                </li>
-                                <li className='signup-button-li'>
-                                    <NavLink to='/sign-up' exact={true} className='signup-button landing-btn'>
-                                        Sign Up
-                                    </NavLink>
-                                </li>
-                            </ul>
-
-                        }
-                    </div>
-
+                    <h5 className='splash_text'>Continue as a  <button className='DemoButton signup-button landing-btn' onClick={() => onClick()}>Guest</button> user.</h5>
+                    <h5 className='splash_text'>Alternatively, sign up or login.</h5>
                 </div>
+            </div>
+
+            <div id='login_forms'>
+                <SignUpForm />
+                <LoginForm />
+
 
             </div>
+
+            {/* {sessionUser ?
+                        <ul className='user-disp-ul'>
+                            <li className='logout-button-li-landing'>
+                                <LogoutButton />
+                            </li>
+                        </ul>
+                        :
+                        <ul className='user-disp-ul-logged-out'>
+                            <li className='login-button-li'>
+                            </li>
+                            <li className='login-button-li'>
+                                <NavLink to='/login' exact={true} activeClassName='active'>
+                                    <LoginFormModal />
+                                </NavLink>
+                            </li>
+                            <li className='signup-button-li'>
+                                <NavLink to='/sign-up' exact={true} className='signup-button landing-btn'>
+                                    Sign Up
+                                </NavLink>
+                            </li>
+                        </ul>
+
+                    } */}
+
+
+        </div>
     )
 }
 

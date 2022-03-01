@@ -749,7 +749,6 @@ const Puzzle = () => {
 
         </div>
 
-        <div className='latest'>Latest Puzzles</div>
         <ul id="puzzle-cards">
           {filteredPuzzles ?
 

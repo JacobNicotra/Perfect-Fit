@@ -336,7 +336,6 @@
 
 .login-title {
   padding: 15px;
-  padding-bottom: 70px;
   font-size: 1.4em;
   font-weight: bold;
 }
@@ -425,4 +424,9 @@
 
 .user_wrapper {
   margin-top: 50px;
+}
+
+.about-container {
+  display: flex;
+  justify-content: center;
 }

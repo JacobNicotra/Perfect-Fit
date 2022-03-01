@@ -39,20 +39,12 @@ html,body{
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(255, 255, 255);
   overflow-x: hidden;
 }
 
-.splash-description {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  justify-content: flex-start;
-}
-
 .splash-container {
-  width: 72vw;
+  width: 100vw;
   margin: 0;
 }
 /* 
@@ -64,15 +56,12 @@ html,body{
 } */
 
 .landing-btns {
-  background-color: #9bffc5d8;
   backdrop-filter: blur(7px);
   padding: 15px 30px 15px 30px;
-  box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
-
 }
 
 
@@ -99,4 +88,11 @@ html,body{
   height: auto;
   margin-top: 50px;
   margin-bottom: 50px;
+}
+
+#login_forms {
+  display: flex;
+  justify-content: space-around;
+
+
 }
