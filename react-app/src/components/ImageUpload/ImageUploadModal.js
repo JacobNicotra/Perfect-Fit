@@ -4,7 +4,7 @@ import ImageUpload from './index';
 
 function ImageUploadModal() {
   const [showModal, setShowModal] = useState(false);
-  
+
 
   const modalSetter = () => {
     setShowModal(false);
@@ -15,11 +15,11 @@ function ImageUploadModal() {
       {/* <button className='add-puzzle-button puzzle-buttons' onClick={() => setShowModal(true)}><i className="far fa-plus-square"></i></button> */}
       {/* <button className='add-img-btn' onClick={() => setShowModal(true)}><i className="fas fa-plus-circle"></i></button> */}
       <button className='add-img-btn' onClick={() => setShowModal(true)}>      <i className="fas fa-edit edit-puz"></i>
-</button>
+      </button>
       {showModal && (
-        <Modal className="add-img-modal" onClose={() => setShowModal(false)}>
+        <Modal className="add-img-modal" id='add_img_modal' onClose={() => setShowModal(false)}>
 
-          <ImageUpload  modalSetter={modalSetter} />
+          <ImageUpload modalSetter={modalSetter} />
         </Modal>
       )}
     </>

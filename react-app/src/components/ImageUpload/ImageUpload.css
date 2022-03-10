@@ -21,7 +21,7 @@
   justify-content: center;
   padding-left: 65px;
   border: none;
-  
+  padding-bottom: 20px;
 
 }
 #file-upload-button{
@@ -31,4 +31,8 @@
   background-color: aqua;
 
 
+}
+
+#add_img_modal {
+  height: 300px;
 }

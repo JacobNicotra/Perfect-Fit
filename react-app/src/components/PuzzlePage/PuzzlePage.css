@@ -126,6 +126,7 @@ body {
   justify-content: flex-start;
   background-color: #ffffff00;
   margin-top: 60px;
+  padding-bottom: 60px;
 }
 
 
@@ -219,8 +220,8 @@ hr {
   justify-content: center;
   text-align: center;
   text-align: center;
-  border: black solid 1.px;
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
+  border: none;
   font-size: 0.83em;
   width: 100%;
 }
@@ -251,7 +252,7 @@ cursor:pointer;
 
 .filter_tag {
   display: flex;
-  border: black solid 1.px;
+  border: none;
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
   align-items: center;
   padding: 6px;

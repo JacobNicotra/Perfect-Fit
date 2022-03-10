@@ -19,33 +19,37 @@ const NavBar = () => {
     <nav id="nav">
 
       <span id='nav-puzzles'>
-        <NavLink to='/puzzles' exact={true} activeClassName='active' className='visited-link'>
 
-          Puzzles
+        <NavLink to='/home' exact={true}
+          // activeClassName='active hovertext' data-hover="Go to Home"
+          className='visited-link'>
+          {/* <i className="fas fa-puzzle-piece font-logo"></i> */}
+          Home
         </NavLink>
       </span>
       <span id='nav-custom-order'>
-      <NavLink to='/custom' exact={true} activeClassName='active' className='visited-link' >
+        <NavLink to='/custom' exact={true} activeClassName='active' className='visited-link' >
 
           Custom Order
-          </NavLink>
+        </NavLink>
       </span>
 
       <span id="nav-left">
 
-        <NavLink to='/home' exact={true} activeClassName='active hovertext' data-hover="Go to Home">
-          <i className="fas fa-puzzle-piece font-logo"></i>
+        <NavLink to='/puzzles' exact={true} activeClassName='active' className='visited-link'>
+
+          Puzzles
         </NavLink>
 
       </span>
 
       <NavLink to='/about' exact={true} activeClassName='active' className='visited-link' >
-          About
-        </NavLink>
+        About
+      </NavLink>
       <span id='nav-my-profile'>
 
         {sessionUser ?
-           <NavLink to={'/users/' + sessionUser.id} className='visited-link' >My Profile</NavLink> 
+          <NavLink to={'/users/' + sessionUser.id} className='visited-link' >My Profile</NavLink>
 
           :
           <ul className='user-disp-ul-logged-out'>

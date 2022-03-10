@@ -723,7 +723,7 @@ const Puzzle = () => {
           </ul>
 
           <div className='filter_div'>
-            {puzzleCount > 1 ?
+            {puzzleCount !== 1 ?
               <div id='puzzle_count' >{puzzleCount} puzzles</div>
               :
               <div id='puzzle_count' >{puzzleCount} puzzle</div>

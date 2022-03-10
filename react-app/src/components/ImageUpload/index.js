@@ -54,7 +54,7 @@ const ImageUpload = ({ modalSetter }) => {
     return (
         <>
             <h2 className='modal-label'>Upload an Image</h2>
-            <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
+            <form autoComplete="off" className='add-puzzle-form' id='add_img_form' onSubmit={onSubmit}>
                 {errors.length > 0 && <div className='puz-form-erros'>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
