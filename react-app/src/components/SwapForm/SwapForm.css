@@ -94,3 +94,9 @@
   background-color: red;
   font-weight: bold;
 }
+
+#swap_form_holder {
+  height: fit-content;
+  overflow-y: scroll;
+  width: 100%;
+}

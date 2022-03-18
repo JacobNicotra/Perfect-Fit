@@ -9,6 +9,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [location, setLocation] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
@@ -19,30 +20,36 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     setErrors([])
-    let errorPresent = false
+    let tempErrors = [];
+
 
     if (!username.replace(/\s/g, '').length) {
-      setErrors(["Really? Try providing a Username..."])
-      errorPresent = true
+      tempErrors = ["Providing a Username..."]
+
     }
     if (username.length < 3) {
-      setErrors([...errors, "Username must be longer than 2 characters."])
-      errorPresent = true
+      tempErrors = [...tempErrors, 'Username must be longer than 2 characters.']
+
 
     }
     if (!email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-      setErrors([...errors, "Provide a valid email"])
-      errorPresent = true
+      tempErrors = [...tempErrors, 'Provide a valid email']
+
+
+    }
+    if (location == '') {
+      tempErrors = [...tempErrors, 'Provide a city']
+
 
     }
     if (password !== repeatPassword) {
-      setErrors([...errors, "Passwords do not match."])
-      errorPresent = true
+      tempErrors = [...tempErrors, 'Passwords do not match.']
 
-      
+
+
     }
-    if (errorPresent) {
-      return //setErrors([])
+    if (tempErrors.length > 0) {
+      return setErrors(tempErrors)
     }
 
     if (password === repeatPassword) {
@@ -52,7 +59,7 @@ const SignUpForm = () => {
       }
       return history.push(`/puzzles`)
 
-    } 
+    }
   };
 
   const updateUsername = (e) => {
@@ -71,6 +78,10 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
+  const updateLocation = (e) => {
+    setLocation(e.target.value);
+  };
+
   if (user) {
     return <Redirect to='/' />;
   }
@@ -78,56 +89,89 @@ const SignUpForm = () => {
   return (
 
 
-      <form onSubmit={onSignUp}  className='login-form'>
-          <div className='login-title'>Signup</div>
-        <div className='errors'>
-          {errors.map((error, ind) => (
-            <div className='error' key={ind}><i className="fas fa-exclamation-triangle"></i>{error}</div>
-          ))}
+    <form onSubmit={onSignUp} className='login-form'>
+      {errors.length > 0 ? 
+      <div className='errors_signup'>
+        {errors.map((error, ind) => (
+          <div className='error_signup' key={ind}><i className="fas fa-exclamation-triangle"></i>{error}</div>
+        ))}
         </div>
+        :
 
-        <input
-          type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
-          className='login-form-input'
-          placeholder='Username'
+        <div className='login-title'>Signup</div>
 
-        ></input>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-          className='login-form-input'
-          placeholder='Email'
+      }
 
 
-        ></input>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-          className='login-form-input'
-          placeholder='Password'
+      <input
+        type='text'
+        name='username'
+        onChange={updateUsername}
+        value={username}
+        className='login-form-input'
+        placeholder='Username'
+
+      ></input>
 
 
-        ></input>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-          className='login-form-input'
-          placeholder='Confirm Password'
+      {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+      <select name="category" id="category-select" className='login-form-input login-select'
+
+        onChange={updateLocation}
+        value={location}
+      >
+
+        <option value="empty">Location</option>
+        <option value={1} >San Francisco</option>
+        <option value={2} >New York	</option>
+        <option value={3} >Chicago	</option>
+        <option value={4} >Los Angeles	</option>
+        <option value={5} >Miami	</option>
+        <option value={6} >Boston</option>
+        <option value={7} >Denver</option>
+        <option value={8} >San Diego	</option>
+        <option value={9} >Dallas</option>
+        <option value={10}>Las Vegas	</option>
+        <option value={11}>Seattle</option>
+        <option value={12}>Philadelphia</option>
+        <option value={13}>Houston</option>
+        <option value={14}>Phoenix</option>
+
+      </select>
+
+      <input
+        type='text'
+        name='email'
+        onChange={updateEmail}
+        value={email}
+        className='login-form-input'
+        placeholder='Email'
 
 
-        ></input>
-        <button type='submit' className='new-puzzle-submit-button'>Sign Up</button>
-      </form>
+      ></input>
+      <input
+        type='password'
+        name='password'
+        onChange={updatePassword}
+        value={password}
+        className='login-form-input'
+        placeholder='Password'
+
+
+      ></input>
+      <input
+        type='password'
+        name='repeat_password'
+        onChange={updateRepeatPassword}
+        value={repeatPassword}
+        className='login-form-input'
+        placeholder='Confirm Password'
+
+
+      ></input>
+
+      <button type='submit' className='new-puzzle-submit-button'>Sign Up</button>
+    </form>
 
   );
 };

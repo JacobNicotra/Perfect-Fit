@@ -63,7 +63,7 @@ transform: scale(.94);
 
 .login-button, .signup-button {
   border:none;
-  background-color: rgb(235, 235, 235);
+  background-color: #efefef;
   font-size: .95em;
   padding: 8px;
   border-radius: 12px;
@@ -72,7 +72,7 @@ transform: scale(.94);
 }
 
 .login-button:hover, .signup-button:hover {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
   cursor: pointer;
   
 

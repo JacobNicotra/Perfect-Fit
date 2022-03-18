@@ -68,8 +68,8 @@ const Home = () => {
       <div className='inner-home-container' >
         <span className='center-flex-col' id='welcome-span'>
           <h1 className='text-align'>Welcome to Perfect Fit!</h1>
-          <p className='text-align' >Don’t let a good puzzle go to waste.
-            Use our free services to browse thousands of puzzles and initiate a puzzle swap anywhere in the USA.
+          <p className='text-align home_description' >Don’t let a good puzzle go to waste.
+            Use our free services to register a puzzle of your own, browse thousands of puzzles, and initiate a puzzle swap anywhere in the US.
             Don't see anything that sparks your interest?
             Order a custom puzzle using an image of your choice!</p>
         </span>

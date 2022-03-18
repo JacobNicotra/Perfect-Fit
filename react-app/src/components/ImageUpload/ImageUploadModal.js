@@ -17,7 +17,7 @@ function ImageUploadModal() {
       <button className='add-img-btn' onClick={() => setShowModal(true)}>      <i className="fas fa-edit edit-puz"></i>
       </button>
       {showModal && (
-        <Modal className="add-img-modal" id='add_img_modal' onClose={() => setShowModal(false)}>
+        <Modal className="add-img-modal" id='add_img_modal' onClose={() => setShowModal(false)} size='img'>
 
           <ImageUpload modalSetter={modalSetter} />
         </Modal>

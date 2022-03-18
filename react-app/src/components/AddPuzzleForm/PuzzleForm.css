@@ -16,13 +16,13 @@
  .add-puzzle-form {
    display: flex;
    flex-direction: column;
-   justify-content: flex-start;
-   align-content: center;
+   justify-content: center;
+      align-content: center;
    align-items: center;
    /* background-color: #26532b94; */
    height: 98%;
    overflow-y: auto;
-   padding-top: 25px;
+   width: 100%;
  }
 
  .radio-wrapper {
@@ -78,8 +78,15 @@
  .puzzle-form-input:hover {
    background-color: white;
  }
+
+ .edit-puzzle-delete-button:hover{ 
+  background-color: red;
+  cursor: pointer;
+
+ }
+
  .new-puzzle-submit-button {
-   margin: 0 10px 0 10px
+   margin: 10px 10px 0 10px
  }
 
  #error-prompt {

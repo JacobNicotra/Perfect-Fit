@@ -652,7 +652,7 @@ const Puzzle = () => {
             <li className='li-nostyle  filter_li'>
               <div className=' filter_input'>
                 {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-                <select name="category" id="category-select" className=" filter_select" id='location-input'
+                <select name="category" id="category-select" className=" filter_select" 
 
                   onChange={updateLocation}
                   value={location}

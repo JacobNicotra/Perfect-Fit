@@ -131,3 +131,8 @@ height: 170px;
 padding: 10px;
 
 }
+
+.home_description {
+  width: 80%;
+  max-width: 800px;
+}

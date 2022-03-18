@@ -38,7 +38,7 @@ const NavBar = () => {
 
         <NavLink to='/puzzles' exact={true} activeClassName='active' className='visited-link'>
 
-          Puzzles
+          Browse
         </NavLink>
 
       </span>

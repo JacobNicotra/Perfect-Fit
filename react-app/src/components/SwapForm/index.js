@@ -104,28 +104,9 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
 
 
 
-  return (<div>
+  return (<div id='swap_form_holder'>
 
-    {errors.length > 0 ? <div className='puz-swap-errors'>
-      {errors.map((error, ind) => (
-        <div key={ind}>{error}</div>
-      ))}
-    </div>
-
-:
-
-  <span className='puzzle-decor-holder'>
-      <div className='puzzle-decor1'><i className="fas fa-puzzle-piece"></i></div>
-      <div className='puzzle-decor2'><i className="fas fa-puzzle-piece"></i></div>
-      <div className='puzzle-decor3'><i className="fas fa-puzzle-piece"></i></div>
-      <div className='puzzle-decor4'><i className="fas fa-puzzle-piece"></i></div>
-      <div className='puzzle-decor5'><i className="fas fa-puzzle-piece"></i></div>
-      <div className='puzzle-decor6'><i className="fas fa-puzzle-piece"></i></div>
-    </span>
-
-
-      
-    }
+   
 
   
 
@@ -133,7 +114,7 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
     <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
       <div>Choose a Puzzle of Yours To Exchange</div>
       <ul className='user-puz-selection'>
-        {userPuzzles &&
+        {userPuzzles.length > 0 ?
           userPuzzles.map(puzzle => {
             return (
               <button id={puzzle.id} onClick={(e) => {
@@ -153,6 +134,8 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
               </button>
             )
           })
+          :
+          <div>It appears that you do not have any registered puzzles to swap with. Add a puzzle in your profile section.</div>
         }
       </ul>
 
