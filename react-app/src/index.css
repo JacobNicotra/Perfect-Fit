@@ -429,7 +429,8 @@
 .user-disp-ul {
   display: flex;
   padding-right: 30px;
-  justify-content: flex-end
+  justify-content: flex-end;
+  margin:0;
 }
 
 
@@ -440,6 +441,9 @@
 .about-container {
   display: flex;
   justify-content: center;
+  height: 30px;
+  align-items: center;
+
 }
 
 .login-select {
