@@ -76,7 +76,7 @@
    font-size: .8em;
  }
  .puzzle-form-input:hover {
-   background-color: white;
+   background-color: rgb(221, 221, 221);
  }
 
  .edit-puzzle-delete-button:hover{ 

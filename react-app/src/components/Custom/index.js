@@ -225,7 +225,7 @@ const Custom = () => {
           </div>
           <div className='LabelAndInputContainer custom_label_input'>
             {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-            <select name="category" id="category-select" className="puzzle-form-input custom_input puz-form-sel" id='custom-category'
+            <select name="category" className="puzzle-form-input custom_input puz-form-sel" id='custom-category'
 
               onChange={updateCategory}
               value={category}
@@ -256,10 +256,8 @@ const Custom = () => {
 
           <div className='LabelAndInputContainer custom_label_input'>
             {/* <label className="puzzle-form-label">Description</label> */}
-            <input
-              type='text'
+            <textarea
               id='description-input'
-
               name='title'
               onChange={updateDescription}
               value={description}
@@ -269,8 +267,9 @@ const Custom = () => {
               placeholder="Description"
 
 
-            ></input>
+            ></textarea>
           </div>
+           
 
           <>
             <div className='custom_img' >Upload an Image</div>

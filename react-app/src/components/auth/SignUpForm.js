@@ -22,7 +22,6 @@ const SignUpForm = () => {
     setErrors([])
     let tempErrors = [];
 
-
     if (!username.replace(/\s/g, '').length) {
       tempErrors = ["Providing a Username..."]
 
@@ -30,11 +29,9 @@ const SignUpForm = () => {
     if (username.length < 3) {
       tempErrors = [...tempErrors, 'Username must be longer than 2 characters.']
 
-
     }
     if (!email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
       tempErrors = [...tempErrors, 'Provide a valid email']
-
 
     }
     if (location == '') {
