@@ -552,10 +552,32 @@ const Puzzle = () => {
       }
     }
     else if (type == 'difficulty') {
-      dominoPuzzles = filterDifficulty(puzzles, value)
+      dominoPuzzles = puzzles
       // if (pieceCount && pieceCount != 'empty') {
       //   dominoPuzzles = filterPieceCount(dominoPuzzles, pieceCount)
       // }
+      if (parsedPieceCount && parsedPieceCount != 'empty') {
+        dominoPuzzles = filterPieceCount(dominoPuzzles, parsedPieceCount)
+      }
+
+      if (parsedDifficulty && parsedDifficulty != 'empty') {
+        dominoPuzzles = filterDifficulty(dominoPuzzles, parsedDifficulty)
+      }
+      // if (location && location != 'empty') {
+      //   dominoPuzzles = filterLocation(dominoPuzzles, location)
+      // }
+      if (parsedLocation && parsedLocation != 'empty') {
+        dominoPuzzles = filterLocation(dominoPuzzles, parsedLocation)
+      }
+      // if (category && category != 'empty') {
+      //   dominoPuzzles = filterCategory(dominoPuzzles, category)
+      // }
+      if (parsedCategory && parsedCategory != 'empty') {
+        dominoPuzzles = filterCategory(dominoPuzzles, parsedCategory)
+      }
+    }
+    else if (type == 'orderBy') {
+     
       if (parsedPieceCount && parsedPieceCount != 'empty') {
         dominoPuzzles = filterPieceCount(dominoPuzzles, parsedPieceCount)
       }

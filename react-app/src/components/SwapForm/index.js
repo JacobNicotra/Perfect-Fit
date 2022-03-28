@@ -106,7 +106,7 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
 
   return (<div id='swap_form_holder'>
 
-   
+
 
   
 
