@@ -5,6 +5,7 @@ import { createPuzzle, addImg } from '../../store/puzzle';
 import { getPuzzles } from '../../store/puzzle';
 import { useEffect } from 'react';
 import "./PuzzleForm.css"
+import puzzle_img from "../../images/add_puzzle_img.png"
 
 const AddPuzzleForm = ({ modalSetter }) => {
   const [errors, setErrors] = useState([]);
@@ -123,9 +124,9 @@ const AddPuzzleForm = ({ modalSetter }) => {
 
     }
 
-    
+
     newPuzzle.pieceCount = parseInt(pieceCount)
-   
+
     // if (image.replace(/\s/g, '').length) {
     //   newPuzzle.image = image
     // }
@@ -192,16 +193,22 @@ const AddPuzzleForm = ({ modalSetter }) => {
 
 
   return (
-    <>
-      <h2 className='modal-label'>{'New Puzzle'}</h2>
-      <form autoComplete="off" className='add-puzzle-form' id='add-puz-form' onSubmit={onSubmit}>
-        {errors.length > 0 && <div className='puz-form-erros'>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
-        </div>
-        }
-        <div className='LabelAndInputContainer'>
+    <div id="new_puzzle">
+      <h2 className='modal-label' id='add_puzzle_title'>Register Your Puzzle</h2>
+
+      <h4 id='add_puzzle_subtitle'>Provide us some info so users know more about your puzzle.</h4>
+      <div id='form_and_image_holder'>
+
+
+        <img id="new_puzzle_img" src={puzzle_img}></img>
+        <form autoComplete="off" className='add-puzzle-form' id='add-puz-form' onSubmit={onSubmit}>
+          {errors.length > 0 && <div className='puz-form-erros'>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          }
+          {/* <div className='LabelAndInputContainer'> */}
           {/* <label className="puzzle-form-label">Puzzle Name</label> */}
           <input
             id='title-input'
@@ -215,8 +222,8 @@ const AddPuzzleForm = ({ modalSetter }) => {
             placeholder="Name of Puzzle"
 
           ></input>
-        </div>
-        <div className='LabelAndInputContainer'>
+          {/* </div> */}
+          {/* <div className='LabelAndInputContainer'> */}
           {/* <label className="puzzle-form-label">Number of Pieces</label> */}
           <input
             type='number'
@@ -231,8 +238,8 @@ const AddPuzzleForm = ({ modalSetter }) => {
 
 
           ></input>
-        </div>
-        <div className='LabelAndInputContainer'>
+          {/* </div> */}
+          {/* <div className='LabelAndInputContainer'> */}
           {/* <label className="puzzle-form-label">Number of Pieces</label> */}
           <select name="category" id="category-select" className="puzzle-form-input puz-form-sel" id='category-input'
 
@@ -261,98 +268,99 @@ const AddPuzzleForm = ({ modalSetter }) => {
             <option value={18}>Cars</option>
             <option value={19}>Miscellaneous</option>
           </select>
-        </div>
-        <div className='LabelAndInputContainer'>
-          {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-          <select name="category" id="category-select" className="puzzle-form-input puz-form-sel" id='difficulty-input'
+          {/* </div> */}
+          {/* <div className='LabelAndInputContainer'> */}
+            {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+            <select name="category" id="category-select" className="puzzle-form-input puz-form-sel" id='difficulty-input'
 
-            onChange={updateDifficulty}
-            value={difficulty}
+              onChange={updateDifficulty}
+              value={difficulty}
+            >
+
+              <option value="">Difficulty level</option>
+              <option value='easy'>Easy</option>
+              <option value='medium'>Medium</option>
+              <option value='hard'>Hard</option>
+              <option value='expert'>Expert</option>
+
+            </select>
+          {/* </div> */}
+          {/* <div className='LabelAndInputContainer'> */}
+            {/* <label className="puzzle-form-label">Description</label> */}
+            <input
+              type='text'
+              id='description-input'
+
+              name='title'
+              onChange={updateDescription}
+              value={description}
+              // required
+              autoComplete="off"
+              className="puzzle-form-input-text"
+              placeholder="Description"
+
+
+            ></input>
+          {/* </div> */}
+
+
+          <div className='radio-wrapper' id='delivery-input'
           >
+            <span className='radio-prompt'>How would you like users to swap for this puzzle?</span>
 
-            <option value="">Difficulty level</option>
-            <option value='easy'>Easy</option>
-            <option value='medium'>Medium</option>
-            <option value='hard'>Hard</option>
-            <option value='expert'>Expert</option>
+            <div className='delivery-input'>
+              <label>
+                <input type="radio" name='delivery-method'
+                  // checked
+                  onChange={updateDelivery}
+                  checked={delivery == 'either'}
+                  value='either'
+                >
+                </input>
+                <span>Mail & Local Pickup</span>
+              </label>
 
-          </select>
-        </div>
-        <div className='LabelAndInputContainer'>
-          {/* <label className="puzzle-form-label">Description</label> */}
-          <input
-            type='text'
-            id='description-input'
+            </div>
+            <div className='delivery-input'>
+              <label>
+                <input type="radio" name='delivery-method'
+                  // checked
+                  onChange={updateDelivery}
+                  checked={delivery == 'pickup'}
+                  value='pickup'
+                >
+                </input>
+                <span>Local Pickup</span>
+              </label>
 
-            name='title'
-            onChange={updateDescription}
-            value={description}
-            // required
-            autoComplete="off"
-            className="puzzle-form-input"
-            placeholder="Description"
+            </div>
+            <div className='delivery-input'>
+              <label>
 
+                <input type="radio" name='delivery-method'
+                  // checked
+                  onChange={updateDelivery}
+                  checked={delivery == 'delivery'}
+                  value='delivery'
 
-          ></input>
-        </div>
+                >
+                </input>
+                <span>Mail</span>
+              </label>
 
-
-        <div className='radio-wrapper' id='delivery-input'
-        >
-          <span className='radio-prompt'>How would you like users <br />to swap for this puzzle?</span>
-
-          <div className='delivery-input'>
-            <label>
-              <input type="radio" name='delivery-method'
-                // checked
-                onChange={updateDelivery}
-                checked={delivery == 'either'}
-                value='either'
-              >
-              </input>
-              <span>Mail & Local Pickup</span>
-            </label>
-
+            </div>
           </div>
-          <div className='delivery-input'>
-            <label>
-              <input type="radio" name='delivery-method'
-                // checked
-                onChange={updateDelivery}
-                checked={delivery == 'pickup'}
-                value='pickup'
-              >
-              </input>
-              <span>Local Pickup</span>
-            </label>
-
-          </div>
-          <div className='delivery-input'>
-            <label>
-
-              <input type="radio" name='delivery-method'
-                // checked
-                onChange={updateDelivery}
-                checked={delivery == 'delivery'}
-                value='delivery'
-
-              >
-              </input>
-              <span>Mail</span>
-            </label>
-
-          </div>
-        </div>
 
 
-        {errors.length > 0 ? <p id='error-prompt'>Please Provide <br />Required Information</p>
-          :
+          {errors.length > 0 ? <p id='error-prompt'>Please Provide <br />Required Information</p>
+            :
 
 
-          (imageLoading) && <p>Loading...</p>}
-        <button className='new-puzzle-submit-button' type='submit'>{'Create Puzzle'}</button>
-      </form>
-    </>
+            (imageLoading) && <p>Loading...</p>}
+          <button className='new-puzzle-submit-button' type='submit'>{'Create Puzzle'}</button>
+        </form>
+      </div>
+    </div>
   );
 };
 

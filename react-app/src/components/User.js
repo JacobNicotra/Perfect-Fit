@@ -55,7 +55,9 @@ function User() {
           <span className='nav-username-pro-btn'>
             {owner ?
               <div className='nav-middle'>
-                <AddPuzzleModal edit={false} className="puzzle-modal" />
+                <NavLink to='/new' exact={true} data-hover="Add a New Puzzle" className="hovertext">
+                  <button className='nav-swap-btn'>Add Puzzle</button>
+                </NavLink >
                 <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
                 <NavLink to='/swaps' exact={true} data-hover="See your Swap Requests" className="hovertext">
                   <button className='nav-swap-btn'><i className="fas fa-envelope swap-icon"></i></button>

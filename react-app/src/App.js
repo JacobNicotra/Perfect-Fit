@@ -19,6 +19,7 @@ import Home from './components/Home';
 import Custom from './components/Custom';
 import Thank from './components/Thank';
 import About from './components/About';
+import AddPuzzleForm from './components/AddPuzzleForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -44,32 +45,37 @@ function App() {
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
-          <Footer notLanding={false} />
+          {/* <Footer notLanding={false} /> */}
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
-          <Footer notLanding={false} />
+          {/* <Footer notLanding={false} /> */}
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
-          <Footer notLanding={true} />
+          {/* <Footer notLanding={true} /> */}
+        </ProtectedRoute>
+        <ProtectedRoute path='/new' exact={true} >
+          <NavBar />
+          <AddPuzzleForm />
+          {/* <Footer notLanding={true} /> */}
         </ProtectedRoute>
         <ProtectedRoute path='/swaps' exact={true} >
           <NavBar />
           <Swaps />
-          <Footer notLanding={true} />
+          {/* <Footer notLanding={true} /> */}
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <NavBar />
           <User />
-          <Footer notLanding={true} />
+          {/* <Footer notLanding={true} /> */}
         </ProtectedRoute>
         <Route path='/home' exact>
           <div className='PuzzlesContainer'>
             {/* <Intro /> */}
             <NavBar />
             <Home />
-            <Footer notLanding={true} />
+            {/* <Footer notLanding={true} /> */}
           </div>
         </Route>
         <Route path='/puzzles' exact>
@@ -77,34 +83,34 @@ function App() {
             {/* <Intro /> */}
             <NavBar />
             <Puzzle />
-            <Footer notLanding={true} />
+            {/* <Footer notLanding={true} /> */}
           </div>
         </Route>
         <Route path='/puzzles/:puzzleId' exact>
           <div className='PuzzleDetailsContainer'>
             <NavBar />
             <PuzzleDetails />
-            <Footer notLanding={true} />
+            {/* <Footer notLanding={true} /> */}
           </div>
         </Route>
         <Route path='/custom' exact>
           <div className='custom_container'>
             <NavBar />
             <Custom />
-            <Footer notLanding={true} />
+            {/* <Footer notLanding={true} /> */}
           </div>
         </Route>
         <Route path='/thanks' exact>
           <div className='custom_container'>
             <NavBar />
             <Thank />
-            <Footer notLanding={true} />
+            {/* <Footer notLanding={true} /> */}
           </div>
         </Route>
         <Route path='/about' exact>
             <NavBar />
             <About />
-            <Footer notLanding={true} />
+            {/* <Footer notLanding={true} /> */}
         </Route>
       </Switch>
     </BrowserRouter>
