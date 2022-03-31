@@ -1,6 +1,7 @@
 .about_title {
   font-size: 23px;
   margin: 0;
+  font-weight: 350;
 }
 
 #faqs {
@@ -139,4 +140,8 @@ background-color: #d9eaea;
 
   .open_about_para {
     margin: 0;
+  }
+
+  #artwork_attributions {
+    margin-top: 35px;
   }

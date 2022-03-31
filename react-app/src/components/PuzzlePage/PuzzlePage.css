@@ -25,7 +25,7 @@ body {
 }
 
 .puzzle-card-wrapper:hover {
-  box-shadow: 0px 1px 10px 7px #7ac99b88;
+  box-shadow: 0px 0px 30px 20px #c2ebfe9b;
 
 }
 
@@ -41,7 +41,7 @@ body {
 }
 
 .puzzle-card-background {
-  background-color: #9bffc5;
+  background-color: #c2ebfe;
 
 }
 
@@ -71,9 +71,10 @@ body {
 }
 
 .puzzle-card-logo {
-  height: 100px; 
-  margin-top: 13px;
-  padding-top: 16px
+  height: auto; 
+
+  margin: 30px 0 0 40px;
+  width: 100px;
 
 }
 /* 
@@ -85,7 +86,7 @@ body {
 
 .loader {
   border: 16px solid #f3f3f3; 
-  border-top: 16px solid #9bffc5; 
+  border-top: 16px solid #c2ebfe86; 
   border-radius: 50%;
   width: 120px;
   height: 120px;

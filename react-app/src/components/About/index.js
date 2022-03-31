@@ -24,25 +24,25 @@ const About = () => {
 
     <div className='splash-description about_wrapper align-left'>
 
-    <h2 className='about_title'>About Perfect Fit</h2>
-        <p className='about_p'>My name is Jacob Nicotra, and I built Perfect Fit after
-          finding myself usure of what to do with my completed puzzles. 
+      <h2 className='about_title'>About Perfect Fit</h2>
+      <p className='about_p'>My name is Jacob Nicotra, and I built Perfect Fit after
+        finding myself usure of what to do with my completed puzzles.
         I thought it would be nice to use a seamless online platform which facilitates puzzle swapping. That way, I could reduce waste,
         give someone else the chance to enjoy my puzzle, and try a new puzzle myself.
         I hope you enjoy this site!
 
-        </p>
+      </p>
 
-    <h2 className='about_title'>Techonologies used</h2>
-        <p className='about_p'>
-          JavaScript, Python, React - Redux, Flask, PostgreSQL, SQAlchemy, HTML5, CSS3
+      <h2 className='about_title'>Techonologies used</h2>
+      <p className='about_p'>
+        JavaScript, Python, React - Redux, Flask, PostgreSQL, SQAlchemy, HTML5, CSS3
 
-        </p>
+      </p>
 
 
 
       <h2 className='about_title' id='faq_title'>Frequently Asked Questions (FAQs)
-        
+
       </h2>
       <ul id='faqs'>
         <li className='li-nostyle'>
@@ -83,7 +83,7 @@ const About = () => {
 
         <li className='li-nostyle'>
 
-          <Collapsible trigger="I shipped my puzzle but didn’t receive one in return. What can I do??">
+          <Collapsible trigger="I shipped my puzzle but didn’t receive one in return.">
             <p className='open_about_para'>
               If a member does not ship out a puzzle they agreed to exchange with, the member’s account will be suspended until the delinquent puzzle is shipped. Please email any complaints to nicotra100@gmail.com.
 
@@ -97,7 +97,7 @@ const About = () => {
 
           <Collapsible trigger="How do I report an issue?">
             <p className='open_about_para'>
-            If you have are experiencing any issues with this site or the service, please send an email to nicotra1008@gmail.com
+              If you have are experiencing any issues with this site or the service, please send an email to nicotra1008@gmail.com
 
             </p>
           </Collapsible>
@@ -108,7 +108,7 @@ const About = () => {
 
           <Collapsible trigger="A puzzle I swapped for is missing pieces">
             <p className='open_about_para'>
-            Any member who swaps an incomplete puzzle will be suspended, until they return your original puzzle. Please email any complaints to nicotra100@gmail.com.
+              Any member who swaps an incomplete puzzle will be suspended, until they return your original puzzle. Please email any complaints to nicotra100@gmail.com.
 
             </p>
           </Collapsible>
@@ -118,22 +118,30 @@ const About = () => {
 
       </ul>
 
+      <h2 className='about_title' id='artwork_attributions'>Artwork Attributions</h2>
+      <p className='about_p'>
+        Logo by Monkik & artwork by Victoria Chepkasova
+
+      </p>
+
+
+
 
     </div >
 
   )
-return (
-  <Collapsible trigger="Start here">
-    <p>
-      This is the collapsible content. It can be any element or React
-      component you like.
-    </p>
-    <p>
-      It can even be another Collapsible component. Check out the next
-      section!
-    </p>
-  </Collapsible>
-);
+  return (
+    <Collapsible trigger="Start here">
+      <p>
+        This is the collapsible content. It can be any element or React
+        component you like.
+      </p>
+      <p>
+        It can even be another Collapsible component. Check out the next
+        section!
+      </p>
+    </Collapsible>
+  );
 
 }
 

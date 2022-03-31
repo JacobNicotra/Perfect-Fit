@@ -68,7 +68,7 @@ const SignUpForm = () => {
   const onClick = () => {
     dispatch(login('demo@aa.io', 'password'));
     return history.push(`/puzzles`);
-};
+  };
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -102,7 +102,7 @@ const SignUpForm = () => {
         <h1 className='splash_text' id='title_splash'>Perfect Fit
           <img src={jigsaw} id="jigsaw"></img></h1>
 
-        </span>
+      </span>
 
       <img id="new_puzzle_img" src={signup_art}></img>
 
@@ -115,7 +115,7 @@ const SignUpForm = () => {
           </div>
           :
 
-          <div className='login-title'>Signup</div>
+          <div className='login-title'>Sign Up</div>
 
         }
 

@@ -9,6 +9,8 @@ import { getPuzzles } from '../../store/puzzle';
 import './PuzzlePage.css'
 import logo from '../../logo-black.png'
 import logoBW from '../../logo-black.png'
+import jigsaw from '../../images/jigsaw.png'
+
 
 // import Intro from '../Intro';
 
@@ -577,7 +579,7 @@ const Puzzle = () => {
       }
     }
     else if (type == 'orderBy') {
-     
+
       if (parsedPieceCount && parsedPieceCount != 'empty') {
         dominoPuzzles = filterPieceCount(dominoPuzzles, parsedPieceCount)
       }
@@ -674,7 +676,7 @@ const Puzzle = () => {
             <li className='li-nostyle  filter_li'>
               <div className=' filter_input'>
                 {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-                <select name="category" id="category-select" className=" filter_select" 
+                <select name="category" id="category-select" className=" filter_select"
 
                   onChange={updateLocation}
                   value={location}
@@ -782,18 +784,18 @@ const Puzzle = () => {
                 color = 'white'
               }
               return (
+                  <NavLink to={`/puzzles/${puzzle.id}`}>
                 <li key={puzzle.id} className='puzzle-card-wrapper' id={`puzzle-${puzzle.id}`}>
-                  <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
-                    <span className='puzzle-card-title'>{puzzle.title}</span>
-                    <span className='puzzle-card-rating'></span>
-                    <NavLink to={`/puzzles/${puzzle.id}`}>
-                      <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
-                    </NavLink>
+                    <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                      <span className='puzzle-card-title'>{puzzle.title}</span>
+                      <span className='puzzle-card-rating'></span>
+                      <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : jigsaw} alt='Puzzle Thumbnail'></img>
 
 
-                  </div>
+                    </div>
 
                 </li >
+                  </NavLink>
               )
             })
             :
@@ -810,7 +812,7 @@ const Puzzle = () => {
                     <span className='puzzle-card-title'>{puzzle.title}</span>
                     <span className='puzzle-card-rating'></span>
                     <NavLink to={`/puzzles/${puzzle.id}`}>
-                      <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                      <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : jigsaw} alt='Puzzle Thumbnail'></img>
                     </NavLink>
 
 

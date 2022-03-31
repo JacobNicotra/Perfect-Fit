@@ -15,21 +15,14 @@ html,body{
 }
 
 .background {
-  padding-top: 90px;
   height: fit-content;
-  min-height:1500px;
   background-color: white;
-  background-image: url('../../puzzle-background.jpeg');
-  background-size: 1450px;
-  background-repeat: no-repeat;
-  background-position: top;
-  width: 80vw;
-  min-width: 600px;
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
-  box-shadow: 0px 1px 12px 8px rgba(0, 0, 0, 0.2);
+  padding-top: 80px;
+
 
 }
 

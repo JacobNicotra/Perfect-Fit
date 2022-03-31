@@ -15,6 +15,8 @@ import ImageUploadModal from '../ImageUpload/ImageUploadModal';
 // import AddServerModal from '../AddServerModal';
 import './PuzzleDetailsPage.css'
 import logoBW from '../../logo-black.png'
+import jigsaw from '../../images/jigsaw.png'
+
 
 
 const PuzzleDetails = () => {
@@ -90,7 +92,7 @@ const PuzzleDetails = () => {
 
           <span id="puz-det-images">
 
-            <div id="puz-det-image-wrap"><img id="puz-det-image" src={puzzle.image ? puzzle.image : logoBW}></img></div>
+            <div id="puz-det-image-wrap"><img id="puz-det-image" src={puzzle.image ? puzzle.image : jigsaw}></img></div>
             <div hidden={owner !== true} ><  ImageUploadModal /></div>
             {puzzle?.images &&
               <ul id="puzzle-details-ul">

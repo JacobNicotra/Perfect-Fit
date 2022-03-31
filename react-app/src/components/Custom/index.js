@@ -6,6 +6,8 @@ import { getPuzzles } from '../../store/puzzle';
 import { useEffect } from 'react';
 import "./Custom.css"
 
+import custom_art from '../../images/custom_order_art.png'
+
 const Custom = () => {
   const user = useSelector(state => state.session.user);
   const history = useHistory()
@@ -169,6 +171,11 @@ const Custom = () => {
         and something your loved ones will cherish for years to come.
         Simply fill out the custom order request form below and a member of our
         team will get back to you with a quote.</p>
+      
+        <div class='form_and_image_holder_custom'> 
+        
+        <img id="new_puzzle_img_custom" src={custom_art}></img>
+
       <form autoComplete="off" id='custom_form' onSubmit={onSubmit}>
 
         <div id='request'>Request a custom order today!</div>
@@ -298,7 +305,9 @@ const Custom = () => {
 
           (imageLoading) && <p>Loading...</p>}
         <button className='new-puzzle-submit-button' type='submit'>Submit</button>
-      </form>
+        </form>
+        </div>
+
     </>
   );
 };

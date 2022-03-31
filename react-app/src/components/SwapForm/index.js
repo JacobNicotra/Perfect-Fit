@@ -114,7 +114,7 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
     <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
       <div>Choose a Puzzle of Yours To Exchange</div>
       <ul className='user-puz-selection'>
-        {userPuzzles.length > 0 ?
+        {userPuzzles?.length > 0 ?
           userPuzzles.map(puzzle => {
             return (
               <button id={puzzle.id} onClick={(e) => {
