@@ -145,3 +145,19 @@ background-color: #d9eaea;
   #artwork_attributions {
     margin-top: 35px;
   }
+
+  .q_and_art_holder {
+    
+      display: flex;
+      width: 100%;
+      justify-content: center;
+
+  }
+
+  #faq_art {
+    width: 50%;
+    margin: auto;
+    object-position: center top;
+    display: flex;
+    margin-bottom: 50px;
+  }

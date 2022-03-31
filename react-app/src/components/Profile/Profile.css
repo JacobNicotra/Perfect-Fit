@@ -35,11 +35,11 @@
 .logout-button {
   border:none;
   background-color: rgb(194, 2, 2);
-  font-size: .7em;
-  padding: 6px;
+  font-size: .8em;
+  padding: 5px 0px 5px 0px;
   border-radius: 12px;
   color: white;
-
+width: 70px;
 }
 
 .logout-button:hover {

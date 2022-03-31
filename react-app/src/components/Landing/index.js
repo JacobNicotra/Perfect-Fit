@@ -48,7 +48,7 @@ const Landing = () => {
                             Sign Up
                         </NavLink>
                         &nbsp;|&nbsp;
-                        <button className='button-no-style' onClick={() => onClick()}>Demo Now</button>
+                        <button className='button-no-style' id='demo_now' onClick={() => onClick()}>Demo Now</button>
 
 
                     </span>
@@ -71,8 +71,9 @@ const Landing = () => {
                             Why not swap it!
 
                         </div>
-                        <button className='submit_button'>Let's get started</button>
-
+                        <NavLink to='/login' className='visited-link'>
+                            <button className='submit_button'>Let's get started</button>
+                        </NavLink>
                     </div>
                     <img src={clip_puzzle} id="clip_puzzle"></img>
                 </div>
@@ -108,8 +109,10 @@ const Landing = () => {
                 </div>
 
             </div>
-            <button className='submit_button'>Let's get started</button>
+            <NavLink to='/login' className='visited-link'>
 
+                <button className='submit_button'>Let's get started</button>
+            </NavLink>
         </div>
     )
 }

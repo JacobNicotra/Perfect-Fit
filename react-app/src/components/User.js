@@ -8,6 +8,10 @@ import AddPuzzleModal from './AddPuzzleForm/AddPuzzleModal';
 import LogoutButton from './auth/LogoutButton';
 import logoBW from '../logo-black.png'
 
+import jigsaw from '../images/jigsaw.png'
+import prof_pic_1 from '../images/profile_pic_blue.png'
+
+
 function User() {
   const sessionUser = useSelector(state => state.session.user);
   const history = useHistory()
@@ -50,27 +54,44 @@ function User() {
   if (userId) {
     return (
       <div className='user_wrapper'>
-      
-        <span>
-          <span className='nav-username-pro-btn'>
-            {owner ?
-              <div className='nav-middle'>
-                <NavLink to='/new' exact={true} data-hover="Add a New Puzzle" className="hovertext">
-                  <button className='nav-swap-btn'>Add Puzzle</button>
-                </NavLink >
-                <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
-                <NavLink to='/swaps' exact={true} data-hover="See your Swap Requests" className="hovertext">
-                  <button className='nav-swap-btn'><i className="fas fa-envelope swap-icon"></i></button>
-                </NavLink >
-                <LogoutButton/>
+
+        {owner &&
+          <span id='prof_top'>
+            <span className='prof_left'>
+              <div id='prof_pic_holder' >
+
+              <img id='prof_pic' src={prof_pic_1}>
+
+              </img>
               </div>
+              <ul id='name_email_ul'>
+                <div id='username'>
 
-              :
-              <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
-            }
+                  {sessionUser.username}
+                </div>
+                <div id='email'>
 
+                  {sessionUser.email}
+                </div>
+                <LogoutButton/>
+              </ul>
+            </span>
+            <ul id='user_nav_ul'>
+              <NavLink to='/new' exact={true} data-hover="Register a puzzle you own." className="hovertext">
+                <button className='nav-swap-btn'>Add Puzzle</button>
+              </NavLink >
+              <NavLink to='/swaps' exact={true} data-hover="See your Swap Requests" className="hovertext">
+                <button className='nav-see-swaps-btn'><i className="fas fa-envelope swap-icon"></i></button>
+              </NavLink >
+            </ul>
           </span>
-        </span>
+        }
+        {owner ?
+          <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
+          :
+
+          <div className='user-page-owner'>Puzzles Owned by {sessionUser?.id === parseInt(userId) ? 'You' : 'This User'}</div>
+        }
         <div className='user-holder'>
           <ul id="puzzle-cards">
             {userPuzzles ? userPuzzles.map(puzzle => {
@@ -86,7 +107,7 @@ function User() {
                     <span className='puzzle-card-title'>{puzzle.title}</span>
                     <span className='puzzle-card-rating'></span>
                     <NavLink to={`/puzzles/${puzzle.id}`}>
-                      <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                      <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : jigsaw} alt='Puzzle Thumbnail'></img>
                     </NavLink>
 
 
@@ -100,7 +121,7 @@ function User() {
             }
           </ul >
         </div >
-        </div>
+      </div>
 
     )
   } else {

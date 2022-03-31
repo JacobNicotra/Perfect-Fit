@@ -29,7 +29,6 @@ const Puzzle = () => {
   let city = loc?.state?.filter?.location
   window.history.replaceState({}, '')
 
-
   const dispatch = useDispatch();
   const params = useParams();
 

@@ -125,14 +125,14 @@ const SignUpForm = () => {
           name='username'
           onChange={updateUsername}
           value={username}
-          className='puzzle-form-input'
+          className='login-input'
           placeholder='Username'
 
         ></input>
 
 
         {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-        <select name="category" id="category-select" className='puzzle-form-input puz-form-sel'
+        <select name="category" id="category-select" className='login-input puz-form-sel'
 
           onChange={updateLocation}
           value={location}
@@ -161,7 +161,7 @@ const SignUpForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
-          className='puzzle-form-input'
+          className='login-input'
           placeholder='Email'
 
 
@@ -171,7 +171,7 @@ const SignUpForm = () => {
           name='password'
           onChange={updatePassword}
           value={password}
-          className='puzzle-form-input'
+          className='login-input'
           placeholder='Password'
 
 
@@ -181,14 +181,17 @@ const SignUpForm = () => {
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          className='puzzle-form-input'
+          className='login-input'
           placeholder='Confirm Password'
 
 
         ></input>
 
-        <button type='submit' className='new-puzzle-submit-button'>Sign Up</button>
+        <button type='submit' className='new-puzzle-submit-button auth-btn'>Sign Up</button>
         <button type='submit' className='new-puzzle-submit-button' id='demo_button' onClick={() => onClick()}>Demo Login</button>
+        <NavLink to='/login' className='visited-link already'>
+          Create an account.
+        </NavLink>
       </form>
     </div>
 

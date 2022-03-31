@@ -287,10 +287,13 @@
 }
 
 .user-page-owner {
-  padding: 30px;
+  padding: 30px 30px 0 30px;
   margin-top: 30px;
-  background-color: #9bffc5;
-  box-shadow: 0px 1px 9px 3px rgba(0, 0, 0, 0.2);
+  background: none;
+  display: flex;
+  justify-content: center;
+  font-size: 1.6em;
+  
 
 }
 
@@ -409,17 +412,20 @@
   content: attr(data-hover);
   visibility: hidden;
   opacity: 0;
-  width: 140px;
-  background-color: black;
+  width: fit-content;
+  height: fit-content;
+  background-color: rgba(0, 0, 0, 0.738);
   color: #fff;
-  text-align: center;
+  font-size: .84em;
+  font-weight: 340;
+  text-align: left;
   border-radius: 5px;
-  padding: 5px 0;
+  padding: 5px 0 5px 5px;
   transition: opacity 1s ease-in-out;
 
   position: absolute;
   z-index: 1;
-  left: 0;
+  left: -20;
   top: 110%;
 }
 
@@ -443,7 +449,7 @@
 
 
 .user_wrapper {
-  margin-top: 50px;
+  margin-top: 90px;
 }
 
 .about-container {
@@ -457,4 +463,81 @@
 .login-select {
   width: 186px;
   height: 34.5px;
+}
+
+.prof_left {
+  display: flex;
+  
+}
+
+#name_email_ul {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+  margin-top: 0;
+}
+#username {
+  font-size: 1.8em;
+  font-weight: 600;
+  padding-bottom: 6px;
+}
+
+#email{
+  padding-left: 10px;
+}
+.logout-button {
+  margin-top: 25px;
+  padding: 3px;
+
+}
+
+#prof_pic_holder {
+  width: 110px;
+  height: 110px;
+  background-color: #D8D8D8;
+  border-radius: 100px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 7px 10px;
+}
+
+#prof_pic {
+  width: 90px;
+  height: 90px;
+  background: none;
+  border: none;
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+#prof_top {
+   display: flex;
+   justify-content: space-between;
+   align-items:flex-start;
+}
+#user_nav_ul {
+  display: flex;
+  flex-direction: column;
+  padding-right: 35px;
+
+}
+
+.nav-swap-btn {
+  padding: 8px 6px;
+  background-color: #c2ebfecf;
+  border-radius: 10px;
+  box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.2);
+}
+
+.nav-swap-btn:hover {
+  cursor: pointer;
+  background-color: #c7edfeae;
+
+}
+
+.nav-see-swaps-btn {
+  border: none;
+  padding: none;
+  background: none;
 }

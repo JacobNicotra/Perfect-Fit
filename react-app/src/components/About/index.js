@@ -8,6 +8,7 @@ import Collapsible from 'react-collapsible';
 import "./About.css"
 
 import landingImage from '../../landing-image.png'
+import faq_art from '../../images/FAQ.png'
 
 
 const About = () => {
@@ -44,85 +45,96 @@ const About = () => {
       <h2 className='about_title' id='faq_title'>Frequently Asked Questions (FAQs)
 
       </h2>
-      <ul id='faqs'>
-        <li className='li-nostyle'>
+      <span className='q_and_art_holder'>
 
-          <Collapsible trigger="Do I have to swap puzzles?">
-            <p className='open_about_para'>
-              No. If you would like to acquire a puzzle you found on the explore page, you would need to initiate a swap exchange. However, if you don’t have a puzzle to exchange with, you may consider ordering a brand new puzzle in our Custom Order tab.
+        <div id='left_about'>
 
-            </p>
-          </Collapsible>
+          <ul id='faqs'>
+            <li className='li-nostyle'>
 
-        </li>
+              <Collapsible trigger="Do I have to swap puzzles?">
+                <p className='open_about_para'>
+                  No. If you would like to acquire a puzzle you found on the explore page, you would need to initiate a swap exchange. However, if you don’t have a puzzle to exchange with, you may consider ordering a brand new puzzle in our Custom Order tab.
 
-        <li className='li-nostyle'>
+                </p>
+              </Collapsible>
 
-          <Collapsible trigger="How do I list my puzzle?">
-            <p className='open_about_para'>
-              When you create an account, click on the My Profile tab and then the + icon to add a new puzzle. Once you complete all fields and upload your puzzle, other members will be able to see your puzzle on the Explore feed.
+            </li>
 
-            </p>
-          </Collapsible>
+            <li className='li-nostyle'>
 
-        </li>
+              <Collapsible trigger="How do I list my puzzle?">
+                <p className='open_about_para'>
+                  When you create an account, click on the My Profile tab and then the + icon to add a new puzzle. Once you complete all fields and upload your puzzle, other members will be able to see your puzzle on the Explore feed.
 
+                </p>
+              </Collapsible>
 
-
-        <li className='li-nostyle'>
-
-          <Collapsible trigger="How do I initiate a swap?">
-            <p className='open_about_para'>
-              Once you’ve found a puzzle you’d like to acquire, click on Initiate Swap. The owner of the puzzle will receive a swap request message and they have the choice to either approve or deny the puzzle exchange.
-
-            </p>
-          </Collapsible>
-
-        </li>
+            </li>
 
 
-        <li className='li-nostyle'>
 
-          <Collapsible trigger="I shipped my puzzle but didn’t receive one in return.">
-            <p className='open_about_para'>
-              If a member does not ship out a puzzle they agreed to exchange with, the member’s account will be suspended until the delinquent puzzle is shipped. Please email any complaints to nicotra100@gmail.com.
+            <li className='li-nostyle'>
 
-            </p>
-          </Collapsible>
+              <Collapsible trigger="How do I initiate a swap?">
+                <p className='open_about_para'>
+                  Once you’ve found a puzzle you’d like to acquire, click on Initiate Swap. The owner of the puzzle will receive a swap request message and they have the choice to either approve or deny the puzzle exchange.
 
-        </li>
+                </p>
+              </Collapsible>
 
-
-        <li className='li-nostyle'>
-
-          <Collapsible trigger="How do I report an issue?">
-            <p className='open_about_para'>
-              If you have are experiencing any issues with this site or the service, please send an email to nicotra1008@gmail.com
-
-            </p>
-          </Collapsible>
-
-        </li>
-
-        <li className='li-nostyle'>
-
-          <Collapsible trigger="A puzzle I swapped for is missing pieces">
-            <p className='open_about_para'>
-              Any member who swaps an incomplete puzzle will be suspended, until they return your original puzzle. Please email any complaints to nicotra100@gmail.com.
-
-            </p>
-          </Collapsible>
-
-        </li>
+            </li>
 
 
-      </ul>
+            <li className='li-nostyle'>
 
-      <h2 className='about_title' id='artwork_attributions'>Artwork Attributions</h2>
-      <p className='about_p'>
-        Logo by Monkik & artwork by Victoria Chepkasova
+              <Collapsible trigger="I shipped my puzzle but didn’t receive one in return.">
+                <p className='open_about_para'>
+                  If a member does not ship out a puzzle they agreed to exchange with, the member’s account will be suspended until the delinquent puzzle is shipped. Please email any complaints to nicotra100@gmail.com.
 
-      </p>
+                </p>
+              </Collapsible>
+
+            </li>
+
+
+            <li className='li-nostyle'>
+
+              <Collapsible trigger="How do I report an issue?">
+                <p className='open_about_para'>
+                  If you have are experiencing any issues with this site or the service, please send an email to nicotra1008@gmail.com
+
+                </p>
+              </Collapsible>
+
+            </li>
+
+            <li className='li-nostyle'>
+
+              <Collapsible trigger="A puzzle I swapped for is missing pieces">
+                <p className='open_about_para'>
+                  Any member who swaps an incomplete puzzle will be suspended, until they return your original puzzle. Please email any complaints to nicotra100@gmail.com.
+
+                </p>
+              </Collapsible>
+
+            </li>
+
+
+          </ul>
+          <h2 className='about_title' id='artwork_attributions'>Artwork Attributions</h2>
+          <p className='about_p'>
+            Logo by Monkik & artwork by Victoria Chepkasova
+
+          </p>
+        </div>
+
+        <img src={faq_art} id='faq_art'>
+        </img>
+      </span>
+
+
+
 
 
 

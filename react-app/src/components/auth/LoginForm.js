@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { login } from '../../store/session';
 
 import jigsaw from '../../images/jigsaw.png'
@@ -63,7 +63,7 @@ const LoginForm = () => {
           placeholder='Email'
           value={email}
           onChange={updateEmail}
-          className='puzzle-form-input'
+          className='login-input'
           placeholder='Email'
         />
         <input
@@ -72,12 +72,15 @@ const LoginForm = () => {
           placeholder='Password'
           value={password}
           onChange={updatePassword}
-          className='puzzle-form-input'
+          className='login-input'
           placeholder='Password'
 
 
         />
-        <button className='new-puzzle-submit-button' type='submit'>Login</button>
+        <button className='new-puzzle-submit-button auth-btn' type='submit'>Login</button>
+        <NavLink to='/sign-up' className='visited-link already'>
+          Already have an account?
+        </NavLink>
       </form>
     </div>
 
