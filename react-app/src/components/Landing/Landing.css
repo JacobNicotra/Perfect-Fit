@@ -221,7 +221,8 @@ text-align: left;
   margin-right: 40px;
 }
 #demo_img_inner_3 {
-  width: 300px;
+  width: 400px;
+  border-radius: 0 0px 30px 30px;
 }
 
 .submit_button:hover {

@@ -83,7 +83,12 @@ const PuzzleDetails = () => {
               hidden={owner !== true}> <EditPuzzleModal className="puzzle-modal" />
             </div>
             <div className="puz-edit-div"
-              hidden={owner == true}> <SwapFormModal puzzleOwner={puzzle.user} className="puzzle-modal" />
+              hidden={owner == true}> <NavLink className='user-link-page' to={`/swap`}>
+                <button id='swap_btn'>
+                  Swap
+              </button>
+              </NavLink>
+
             </div>
 
 

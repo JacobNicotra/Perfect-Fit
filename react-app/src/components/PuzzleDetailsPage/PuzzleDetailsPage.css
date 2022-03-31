@@ -131,3 +131,23 @@ max-height: 500px;
   color: #0e8841;
   font-weight: bold;
 }
+
+
+#swap_btn {
+  font-size: 0.9em;
+  font-weight: 250;
+  border: none;
+  background-color: #00aeff99;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+  margin-top: 15px;
+  padding: 6px 6px;
+  margin-left: 15px;
+}
+
+
+#swap_btn:hover {
+  background-color: #00aeff59;
+  cursor: pointer;
+}

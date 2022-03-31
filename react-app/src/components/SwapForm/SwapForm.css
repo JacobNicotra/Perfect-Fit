@@ -20,19 +20,12 @@
 
 
 .user-puz-selection {
+  padding: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-    align-content: center;
-  align-items: center;
-  max-height: 500px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 0 34px 0 34px;
-  background-color: #ffffffcb;
-  box-shadow: 0px 1px 9px 5px rgba(0, 0, 0, 0.2);
-  width: 200px;
-  max-height: 280px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1050px;
+
 }
 
 .swap-form-title {
@@ -96,7 +89,24 @@
 }
 
 #swap_form_holder {
-  height: fit-content;
-  overflow-y: scroll;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 110px;
+  align-items: center;
+
+}
+
+
+.swap_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.swap-form-title {
+  display: flex;
+justify-content: center;
+font-weight: 360;
 }

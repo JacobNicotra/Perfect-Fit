@@ -783,8 +783,8 @@ const Puzzle = () => {
                 color = 'white'
               }
               return (
-                  <NavLink to={`/puzzles/${puzzle.id}`}>
-                <li key={puzzle.id} className='puzzle-card-wrapper' id={`puzzle-${puzzle.id}`}>
+                <NavLink to={`/puzzles/${puzzle.id}`}>
+                  <li key={puzzle.id} className='puzzle-card-wrapper' id={`puzzle-${puzzle.id}`}>
                     <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
                       <span className='puzzle-card-title'>{puzzle.title}</span>
                       <span className='puzzle-card-rating'></span>
@@ -793,8 +793,8 @@ const Puzzle = () => {
 
                     </div>
 
-                </li >
-                  </NavLink>
+                  </li >
+                </NavLink>
               )
             })
             :
@@ -806,18 +806,18 @@ const Puzzle = () => {
                 color = 'white'
               }
               return (
-                <li key={puzzle.id} className='puzzle-card-wrapper' id={`puzzle-${puzzle.id}`}>
-                  <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
-                    <span className='puzzle-card-title'>{puzzle.title}</span>
-                    <span className='puzzle-card-rating'></span>
-                    <NavLink to={`/puzzles/${puzzle.id}`}>
+                <NavLink to={`/puzzles/${puzzle.id}`}>
+                  <li key={puzzle.id} className='puzzle-card-wrapper' id={`puzzle-${puzzle.id}`}>
+                    <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background'}>
+                      <span className='puzzle-card-title'>{puzzle.title}</span>
+                      <span className='puzzle-card-rating'></span>
                       <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo'} src={puzzle.image ? puzzle.image : jigsaw} alt='Puzzle Thumbnail'></img>
-                    </NavLink>
 
 
-                  </div>
+                    </div>
 
-                </li >
+                  </li >
+                </NavLink>
               )
             })
 

@@ -20,6 +20,7 @@ import Custom from './components/Custom';
 import Thank from './components/Thank';
 import About from './components/About';
 import AddPuzzleForm from './components/AddPuzzleForm';
+import SwapForm from './components/SwapForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -58,6 +59,11 @@ function App() {
         <ProtectedRoute path='/new' exact={true} >
           <NavBar />
           <AddPuzzleForm />
+          {/* <Footer notLanding={true} /> */}
+        </ProtectedRoute>
+        <ProtectedRoute path='/swap' exact={true} >
+          <NavBar />
+          <SwapForm />
           {/* <Footer notLanding={true} /> */}
         </ProtectedRoute>
         <ProtectedRoute path='/swaps' exact={true} >

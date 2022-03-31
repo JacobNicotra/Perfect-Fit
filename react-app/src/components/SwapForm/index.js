@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import "./SwapForm.css"
 import logoBW from '../../logo-black.png'
 import { createSwap } from '../../store/swap'
+import jigsaw from '../../images/jigsaw.png'
 
 
 const SwapForm = ({ modalSetter, puzzleOwner }) => {
@@ -111,7 +112,7 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
   
 
     <h1 className='swap-form-title'>Swap for this Puzzle!</h1>
-    <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
+    <form autoComplete="off" className='swap_form' onSubmit={onSubmit}>
       <div>Choose a Puzzle of Yours To Exchange</div>
       <ul className='user-puz-selection'>
         {userPuzzles?.length > 0 ?
@@ -125,7 +126,7 @@ const SwapForm = ({ modalSetter, puzzleOwner }) => {
                   <div className={puzzle.image ? 'puzzle-card' : 'puzzle-card puzzle-card-background puzzle-card-background-swap-form'}>
                     <span className='puzzle-card-title puz-title-swap-form'>{puzzle.title}</span>
                     <span className='puzzle-card-rating'></span>
-                    <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo logo-swap-form'} src={puzzle.image ? puzzle.image : logoBW} alt='Puzzle Thumbnail'></img>
+                    <img className={puzzle.image ? 'puzzle-card-image' : 'puzzle-card-logo logo-swap-form'} src={puzzle.image ? puzzle.image : jigsaw} alt='Puzzle Thumbnail'></img>
 
 
                   </div>
