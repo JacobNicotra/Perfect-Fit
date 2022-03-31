@@ -3,6 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 
+import jigsaw from '../../images/jigsaw.png'
+import login_art from '../../images/login.png'
+
+
+
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
@@ -31,13 +36,21 @@ const LoginForm = () => {
   }
 
   return (
+    <div class='form_and_image_holder'>
+      <span className="Perfect_Fit_header">
 
+        <h1 className='splash_text' id='title_splash'>Perfect Fit
+          <img src={jigsaw} id="jigsaw"></img></h1>
 
-      <form onSubmit={onLogin} className='login-form'>
+      </span>
+
+      <img id="new_puzzle_img" src={login_art}></img>
+
+      <form onSubmit={onLogin} className='auth-form'>
         <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+          {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
 
         </div>
 
@@ -50,7 +63,7 @@ const LoginForm = () => {
           placeholder='Email'
           value={email}
           onChange={updateEmail}
-          className='login-form-input'
+          className='puzzle-form-input'
           placeholder='Email'
         />
         <input
@@ -59,13 +72,14 @@ const LoginForm = () => {
           placeholder='Password'
           value={password}
           onChange={updatePassword}
-          className='login-form-input'
+          className='puzzle-form-input'
           placeholder='Password'
 
 
         />
         <button className='new-puzzle-submit-button' type='submit'>Login</button>
       </form>
+    </div>
 
   );
 };

@@ -29,9 +29,9 @@ const Footer = ({ notLanding }) => {
           :
 
           <div className='about-links' id='about-link'>
-            Built By: Jacob Arthur Nicotra
-            <a target='_blank' rel='noreferrer' href='https://github.com/JacobNicotra'><i className="fab fa-github gh"></i></a>
-            <a target='_blank' rel='noreferrer' href='https://www.linkedin.com/in/jacobnicotra/'><i className="fab fa-linkedin linkedin"></i></a>
+            Built By: Jacob Nicotra
+            <a target='_blank' rel='noreferrer' href='https://github.com/JacobNicotra'><i className="fab fa-github gh visited-link"></i></a>
+            <a target='_blank' rel='noreferrer' href='https://www.linkedin.com/in/jacobnicotra/'><i className="fab fa-linkedin linkedin visited-link"></i></a>
           </div>
         }
 

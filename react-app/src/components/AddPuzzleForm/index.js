@@ -54,68 +54,68 @@ const AddPuzzleForm = ({ modalSetter }) => {
       userId,
     }
 
-    let modal = document.getElementById('modal-content')
+    // let modal = document.getElementById('modal-content')
     let titleInput = document.getElementById('title-input')
     let deliveryInput = document.getElementById('delivery-input')
     let difficultyInput = document.getElementById('difficulty-input')
     let categoryInput = document.getElementById('category-input')
-    let descriptionInput = document.getElementById('description-input')
+    let descriptionInput = document.getElementById('description-textarea')
     let pieceCountInput = document.getElementById('pieceCountInput')
 
     let tempErrors = []
 
     if (!title || !title.replace(/\s/g, '').length) {
       titleInput.className = 'puzzle-form-input error-input'
-      modal.className = 'modal-content error-input'
+      // modal.className = 'modal-content error-input'
       tempErrors = ['Name your puzzle.']
     } else {
       let titleInput = document.getElementById('title-input')
-      modal.className = 'modal-content'
+      // modal.className = 'modal-content'
       titleInput.className = 'puzzle-form-input'
     }
     if (!delivery) {
       deliveryInput.className = 'radio-wrapper error-input'
-      modal.className = 'modal-content error-input'
+      // modal.className = 'modal-content error-input'
       tempErrors = [...tempErrors, 'Specify delivery method.']
     } else {
       let deliveryInput = document.getElementById('delivery-input')
-      modal.className = 'modal-content'
+      // modal.className = 'modal-content'
       deliveryInput.className = 'radio-wrapper'
     }
     if (!category) {
       categoryInput.className = 'puzzle-form-input puz-form-sel error-input'
-      modal.className = 'modal-content error-input'
+      // modal.className = 'modal-content error-input'
       tempErrors = [...tempErrors, 'Select Category.']
     } else {
       let categoryInput = document.getElementById('category-input')
-      modal.className = 'modal-content'
+      // modal.className = 'modal-content'
       categoryInput.className = 'puzzle-form-input puz-form-sel'
     }
     if (!description) {
-      descriptionInput.className = 'puzzle-form-input error-input'
-      modal.className = 'modal-content error-input'
+      descriptionInput.className = 'puzzle-form-input-text error-input'
+      // modal.className = 'modal-content error-input'
       tempErrors = [...tempErrors, 'Provide description.']
     } else {
-      let descriptionInput = document.getElementById('description-input')
-      modal.className = 'modal-content'
-      descriptionInput.className = 'puzzle-form-input'
+      let descriptionInput = document.getElementById('description-textarea')
+      // modal.className = 'modal-content'
+      descriptionInput.className = 'puzzle-form-input-text'
     }
     if (!difficulty) {
       difficultyInput.className = 'puzzle-form-input puz-form-sel error-input'
-      modal.className = 'modal-content error-input'
+      // modal.className = 'modal-content error-input'
       tempErrors = [...tempErrors, 'Select difficulty']
     } else {
       let difficultyInput = document.getElementById('difficulty-input')
-      modal.className = 'modal-content'
+      // modal.className = 'modal-content'
       difficultyInput.className = 'puzzle-form-input puz-form-sel'
     }
     if (!pieceCount) {
       pieceCountInput.className = 'puzzle-form-input error-input'
-      modal.className = 'modal-content error-input'
+      // modal.className = 'modal-content error-input'
       tempErrors = [...tempErrors, 'Select pieceCountInput']
     } else {
       let pieceCountInput = document.getElementById('pieceCountInput')
-      modal.className = 'modal-content'
+      // modal.className = 'modal-content'
       pieceCountInput.className = 'puzzle-form-input'
     }
 
@@ -153,7 +153,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
       }
       dispatch(getPuzzles())
     }
-    modalSetter(true);
+    // modalSetter(true);
 
     return history.push(`/puzzles/${newPuzzleDb['id']}`)
 
@@ -287,9 +287,8 @@ const AddPuzzleForm = ({ modalSetter }) => {
           {/* </div> */}
           {/* <div className='LabelAndInputContainer'> */}
             {/* <label className="puzzle-form-label">Description</label> */}
-            <input
-              type='text'
-              id='description-input'
+            <textarea
+              id='description-textarea'
 
               name='title'
               onChange={updateDescription}
@@ -300,7 +299,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
               placeholder="Description"
 
 
-            ></input>
+            ></textarea>
           {/* </div> */}
 
 
@@ -317,7 +316,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
                   value='either'
                 >
                 </input>
-                <span>Mail & Local Pickup</span>
+                <span className='radio_option'>Mail & Local Pickup</span>
               </label>
 
             </div>
@@ -330,7 +329,7 @@ const AddPuzzleForm = ({ modalSetter }) => {
                   value='pickup'
                 >
                 </input>
-                <span>Local Pickup</span>
+                <span className='radio_option'>Local Pickup</span>
               </label>
 
             </div>
@@ -345,10 +344,11 @@ const AddPuzzleForm = ({ modalSetter }) => {
 
                 >
                 </input>
-                <span>Mail</span>
+                <span className='radio_option'>Mail</span>
               </label>
 
             </div>
+            <span id='photo_disclaimer'>(You can add a photo of your puzzle once registered)</span>
           </div>
 
 

@@ -5,7 +5,7 @@ import { getUserSwaps } from '../store/swap';
 import Swaps from './Swap.js';
 import { getPuzzlesUser } from '../store/puzzle';
 import AddPuzzleModal from './AddPuzzleForm/AddPuzzleModal';
-
+import LogoutButton from './auth/LogoutButton';
 import logoBW from '../logo-black.png'
 
 function User() {
@@ -62,6 +62,7 @@ function User() {
                 <NavLink to='/swaps' exact={true} data-hover="See your Swap Requests" className="hovertext">
                   <button className='nav-swap-btn'><i className="fas fa-envelope swap-icon"></i></button>
                 </NavLink >
+                <LogoutButton/>
               </div>
 
               :

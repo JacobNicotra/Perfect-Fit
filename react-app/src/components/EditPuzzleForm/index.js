@@ -89,7 +89,7 @@ const EditPuzzleForm = ({ modalSetter }) => {
   return (
     <>
       <h2 className='modal-label'>{'Edit Puzzle'}</h2>
-      <form autoComplete="off" className='add-puzzle-form' onSubmit={onSubmit}>
+      <form autoComplete="off" className='edit-puzzle-form' onSubmit={onSubmit}>
         {errors.length > 0 && <div className='puz-form-erros'>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>

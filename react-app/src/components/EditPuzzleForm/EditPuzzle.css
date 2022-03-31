@@ -6,17 +6,6 @@
 
  
 
- .new-puzzle-submit-button {
-   border:none;
-   border-radius: 30px;
-
-   padding: 9px 13px 9px 13px;
-
- }
-
- .new-puzzle-submit-button:hover {
-   background-color: white;
- }
 
 
 
@@ -56,3 +45,26 @@
    background-color: red;
    color: green;
  } */
+
+.edit-puzzle-form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+#picture_edit_icon {
+  width: 35px;
+  height: auto;
+}
+
+#edit_span {
+  display: flex;
+  
+align-items: flex-end;
+}
+
+#edit_details {
+  font-size: .74em;
+  font-weight: 370;
+  color: rgba(0, 0, 0, 0.567);
+}

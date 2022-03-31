@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory, NavLink } from 'react-router-dom';
+import { login } from '../../store/session';
 import { signUp } from '../../store/session';
+import signup_art from '../../images/signup.png'
+import jigsaw from '../../images/jigsaw.png'
+
+import "./Auth.css"
+
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -59,6 +65,11 @@ const SignUpForm = () => {
     }
   };
 
+  const onClick = () => {
+    dispatch(login('demo@aa.io', 'password'));
+    return history.push(`/puzzles`);
+};
+
   const updateUsername = (e) => {
     setUsername(e.target.value);
   };
@@ -85,90 +96,101 @@ const SignUpForm = () => {
 
   return (
 
+    <div class='form_and_image_holder'>
+      <span className="Perfect_Fit_header">
 
-    <form onSubmit={onSignUp} className='login-form'>
-      {errors.length > 0 ? 
-      <div className='errors_signup'>
-        {errors.map((error, ind) => (
-          <div className='error_signup' key={ind}><i className="fas fa-exclamation-triangle"></i>{error}</div>
-        ))}
-        </div>
-        :
+        <h1 className='splash_text' id='title_splash'>Perfect Fit
+          <img src={jigsaw} id="jigsaw"></img></h1>
 
-        <div className='login-title'>Signup</div>
+        </span>
 
-      }
+      <img id="new_puzzle_img" src={signup_art}></img>
 
+      <form onSubmit={onSignUp} className='auth-form'>
+        {errors.length > 0 ?
+          <div className='errors_signup'>
+            {errors.map((error, ind) => (
+              <div className='error_signup' key={ind}><i className="fas fa-exclamation-triangle"></i>{error}</div>
+            ))}
+          </div>
+          :
 
-      <input
-        type='text'
-        name='username'
-        onChange={updateUsername}
-        value={username}
-        className='login-form-input'
-        placeholder='Username'
+          <div className='login-title'>Signup</div>
 
-      ></input>
+        }
 
 
-      {/* <label className="puzzle-form-label">Number of Pieces</label> */}
-      <select name="category" id="category-select" className='login-form-input login-select'
+        <input
+          type='text'
+          name='username'
+          onChange={updateUsername}
+          value={username}
+          className='puzzle-form-input'
+          placeholder='Username'
 
-        onChange={updateLocation}
-        value={location}
-      >
-
-        <option value="empty">Location</option>
-        <option value={1} >San Francisco</option>
-        <option value={2} >New York	</option>
-        <option value={3} >Chicago	</option>
-        <option value={4} >Los Angeles	</option>
-        <option value={5} >Miami	</option>
-        <option value={6} >Boston</option>
-        <option value={7} >Denver</option>
-        <option value={8} >San Diego	</option>
-        <option value={9} >Dallas</option>
-        <option value={10}>Las Vegas	</option>
-        <option value={11}>Seattle</option>
-        <option value={12}>Philadelphia</option>
-        <option value={13}>Houston</option>
-        <option value={14}>Phoenix</option>
-
-      </select>
-
-      <input
-        type='text'
-        name='email'
-        onChange={updateEmail}
-        value={email}
-        className='login-form-input'
-        placeholder='Email'
+        ></input>
 
 
-      ></input>
-      <input
-        type='password'
-        name='password'
-        onChange={updatePassword}
-        value={password}
-        className='login-form-input'
-        placeholder='Password'
+        {/* <label className="puzzle-form-label">Number of Pieces</label> */}
+        <select name="category" id="category-select" className='puzzle-form-input puz-form-sel'
+
+          onChange={updateLocation}
+          value={location}
+        >
+
+          <option value="empty">Location</option>
+          <option value={1} >San Francisco</option>
+          <option value={2} >New York	</option>
+          <option value={3} >Chicago	</option>
+          <option value={4} >Los Angeles	</option>
+          <option value={5} >Miami	</option>
+          <option value={6} >Boston</option>
+          <option value={7} >Denver</option>
+          <option value={8} >San Diego	</option>
+          <option value={9} >Dallas</option>
+          <option value={10}>Las Vegas	</option>
+          <option value={11}>Seattle</option>
+          <option value={12}>Philadelphia</option>
+          <option value={13}>Houston</option>
+          <option value={14}>Phoenix</option>
+
+        </select>
+
+        <input
+          type='text'
+          name='email'
+          onChange={updateEmail}
+          value={email}
+          className='puzzle-form-input'
+          placeholder='Email'
 
 
-      ></input>
-      <input
-        type='password'
-        name='repeat_password'
-        onChange={updateRepeatPassword}
-        value={repeatPassword}
-        className='login-form-input'
-        placeholder='Confirm Password'
+        ></input>
+        <input
+          type='password'
+          name='password'
+          onChange={updatePassword}
+          value={password}
+          className='puzzle-form-input'
+          placeholder='Password'
 
 
-      ></input>
+        ></input>
+        <input
+          type='password'
+          name='repeat_password'
+          onChange={updateRepeatPassword}
+          value={repeatPassword}
+          className='puzzle-form-input'
+          placeholder='Confirm Password'
 
-      <button type='submit' className='new-puzzle-submit-button'>Sign Up</button>
-    </form>
+
+        ></input>
+
+        <button type='submit' className='new-puzzle-submit-button'>Sign Up</button>
+        <button type='submit' className='new-puzzle-submit-button' id='demo_button' onClick={() => onClick()}>Demo Login</button>
+      </form>
+    </div>
 
   );
 };
