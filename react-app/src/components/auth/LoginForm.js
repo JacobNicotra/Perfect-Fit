@@ -36,7 +36,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div class='form_and_image_holder'>
+    <div class='form_and_image_holder_login'>
       <span className="Perfect_Fit_header">
 
         <h1 className='splash_text' id='title_splash'>Perfect Fit
