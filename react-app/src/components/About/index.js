@@ -20,7 +20,6 @@ const About = () => {
 
   }
 
-
   return (
 
     <div className='splash-description about_wrapper align-left'>
@@ -34,20 +33,10 @@ const About = () => {
 
       </p>
 
-      <h2 className='about_title'>Techonologies used</h2>
-      <p className='about_p'>
-        JavaScript, Python, React - Redux, Flask, PostgreSQL, SQAlchemy, HTML5, CSS3
-
-      </p>
-
-
-
-      <h2 className='about_title' id='faq_title'>Frequently Asked Questions (FAQs)
-
-      </h2>
       <span className='q_and_art_holder'>
 
         <div id='left_about'>
+      <h2 className='about_title' id='faq_title'>Frequently Asked Questions (FAQs)</h2>
 
           <ul id='faqs'>
             <li className='li-nostyle'>
@@ -122,6 +111,11 @@ const About = () => {
 
 
           </ul>
+          <h2 className='about_title'>Techonologies used</h2>
+          <p className='about_p'>
+            JavaScript, Python, React - Redux, Flask, PostgreSQL, SQAlchemy, HTML5, CSS3
+
+          </p>
           <h2 className='about_title' id='artwork_attributions'>Artwork Attributions</h2>
           <p className='about_p'>
             Logo by Monkik & artwork by Victoria Chepkasova

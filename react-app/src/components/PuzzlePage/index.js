@@ -112,7 +112,6 @@ const Puzzle = () => {
       setDifficulty('empty')
       setLocation('empty')
       setPieceCount('empty')
-      console.log(' **** ** * * * * CAT ')
       return setCategory(parseInt(cat))
     } else if (city) {
       makeLocationTag(parseInt(city))
@@ -139,7 +138,6 @@ const Puzzle = () => {
     const savedCategory = localStorage.getItem("category");
     const parsedCategory = JSON.parse(savedCategory);
     if (parsedCategory != 'empty') {
-      console.log('useEffect setCat() -> ', parsedCategory)
       makeCategoryTag(categoryKey[parseInt(parsedCategory) - 1])
       filter('category', parseInt(parsedCategory))
       setCategory(parseInt(parsedCategory))
@@ -148,7 +146,6 @@ const Puzzle = () => {
     const savedLocation = localStorage.getItem("location");
     const parsedLocation = JSON.parse(savedLocation);
     if (parsedLocation != 'empty') {
-
       makeLocationTag(locationKey[parseInt(parsedLocation) - 1])
       filter('location', parseInt(parsedLocation))
       setLocation(parseInt(parsedLocation))
@@ -486,7 +483,7 @@ const Puzzle = () => {
       //   dominoPuzzles = filterCategory(dominoPuzzles, category)
       // }
       if (parsedCategory && parsedCategory != 'empty') {
-        dominoPuzzles = filterDifficulty(dominoPuzzles, parsedCategory)
+        dominoPuzzles = filterCategory(dominoPuzzles, parsedCategory)
       }
       // if (location) {
       //   dominoPuzzles = filterLocation(dominoPuzzles, location)
@@ -603,7 +600,6 @@ const Puzzle = () => {
     filter('pieceCount', e.target.value)
   };
   const updateCategory = (e) => {
-    console.log('update Cat')
     setCategory(e.target.value);
     filter('category', e.target.value)
   };
@@ -624,7 +620,6 @@ const Puzzle = () => {
   if (!filteredPuzzles) {
     if (puzzles) {
       puzzleCount = puzzles.length
-      console.log('! ! ! !  ! puzzleCount', puzzleCount)
     }
   } else {
     puzzleCount = filteredPuzzles.length

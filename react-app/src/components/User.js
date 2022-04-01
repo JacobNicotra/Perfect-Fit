@@ -77,11 +77,15 @@ function User() {
               </ul>
             </span>
             <ul id='user_nav_ul'>
-              <NavLink to='/new' exact={true} data-hover="Register a puzzle you own." className="hovertext">
+              <NavLink to='/new' exact={true}
+                // data-hover="Register a puzzle you own." className="hovertext"
+              >
                 <button className='nav-swap-btn'>Add Puzzle</button>
               </NavLink >
-              <NavLink to='/swaps' exact={true} data-hover="See your Swap Requests" className="hovertext">
-                <button className='nav-see-swaps-btn'><i className="fas fa-envelope swap-icon"></i></button>
+              <NavLink to='/swaps' exact={true}
+                // data-hover="See your Swap Requests" className="hovertext"
+              >
+                <button className='nav-swap-btn'>See Swap Requests</button>
               </NavLink >
             </ul>
           </span>

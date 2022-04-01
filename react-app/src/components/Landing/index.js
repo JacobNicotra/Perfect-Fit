@@ -71,7 +71,7 @@ const Landing = () => {
                             Why not swap it!
 
                         </div>
-                        <NavLink to='/login' className='visited-link'>
+                        <NavLink to='/sign-up' className='visited-link'>
                             <button className='submit_button'>Let's get started</button>
                         </NavLink>
                     </div>
@@ -109,7 +109,7 @@ const Landing = () => {
                 </div>
 
             </div>
-            <NavLink to='/login' className='visited-link'>
+            <NavLink to='/sign-up' className='visited-link'>
 
                 <button className='submit_button'>Let's get started</button>
             </NavLink>
